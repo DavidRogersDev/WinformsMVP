@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace WinFormsMvp.Binder
+﻿namespace WinFormsMvp.Binder
 {
     /// <summary>
     /// Defines that contract for classes that implement logic for finding relevant presenters given
