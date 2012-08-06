@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace ExampleData
+namespace SampleApp.ExampleData
 {
     public interface IGenericRepository<T> where T : class
     {

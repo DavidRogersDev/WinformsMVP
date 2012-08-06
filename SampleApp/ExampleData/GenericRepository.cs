@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Data.Objects;
 
-namespace ExampleData
+namespace SampleApp.ExampleData
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -25,7 +25,7 @@ namespace ExampleData
         {
             _entities = context;
             _objectSet = context.CreateObjectSet<T>();
-        } 
+        }
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace ExampleData
         {
             return this._objectSet.AsEnumerable();
         }
-        
+
         /// <summary>
         /// Gets all records as an IQueryable
         /// </summary>
@@ -109,7 +109,7 @@ namespace ExampleData
 
                     foreach (
                         var includeProperty in
-                            includeProperties.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                            includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                     {
                         queryAsObjectSet = queryAsObjectSet.Include(includeProperty);
                     }
@@ -121,7 +121,7 @@ namespace ExampleData
                     {
                         return queryAsObjectSet.AsEnumerable();
                     }
-                 
+
                     return orderBy(queryAsObjectSet).AsEnumerable();
 
                 }
@@ -140,7 +140,7 @@ namespace ExampleData
 
         public virtual void Add(T entity)
         {
-            if (ReferenceEquals(entity,null))
+            if (ReferenceEquals(entity, null))
             {
                 throw new ArgumentNullException("entity");
             }
