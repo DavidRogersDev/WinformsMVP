@@ -167,15 +167,15 @@ namespace SampleApp.ExampleData
         /// <summary>
         /// Create a new Project object.
         /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="visible">Initial value of the visible property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="visible">Initial value of the Visible property.</param>
         public static Project CreateProject(global::System.Int64 id, global::System.String name, global::System.Boolean visible)
         {
             Project project = new Project();
-            project.id = id;
-            project.name = name;
-            project.visible = visible;
+            project.Id = id;
+            project.Name = name;
+            project.Visible = visible;
             return project;
         }
 
@@ -187,99 +187,99 @@ namespace SampleApp.ExampleData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 id
+        public global::System.Int64 Id
         {
             get
             {
-                return _id;
+                return _Id;
             }
             set
             {
-                if (_id != value)
+                if (_Id != value)
                 {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int64 _id;
-        partial void OnidChanging(global::System.Int64 value);
-        partial void OnidChanged();
+        private global::System.Int64 _Id;
+        partial void OnIdChanging(global::System.Int64 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String name
+        public global::System.String Name
         {
             get
             {
-                return _name;
+                return _Name;
             }
             set
             {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String description
+        public global::System.String Description
         {
             get
             {
-                return _description;
+                return _Description;
             }
             set
             {
-                OndescriptionChanging(value);
-                ReportPropertyChanging("description");
-                _description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("description");
-                OndescriptionChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _description;
-        partial void OndescriptionChanging(global::System.String value);
-        partial void OndescriptionChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean visible
+        public global::System.Boolean Visible
         {
             get
             {
-                return _visible;
+                return _Visible;
             }
             set
             {
-                OnvisibleChanging(value);
-                ReportPropertyChanging("visible");
-                _visible = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("visible");
-                OnvisibleChanged();
+                OnVisibleChanging(value);
+                ReportPropertyChanging("Visible");
+                _Visible = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visible");
+                OnVisibleChanged();
             }
         }
-        private global::System.Boolean _visible;
-        partial void OnvisibleChanging(global::System.Boolean value);
-        partial void OnvisibleChanged();
+        private global::System.Boolean _Visible;
+        partial void OnVisibleChanging(global::System.Boolean value);
+        partial void OnVisibleChanged();
 
         #endregion
     
@@ -323,17 +323,17 @@ namespace SampleApp.ExampleData
         /// <summary>
         /// Create a new Task object.
         /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="projectId">Initial value of the projectId property.</param>
-        /// <param name="visible">Initial value of the visible property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="projectId">Initial value of the ProjectId property.</param>
+        /// <param name="visible">Initial value of the Visible property.</param>
         public static Task CreateTask(global::System.Int64 id, global::System.String name, global::System.Int64 projectId, global::System.Boolean visible)
         {
             Task task = new Task();
-            task.id = id;
-            task.name = name;
-            task.projectId = projectId;
-            task.visible = visible;
+            task.Id = id;
+            task.Name = name;
+            task.ProjectId = projectId;
+            task.Visible = visible;
             return task;
         }
 
@@ -345,123 +345,123 @@ namespace SampleApp.ExampleData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 id
+        public global::System.Int64 Id
         {
             get
             {
-                return _id;
+                return _Id;
             }
             set
             {
-                if (_id != value)
+                if (_Id != value)
                 {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int64 _id;
-        partial void OnidChanging(global::System.Int64 value);
-        partial void OnidChanged();
+        private global::System.Int64 _Id;
+        partial void OnIdChanging(global::System.Int64 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String name
+        public global::System.String Name
         {
             get
             {
-                return _name;
+                return _Name;
             }
             set
             {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String description
+        public global::System.String Description
         {
             get
             {
-                return _description;
+                return _Description;
             }
             set
             {
-                OndescriptionChanging(value);
-                ReportPropertyChanging("description");
-                _description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("description");
-                OndescriptionChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _description;
-        partial void OndescriptionChanging(global::System.String value);
-        partial void OndescriptionChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 projectId
+        public global::System.Int64 ProjectId
         {
             get
             {
-                return _projectId;
+                return _ProjectId;
             }
             set
             {
-                OnprojectIdChanging(value);
-                ReportPropertyChanging("projectId");
-                _projectId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("projectId");
-                OnprojectIdChanged();
+                OnProjectIdChanging(value);
+                ReportPropertyChanging("ProjectId");
+                _ProjectId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProjectId");
+                OnProjectIdChanged();
             }
         }
-        private global::System.Int64 _projectId;
-        partial void OnprojectIdChanging(global::System.Int64 value);
-        partial void OnprojectIdChanged();
+        private global::System.Int64 _ProjectId;
+        partial void OnProjectIdChanging(global::System.Int64 value);
+        partial void OnProjectIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean visible
+        public global::System.Boolean Visible
         {
             get
             {
-                return _visible;
+                return _Visible;
             }
             set
             {
-                OnvisibleChanging(value);
-                ReportPropertyChanging("visible");
-                _visible = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("visible");
-                OnvisibleChanged();
+                OnVisibleChanging(value);
+                ReportPropertyChanging("Visible");
+                _Visible = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visible");
+                OnVisibleChanged();
             }
         }
-        private global::System.Boolean _visible;
-        partial void OnvisibleChanging(global::System.Boolean value);
-        partial void OnvisibleChanged();
+        private global::System.Boolean _Visible;
+        partial void OnVisibleChanging(global::System.Boolean value);
+        partial void OnVisibleChanged();
 
         #endregion
     
@@ -543,17 +543,17 @@ namespace SampleApp.ExampleData
         /// <summary>
         /// Create a new Work object.
         /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="taskId">Initial value of the taskId property.</param>
-        /// <param name="duration">Initial value of the duration property.</param>
-        /// <param name="dateOfWork">Initial value of the dateOfWork property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="taskId">Initial value of the TaskId property.</param>
+        /// <param name="duration">Initial value of the Duration property.</param>
+        /// <param name="dateOfWork">Initial value of the DateOfWork property.</param>
         public static Work CreateWork(global::System.Int64 id, global::System.Int64 taskId, global::System.Double duration, global::System.DateTime dateOfWork)
         {
             Work work = new Work();
-            work.id = id;
-            work.taskId = taskId;
-            work.duration = duration;
-            work.dateOfWork = dateOfWork;
+            work.Id = id;
+            work.TaskId = taskId;
+            work.Duration = duration;
+            work.DateOfWork = dateOfWork;
             return work;
         }
 
@@ -565,123 +565,123 @@ namespace SampleApp.ExampleData
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 id
+        public global::System.Int64 Id
         {
             get
             {
-                return _id;
+                return _Id;
             }
             set
             {
-                if (_id != value)
+                if (_Id != value)
                 {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("id");
-                    OnidChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int64 _id;
-        partial void OnidChanging(global::System.Int64 value);
-        partial void OnidChanged();
+        private global::System.Int64 _Id;
+        partial void OnIdChanging(global::System.Int64 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 taskId
+        public global::System.Int64 TaskId
         {
             get
             {
-                return _taskId;
+                return _TaskId;
             }
             set
             {
-                OntaskIdChanging(value);
-                ReportPropertyChanging("taskId");
-                _taskId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("taskId");
-                OntaskIdChanged();
+                OnTaskIdChanging(value);
+                ReportPropertyChanging("TaskId");
+                _TaskId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TaskId");
+                OnTaskIdChanged();
             }
         }
-        private global::System.Int64 _taskId;
-        partial void OntaskIdChanging(global::System.Int64 value);
-        partial void OntaskIdChanged();
+        private global::System.Int64 _TaskId;
+        partial void OnTaskIdChanging(global::System.Int64 value);
+        partial void OnTaskIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Double duration
+        public global::System.Double Duration
         {
             get
             {
-                return _duration;
+                return _Duration;
             }
             set
             {
-                OndurationChanging(value);
-                ReportPropertyChanging("duration");
-                _duration = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("duration");
-                OndurationChanged();
+                OnDurationChanging(value);
+                ReportPropertyChanging("Duration");
+                _Duration = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Duration");
+                OnDurationChanged();
             }
         }
-        private global::System.Double _duration;
-        partial void OndurationChanging(global::System.Double value);
-        partial void OndurationChanged();
+        private global::System.Double _Duration;
+        partial void OnDurationChanging(global::System.Double value);
+        partial void OnDurationChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String description
+        public global::System.String Description
         {
             get
             {
-                return _description;
+                return _Description;
             }
             set
             {
-                OndescriptionChanging(value);
-                ReportPropertyChanging("description");
-                _description = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("description");
-                OndescriptionChanged();
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
-        private global::System.String _description;
-        partial void OndescriptionChanging(global::System.String value);
-        partial void OndescriptionChanged();
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime dateOfWork
+        public global::System.DateTime DateOfWork
         {
             get
             {
-                return _dateOfWork;
+                return _DateOfWork;
             }
             set
             {
-                OndateOfWorkChanging(value);
-                ReportPropertyChanging("dateOfWork");
-                _dateOfWork = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("dateOfWork");
-                OndateOfWorkChanged();
+                OnDateOfWorkChanging(value);
+                ReportPropertyChanging("DateOfWork");
+                _DateOfWork = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateOfWork");
+                OnDateOfWorkChanged();
             }
         }
-        private global::System.DateTime _dateOfWork;
-        partial void OndateOfWorkChanging(global::System.DateTime value);
-        partial void OndateOfWorkChanged();
+        private global::System.DateTime _DateOfWork;
+        partial void OnDateOfWorkChanging(global::System.DateTime value);
+        partial void OnDateOfWorkChanged();
 
         #endregion
     

@@ -25,14 +25,14 @@ namespace SampleApp.ExampleData
 
         public void CreateNewProject(string name, bool visibility, string description = null)
         {
-            var newProject = new Project { name = name, description = description, visible = visibility };
+            var newProject = new Project { Name = name, Description = description, Visible = visibility };
             projectRepository.Add(newProject);
             projectRepository.SaveChanges();
         }
 
         public void CreateNewTask(string name, bool visibility, Project project, string description = null)
         {
-            var newTask = new Task {  name = name, description = description, Project = project, visible = visibility };
+            var newTask = new Task {  Name = name, Description = description, Project = project, Visible = visibility };
             taskRepository.Add(newTask);
             taskRepository.SaveChanges();
         }
@@ -41,10 +41,10 @@ namespace SampleApp.ExampleData
         {
             var newWorkItem = new Work
                                   {
-                                      dateOfWork = dateOfWork,
+                                      DateOfWork = dateOfWork,
                                       Task = task,
-                                      description = description,
-                                      duration = duration
+                                      Description = description,
+                                      Duration = duration
                                   };
             workRepository.Add(newWorkItem);
             workRepository.SaveChanges();
@@ -57,13 +57,13 @@ namespace SampleApp.ExampleData
 
         public IQueryable<Task> GetTasksOfProject(int projectId)
         {
-            return taskRepository.Find(t => t.projectId == projectId).AsQueryable();
+            return taskRepository.Find(t => t.ProjectId == projectId).AsQueryable();
 
         }
 
         public IQueryable<Work> GetWorkItemsOfTask(int taskId)
         {
-            return workRepository.FindBy(w => w.taskId == taskId, w => w.OrderBy(o => o.dateOfWork), string.Empty).AsQueryable();
+            return workRepository.FindBy(w => w.TaskId == taskId, w => w.OrderBy(o => o.DateOfWork), string.Empty).AsQueryable();
         }
 
         public void Save()

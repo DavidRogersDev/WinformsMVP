@@ -30,7 +30,7 @@ namespace SampleApp.Services
 
         public IQueryable<Task> GetTasksOfProject(int projectId)
         {
-            return unitOfWork.GetTasksOfProject(projectId).Where(p => p.visible);
+            return unitOfWork.GetTasksOfProject(projectId).Where(p => p.Visible);
         }
 
         public IQueryable<Work> GetWorkItemsOfTask(int taskId)
@@ -40,7 +40,7 @@ namespace SampleApp.Services
 
         public IQueryable<Project> GetListOfProjects()
         {
-            return unitOfWork.GetAllProjects().Where(p => p.visible);
+            return unitOfWork.GetAllProjects().Where(p => p.Visible);
         }
     }
 }

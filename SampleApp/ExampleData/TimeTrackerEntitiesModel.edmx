@@ -91,35 +91,35 @@
         </EntityContainer>
         <EntityType Name="Project">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
-          <Property Name="visible" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tasks" Relationship="TimeTrackerModel.FK_Task_0" FromRole="Project" ToRole="Task" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
-          <Property Name="projectId" Type="Int64" Nullable="false" />
-          <Property Name="visible" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectId" Type="Int64" Nullable="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="TimeTrackerModel.FK_Task_0" FromRole="Task" ToRole="Project" />
           <NavigationProperty Name="Works" Relationship="TimeTrackerModel.FK_Work_0" FromRole="Task" ToRole="Work" />
         </EntityType>
         <EntityType Name="Work">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="taskId" Type="Int64" Nullable="false" />
-          <Property Name="duration" Type="Double" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="dateOfWork" Type="DateTime" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int64" Nullable="false" />
+          <Property Name="Duration" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="DateOfWork" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Task" Relationship="TimeTrackerModel.FK_Work_0" FromRole="Work" ToRole="Task" />
         </EntityType>
         <Association Name="FK_Task_0">
@@ -127,10 +127,10 @@
           <End Role="Task" Type="TimeTrackerModel.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Task">
-              <PropertyRef Name="projectId" />
+              <PropertyRef Name="ProjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -139,10 +139,10 @@
           <End Role="Work" Type="TimeTrackerModel.Work" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Task">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Work">
-              <PropertyRef Name="taskId" />
+              <PropertyRef Name="TaskId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -153,24 +153,24 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TimeTrackerModelStoreContainer" CdmEntityContainer="TTEntities">
           <EntitySetMapping Name="Projects"><EntityTypeMapping TypeName="TimeTrackerModel.Project"><MappingFragment StoreEntitySet="Project">
-            <ScalarProperty Name="id" ColumnName="id" />
-            <ScalarProperty Name="name" ColumnName="name" />
-            <ScalarProperty Name="description" ColumnName="description" />
-            <ScalarProperty Name="visible" ColumnName="visible" />
+            <ScalarProperty Name="Id" ColumnName="id" />
+            <ScalarProperty Name="Name" ColumnName="name" />
+            <ScalarProperty Name="Description" ColumnName="description" />
+            <ScalarProperty Name="Visible" ColumnName="visible" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Tasks"><EntityTypeMapping TypeName="TimeTrackerModel.Task"><MappingFragment StoreEntitySet="Task">
-            <ScalarProperty Name="id" ColumnName="id" />
-            <ScalarProperty Name="name" ColumnName="name" />
-            <ScalarProperty Name="description" ColumnName="description" />
-            <ScalarProperty Name="projectId" ColumnName="projectId" />
-            <ScalarProperty Name="visible" ColumnName="visible" />
+            <ScalarProperty Name="Id" ColumnName="id" />
+            <ScalarProperty Name="Name" ColumnName="name" />
+            <ScalarProperty Name="Description" ColumnName="description" />
+            <ScalarProperty Name="ProjectId" ColumnName="projectId" />
+            <ScalarProperty Name="Visible" ColumnName="visible" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Works"><EntityTypeMapping TypeName="TimeTrackerModel.Work"><MappingFragment StoreEntitySet="Work">
-            <ScalarProperty Name="id" ColumnName="id" />
-            <ScalarProperty Name="taskId" ColumnName="taskId" />
-            <ScalarProperty Name="duration" ColumnName="duration" />
-            <ScalarProperty Name="description" ColumnName="description" />
-            <ScalarProperty Name="dateOfWork" ColumnName="dateOfWork" />
+            <ScalarProperty Name="Id" ColumnName="id" />
+            <ScalarProperty Name="TaskId" ColumnName="taskId" />
+            <ScalarProperty Name="Duration" ColumnName="duration" />
+            <ScalarProperty Name="Description" ColumnName="description" />
+            <ScalarProperty Name="DateOfWork" ColumnName="dateOfWork" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>

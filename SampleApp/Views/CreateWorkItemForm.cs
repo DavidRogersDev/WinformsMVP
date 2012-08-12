@@ -130,21 +130,21 @@ namespace SampleApp.Views
             // 
             // TaskNameColumn
             // 
-            this.TaskNameColumn.DataPropertyName = "name";
+            this.TaskNameColumn.DataPropertyName = "Name";
             this.TaskNameColumn.HeaderText = "Task";
             this.TaskNameColumn.Name = "TaskNameColumn";
             this.TaskNameColumn.ReadOnly = true;
             // 
             // TaskDescriptionColumn
             // 
-            this.TaskDescriptionColumn.DataPropertyName = "description";
+            this.TaskDescriptionColumn.DataPropertyName = "Description";
             this.TaskDescriptionColumn.HeaderText = "Description";
             this.TaskDescriptionColumn.Name = "TaskDescriptionColumn";
             this.TaskDescriptionColumn.ReadOnly = true;
             // 
             // TaskEstimateColumn
             // 
-            this.TaskEstimateColumn.DataPropertyName = "estimate";
+            this.TaskEstimateColumn.DataPropertyName = "Estimate";
             this.TaskEstimateColumn.HeaderText = "Estimate";
             this.TaskEstimateColumn.Name = "TaskEstimateColumn";
             this.TaskEstimateColumn.ReadOnly = true;
