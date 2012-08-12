@@ -13,21 +13,15 @@ namespace SampleApp.ExampleData
         private ObjectContext context;
         private IGenericRepository<Project> projectRepository;
         private IGenericRepository<Task> taskRepository;
+        private IGenericRepository<Work> workRepository;
 
         public UnitOfWork(ObjectContext entities)
         {
             context = entities;
             projectRepository = new ProjectRepository(context);
             taskRepository = new TaskRepository(context);
+            workRepository = new WorkRepository(context);
         }
-
-        //public UnitOfWork(ObjectContext entities, TaskRepository taskRepository, ProjectRepository projectRepository, WorkRepository workRepository)
-        //{
-        //    this.context = entities as TimeTrackerEntities;
-        //    this.projectRepository = projectRepository;
-        //    this.taskRepository = taskRepository;
-        //    this.workRepository = workRepository;
-        //}
 
         public void CreateNewProject(string name, bool visibility, string description = null)
         {
@@ -43,10 +37,34 @@ namespace SampleApp.ExampleData
             taskRepository.SaveChanges();
         }
 
-         public IQueryable<Project> GetAllProjects()
+        public void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null)
+        {
+            var newWorkItem = new Work
+                                  {
+                                      dateOfWork = dateOfWork,
+                                      Task = task,
+                                      description = description,
+                                      duration = duration
+                                  };
+            workRepository.Add(newWorkItem);
+            workRepository.SaveChanges();
+        }
+
+        public IQueryable<Project> GetAllProjects()
          {
              return projectRepository.GetAllAsQueryable();
          }
+
+        public IQueryable<Task> GetTasksOfProject(int projectId)
+        {
+            return taskRepository.Find(t => t.projectId == projectId).AsQueryable();
+
+        }
+
+        public IQueryable<Work> GetWorkItemsOfTask(int taskId)
+        {
+            return workRepository.FindBy(w => w.taskId == taskId, w => w.OrderBy(o => o.dateOfWork), string.Empty).AsQueryable();
+        }
 
         public void Save()
         {

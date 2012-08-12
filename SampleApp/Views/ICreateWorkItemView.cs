@@ -9,5 +9,8 @@ namespace SampleApp.Views
         event EventHandler ProjectedSelectionChanged;
         event EventHandler TaskSelectionChanged;
         event EventHandler AddWorkItemClicked;
+        event EventHandler CloseFormClicked;
+
+        void CloseForm();
     }
 }

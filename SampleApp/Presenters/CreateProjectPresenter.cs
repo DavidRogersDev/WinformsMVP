@@ -17,7 +17,13 @@ namespace SampleApp.Presenters
             timeTrackerService = ServiceLocator.Resolve<ITimeTrackerService>();
 
             View.AddProjectClicked += new EventHandler(view_AddProjectClicked);
+            View.CloseFormClicked += new EventHandler(View_CloseFormClicked);
             View.Load += new EventHandler(View_Load);
+        }
+
+        void View_CloseFormClicked(object sender, EventArgs e)
+        {
+            View.CloseForm();
         }
 
         private void View_Load(object sender, EventArgs e)

@@ -63,11 +63,13 @@
     </Compile>
     <Compile Include="ExampleData\UnitOfWork.cs" />
     <Compile Include="ExampleData\ProjectRepository.cs" />
+    <Compile Include="ExampleData\WorkRepository.cs" />
     <Compile Include="Ioc\DependancyRegistry.cs" />
     <Compile Include="Ioc\ServiceLocator.cs" />
     <Compile Include="Models\CreateProjectModel.cs" />
     <Compile Include="Models\CreateTaskModel.cs" />
     <Compile Include="Models\CreateWorkItemModel.cs" />
+    <Compile Include="Models\ViewAllWorkModel.cs" />
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
     <Compile Include="Presenters\CreateTaskPresenter.cs" />
     <Compile Include="Presenters\CreateWorkItemPresenter.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Views\CreateWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\IAllDataView.cs" />
     <Compile Include="Views\ICreateProjectView.cs" />
     <Compile Include="Views\ICreateTaskView.cs" />
     <Compile Include="Views\ICreateWorkItemView.cs" />

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Objects;
 using System.Linq;
-using System.Text;
 using SampleApp.ExampleData;
 
 namespace SampleApp.Services
@@ -26,9 +23,24 @@ namespace SampleApp.Services
             unitOfWork.CreateNewTask(name, visibility, project, description);
         }
 
+        public void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null)
+        {
+            unitOfWork.CreateNewWorkItem(task, duration, dateOfWork, description);
+        }
+
+        public IQueryable<Task> GetTasksOfProject(int projectId)
+        {
+            return unitOfWork.GetTasksOfProject(projectId).Where(p => p.visible);
+        }
+
+        public IQueryable<Work> GetWorkItemsOfTask(int taskId)
+        {
+            return unitOfWork.GetWorkItemsOfTask(taskId);
+        }
+
         public IQueryable<Project> GetListOfProjects()
         {
-            return unitOfWork.GetAllProjects();
+            return unitOfWork.GetAllProjects().Where(p => p.visible);
         }
     }
 }

@@ -24,6 +24,12 @@ namespace SampleApp.Views
         #region Implementation of ICreateProjectView
 
         public event EventHandler AddProjectClicked;
+        public event EventHandler CloseFormClicked;
+
+        public void CloseForm()
+        {
+            this.Close();
+        }
 
         #endregion
 
@@ -44,7 +50,7 @@ namespace SampleApp.Views
             this.NameTextBox.Location = new System.Drawing.Point(75, 48);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.MaxLength = 100;
-            this.NameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.NameTextBox.Size = new System.Drawing.Size(300, 20);
             this.NameTextBox.TabIndex = 1;
             // 
             // DescriptionTextBox
@@ -52,7 +58,7 @@ namespace SampleApp.Views
             this.DescriptionTextBox.Location = new System.Drawing.Point(75, 73);
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.MaxLength = 250;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(100, 20);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(300, 20);
             this.DescriptionTextBox.TabIndex = 2;
             // 
             // NameLabel

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SampleApp.ExampleData;
 using SampleApp.Models;
@@ -154,6 +151,12 @@ namespace SampleApp.Views
         #region Implementation of ICreateTaskView
 
         public event EventHandler AddTaskClicked;
+        public event EventHandler CloseFormClicked;
+
+        public void CloseForm()
+        {
+            this.Close();
+        }
 
         #endregion
     }
