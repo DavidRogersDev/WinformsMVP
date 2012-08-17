@@ -9,7 +9,7 @@ namespace SampleApp.Presenters
 {
     public class CreateProjectPresenter : Presenter<ICreateProjectView>
     {
-        private ITimeTrackerService timeTrackerService;
+        private readonly ITimeTrackerService timeTrackerService;
 
         public CreateProjectPresenter(ICreateProjectView view)
             :base(view)

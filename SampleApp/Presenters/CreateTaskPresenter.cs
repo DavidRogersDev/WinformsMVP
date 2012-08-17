@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SampleApp.Ioc;
 using SampleApp.Models;
 using SampleApp.Services;
@@ -12,7 +10,7 @@ namespace SampleApp.Presenters
 {
     public class CreateTaskPresenter : Presenter<ICreateTaskView>
     {
-        private ITimeTrackerService timeTrackerService;
+        private readonly ITimeTrackerService timeTrackerService;
 
         public CreateTaskPresenter(ICreateTaskView view)
             : base(view)

@@ -73,8 +73,12 @@
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
     <Compile Include="Presenters\CreateTaskPresenter.cs" />
     <Compile Include="Presenters\CreateWorkItemPresenter.cs" />
+    <Compile Include="Presenters\ManageAllDataPresenter.cs" />
     <Compile Include="Services\ITimeTrackerService.cs" />
     <Compile Include="Services\TimeTrackerService.cs" />
+    <Compile Include="Views\AllDataView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\CreateProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>

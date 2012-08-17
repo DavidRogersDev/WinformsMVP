@@ -18,7 +18,8 @@ namespace SampleApp
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateWorkItemForm());
+            Application.Run(new AllDataView());
+            //Application.Run(new CreateWorkItemForm());
             //Application.Run(new CreateProjectForm());
             //Application.Run(new CreateTaskForm());
         }
