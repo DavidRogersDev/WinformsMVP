@@ -80,6 +80,7 @@ namespace SampleApp.Views
             this.ProjectsDataGridView.Size = new System.Drawing.Size(844, 150);
             this.ProjectsDataGridView.TabIndex = 0;
             this.ProjectsDataGridView.CellClick += new DataGridViewCellEventHandler(ProjectsDataGridView_CellClick);
+            this.ProjectsDataGridView.CellContentClick += new DataGridViewCellEventHandler(ProjectsDataGridView_CellContentClick);
             // 
             // TasksDataGridView
             // 
@@ -175,7 +176,7 @@ namespace SampleApp.Views
             this.ProjectVisibleColumn.DataPropertyName = "Visible";
             this.ProjectVisibleColumn.HeaderText = "Visible";
             this.ProjectVisibleColumn.Name = "ProjectVisibleColumn";
-            this.ProjectVisibleColumn.ReadOnly = true;
+            this.ProjectVisibleColumn.ReadOnly = false;
             this.ProjectVisibleColumn.Width = 50;
             // 
             // ProjectDeleteColumn
@@ -250,6 +251,28 @@ namespace SampleApp.Views
 
         }
 
+        void ProjectsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+            {
+                Model.SelectedProject.Visible =
+                    !(bool)
+                    (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
+                        Value;
+                ProjectVisibilityToggled(null, EventArgs.Empty);
+            }
+            else if(ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+            {
+                ProjectDeleteSelected(null, EventArgs.Empty);
+            }
+            else
+            {
+                ProjectHasBeenSelected(null, EventArgs.Empty);
+            }
+
+            var m = ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"];
+        }
+
         void TasksDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
@@ -259,14 +282,20 @@ namespace SampleApp.Views
         void ProjectsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Model.SelectedProject = ProjectsDataGridView.Rows[e.RowIndex].DataBoundItem as Project;
-            ProjectHasBeenSelected(null, EventArgs.Empty);
         }
 
 
         #region Implementation of IAllDataView
 
+        public event EventHandler ProjectDeleteSelected;
         public event EventHandler ProjectHasBeenSelected;
+        public event EventHandler ProjectVisibilityToggled;
         public event EventHandler TaskHasBeenSelected;
+
+        public void PopulateProjects(IList<Project> projects)
+        {
+            this.ProjectsDataGridView.DataSource = projects;
+        }
 
         public void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject)
         {

@@ -114,6 +114,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TimeTrackerEntitiesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Properties\DataSources\SampleApp.ExampleData.TTEntities.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

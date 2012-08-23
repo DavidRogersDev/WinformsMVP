@@ -33,7 +33,7 @@ namespace SampleApp.Presenters
             View.Model = new CreateWorkItemModel();
             try
             {
-                View.Model.Projects = timeTrackerService.GetListOfProjects().ToList();
+                View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
             }
             catch
             {

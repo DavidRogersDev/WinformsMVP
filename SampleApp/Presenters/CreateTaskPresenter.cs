@@ -30,7 +30,7 @@ namespace SampleApp.Presenters
         private void View_Load(object sender, EventArgs e)
         {
             View.Model = new CreateTaskModel();
-            View.Model.Projects = timeTrackerService.GetListOfProjects().ToList();
+            View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
         }
 
         private void View_AddTaskClicked(object sender, EventArgs e)

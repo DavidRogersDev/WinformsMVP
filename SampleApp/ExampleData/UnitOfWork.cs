@@ -47,6 +47,12 @@ namespace SampleApp.ExampleData
             workRepository.SaveChanges();
         }
 
+        public void DeleteProject(Project project)
+        {
+            projectRepository.Delete(project);
+            projectRepository.SaveChanges(SaveOptions.AcceptAllChangesAfterSave);
+        }
+
         public IQueryable<Project> GetAllProjects()
          {
              return projectRepository.GetAllAsQueryable();
@@ -65,6 +71,13 @@ namespace SampleApp.ExampleData
 
         public void Save()
         {
+            context.SaveChanges();
+        }
+
+        public void UpdateProject(Project project)
+        {
+            //  do nothing with the project. Saving changes on the context pushes the update back to the server. 
+            //  Note: not good code to use entities in the View. But great for simple demo examples.
             context.SaveChanges();
         }
 

@@ -28,6 +28,22 @@ namespace SampleApp.Services
             unitOfWork.CreateNewWorkItem(task, duration, dateOfWork, description);
         }
 
+        public void DeleteProject(Project project)
+        {
+            unitOfWork.DeleteProject(project);
+        }
+
+        public IQueryable<Project> GetListOfProjects()
+        {
+            return unitOfWork.GetAllProjects();
+        }
+
+
+        public IQueryable<Project> GetListOfVisibleProjects()
+        {
+            return unitOfWork.GetAllProjects().Where(p => p.Visible);
+        }
+
         public IQueryable<Task> GetTasksOfProject(int projectId)
         {
             return unitOfWork.GetTasksOfProject(projectId).Where(p => p.Visible);
@@ -38,9 +54,9 @@ namespace SampleApp.Services
             return unitOfWork.GetWorkItemsOfTask(taskId);
         }
 
-        public IQueryable<Project> GetListOfProjects()
+        public void UpdateProject(Project project)
         {
-            return unitOfWork.GetAllProjects().Where(p => p.Visible);
+            this.unitOfWork.UpdateProject(project);
         }
     }
 }
