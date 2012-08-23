@@ -69,10 +69,12 @@
     <Compile Include="Models\CreateProjectModel.cs" />
     <Compile Include="Models\CreateTaskModel.cs" />
     <Compile Include="Models\CreateWorkItemModel.cs" />
+    <Compile Include="Models\MainFormModel.cs" />
     <Compile Include="Models\ViewAllWorkModel.cs" />
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
     <Compile Include="Presenters\CreateTaskPresenter.cs" />
     <Compile Include="Presenters\CreateWorkItemPresenter.cs" />
+    <Compile Include="Presenters\MainEntryMenuPresenter.cs" />
     <Compile Include="Presenters\ManageAllDataPresenter.cs" />
     <Compile Include="Services\ITimeTrackerService.cs" />
     <Compile Include="Services\TimeTrackerService.cs" />
@@ -94,6 +96,10 @@
     <Compile Include="Views\ICreateProjectView.cs" />
     <Compile Include="Views\ICreateTaskView.cs" />
     <Compile Include="Views\ICreateWorkItemView.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
