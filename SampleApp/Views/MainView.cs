@@ -16,6 +16,7 @@ namespace SampleApp.Views
         Button EnterWorkItemButton;
         Button CreateTaskButton;
         Button CreateProjectButton;
+        LinkLabel ExitLinkLabel;
 
         public MainView()
         {
@@ -34,6 +35,7 @@ namespace SampleApp.Views
             this.EnterWorkItemButton = new Button();
             this.CreateTaskButton = new Button();
             this.CreateProjectButton = new Button();
+            this.ExitLinkLabel = new LinkLabel();
             this.SuspendLayout();
             // 
             // ViewAllDataButton
@@ -44,6 +46,7 @@ namespace SampleApp.Views
             this.ViewAllDataButton.TabIndex = 0;
             this.ViewAllDataButton.Text = "View All Data";
             this.ViewAllDataButton.UseVisualStyleBackColor = true;
+            this.ViewAllDataButton.Click += new EventHandler(ViewAllDataButton_Click);
             // 
             // EnterWorkItemButton
             // 
@@ -53,6 +56,7 @@ namespace SampleApp.Views
             this.EnterWorkItemButton.TabIndex = 1;
             this.EnterWorkItemButton.Text = "Enter Work Details";
             this.EnterWorkItemButton.UseVisualStyleBackColor = true;
+            this.EnterWorkItemButton.Click += new EventHandler(EnterWorkItemButton_Click);
             // 
             // CreateTaskButton
             // 
@@ -62,6 +66,7 @@ namespace SampleApp.Views
             this.CreateTaskButton.TabIndex = 2;
             this.CreateTaskButton.Text = "Create Task";
             this.CreateTaskButton.UseVisualStyleBackColor = true;
+            this.CreateTaskButton.Click += new EventHandler(CreateTaskButton_Click);
             // 
             // CreateProjectButton
             // 
@@ -73,6 +78,17 @@ namespace SampleApp.Views
             this.CreateProjectButton.UseVisualStyleBackColor = true;
             this.CreateProjectButton.Click += new EventHandler(CreateProjectButton_Click);
             // 
+            // ExitLinkLabel
+            // 
+            this.ExitLinkLabel.AutoSize = true;
+            this.ExitLinkLabel.Location = new System.Drawing.Point(227, 194);
+            this.ExitLinkLabel.Name = "ExitLinkLabel";
+            this.ExitLinkLabel.Size = new System.Drawing.Size(24, 13);
+            this.ExitLinkLabel.TabIndex = 4;
+            this.ExitLinkLabel.TabStop = true;
+            this.ExitLinkLabel.Text = "Exit";
+            this.ExitLinkLabel.Click += new EventHandler(ExitLinkLabel_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -82,10 +98,34 @@ namespace SampleApp.Views
             this.Controls.Add(this.CreateTaskButton);
             this.Controls.Add(this.EnterWorkItemButton);
             this.Controls.Add(this.ViewAllDataButton);
+            this.Controls.Add(this.ExitLinkLabel);
             this.Name = "MainForm";
             this.Text = "WinFormsMvp - Sample App";
             this.ResumeLayout(false);
 
+        }
+
+        void ExitLinkLabel_Click(object sender, EventArgs e)
+        {
+            CloseFormClicked(null, EventArgs.Empty);
+        }
+
+        void ViewAllDataButton_Click(object sender, EventArgs e)
+        {
+            Model.FormToDisplay = typeof(AllDataView);
+            DisplayCreateProjectView(null, EventArgs.Empty);
+        }
+
+        void EnterWorkItemButton_Click(object sender, EventArgs e)
+        {
+            Model.FormToDisplay = typeof (CreateWorkItemForm);
+            DisplayCreateProjectView(null, EventArgs.Empty);
+        }
+
+        void CreateTaskButton_Click(object sender, EventArgs e)
+        {
+            Model.FormToDisplay = typeof (CreateTaskForm);
+            DisplayCreateProjectView(null, EventArgs.Empty);
         }
 
         void CreateProjectButton_Click(object sender, EventArgs e)
@@ -97,6 +137,7 @@ namespace SampleApp.Views
 
         #region Implementation of IMainView
 
+        public event EventHandler CloseFormClicked;
         public event EventHandler DisplayCreateProjectView;
 
         public void DisplayView()
@@ -107,7 +148,7 @@ namespace SampleApp.Views
 
         public void Exit()
         {
-            throw new NotImplementedException();
+            this.Close();
         }
 
         #endregion

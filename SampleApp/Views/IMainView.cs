@@ -9,6 +9,7 @@ namespace SampleApp.Views
 {
     public interface IMainView : IView<MainFormModel>
     {
+        event EventHandler CloseFormClicked;
         event EventHandler DisplayCreateProjectView;
 
         void DisplayView();
