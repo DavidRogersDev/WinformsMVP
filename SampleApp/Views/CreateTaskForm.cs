@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using SampleApp.ExampleData;
 using SampleApp.Models;
@@ -8,14 +10,15 @@ namespace SampleApp.Views
 {
     public class CreateTaskForm : MvpForm<CreateTaskModel>, ICreateTaskView
     {
-        private TextBox NameTextBox;
-        private TextBox DescriptionTextBox;
-        private Label DescriptionLabel;
-        private Label NameLabel;
-        private Label ProjectLabel;
-        private CheckBox VisibilityCheckBox;
-        private Button CreateTaskButton;
-        private ComboBox ProjectsComboBox;
+        TextBox NameTextBox;
+        TextBox DescriptionTextBox;
+        Label DescriptionLabel;
+        Label NameLabel;
+        Label ProjectLabel;
+        CheckBox VisibilityCheckBox;
+        Button CreateTaskButton;
+        ComboBox ProjectsComboBox;
+        PictureBox successPictureBox;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -37,7 +40,12 @@ namespace SampleApp.Views
             this.ProjectLabel = new Label();
             this.VisibilityCheckBox = new CheckBox();
             this.ProjectsComboBox = new ComboBox();
+            this.successPictureBox = new PictureBox();
             this.SuspendLayout();
+
+            this.successPictureBox.Image = new Bitmap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tick.png"), true);
+            this.successPictureBox.Location = new Point(75, 175);
+            this.successPictureBox.Visible = false;
 
             // 
             // NameTextBox
@@ -45,7 +53,7 @@ namespace SampleApp.Views
             this.NameTextBox.Location = new System.Drawing.Point(75, 48);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.MaxLength = 150;
-            this.NameTextBox.Size = new System.Drawing.Size(300, 20);
+            this.NameTextBox.Size = new System.Drawing.Size(480, 20);
             this.NameTextBox.TabIndex = 1;
             // 
             // DescriptionTextBox
@@ -53,7 +61,7 @@ namespace SampleApp.Views
             this.DescriptionTextBox.Location = new System.Drawing.Point(75, 73);
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.MaxLength = 250;
-            this.DescriptionTextBox.Size = new System.Drawing.Size(300, 20);
+            this.DescriptionTextBox.Size = new System.Drawing.Size(480, 20);
             this.DescriptionTextBox.TabIndex = 2;
             // 
             // NameLabel
@@ -113,7 +121,7 @@ namespace SampleApp.Views
             this.ProjectsComboBox.FormattingEnabled = true;
             this.ProjectsComboBox.Location = new System.Drawing.Point(75, 18);
             this.ProjectsComboBox.Name = "ProjectsComboBox";
-            this.ProjectsComboBox.Size = new System.Drawing.Size(250, 21);
+            this.ProjectsComboBox.Size = new System.Drawing.Size(480, 21);
             this.ProjectsComboBox.TabIndex = 9;
             this.ProjectsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -122,7 +130,7 @@ namespace SampleApp.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 328);
+            this.ClientSize = new System.Drawing.Size(654, 226);
             this.Controls.Add(this.VisibilityCheckBox);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.NameLabel);
@@ -131,8 +139,10 @@ namespace SampleApp.Views
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.ProjectsComboBox);
             this.Controls.Add(this.CreateTaskButton);
+            this.Controls.Add(this.successPictureBox);
             this.Name = "CreateTaskForm";
             this.Text = "Add a New Task";
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -146,6 +156,7 @@ namespace SampleApp.Views
             Model.Visibilty = VisibilityCheckBox.Checked;
 
             AddTaskClicked(null, EventArgs.Empty);
+            successPictureBox.Visible = true;
         }
 
         #region Implementation of ICreateTaskView

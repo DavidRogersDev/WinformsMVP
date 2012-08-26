@@ -1,5 +1,6 @@
 ﻿using SampleApp.Services;
 using StructureMap.Configuration.DSL;
+using SampleApp.Views;
 
 namespace SampleApp.Ioc
 {

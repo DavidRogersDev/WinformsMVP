@@ -7,32 +7,24 @@ namespace WinFormsMvp.Forms
     public class MvpForm<TModel> : Form, IView<TModel>
         where TModel : class
     {
-        private TModel model;
         private readonly PresenterBinder presenterBinder = new PresenterBinder();
-
 
         public MvpForm()
         {
             presenterBinder.PerformBinding(this);
+            ThrowExceptionIfNoPresenterBound = true;
         }
 
         #region Implementation of IView<TModel>
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public TModel Model
-        {
-            get { return model; }
-            set { model = value; }
-        }
+        public TModel Model { get; set; }
 
         #endregion
 
         #region Implementation of IView
 
-        public bool ThrowExceptionIfNoPresenterBound
-        {
-            get { return false; } // todo: need to consider the use of this in this new environment!!!
-        }
+        public bool ThrowExceptionIfNoPresenterBound { get; private set; }
 
         #endregion
     }

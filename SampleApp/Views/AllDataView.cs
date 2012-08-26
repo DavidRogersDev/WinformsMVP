@@ -244,6 +244,8 @@ namespace SampleApp.Views
             this.Controls.Add(this.ProjectsDataGridView);
             this.Name = "AllDataView";
             this.Text = "AllDataView";
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TasksDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkItemsDataGridView)).EndInit();

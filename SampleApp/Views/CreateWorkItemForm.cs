@@ -215,6 +215,8 @@ namespace SampleApp.Views
             this.Controls.Add(this.DurationLabel);
             this.Name = "AddWorkForm";
             this.Text = "Add Work Item";
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             ((System.ComponentModel.ISupportInitialize)(this.TasksDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationNumericUpDown)).EndInit();
             this.ResumeLayout(false);

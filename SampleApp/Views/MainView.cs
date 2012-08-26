@@ -101,6 +101,8 @@ namespace SampleApp.Views
             this.Controls.Add(this.ExitLinkLabel);
             this.Name = "MainForm";
             this.Text = "WinFormsMvp - Sample App";
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             this.ResumeLayout(false);
 
         }
