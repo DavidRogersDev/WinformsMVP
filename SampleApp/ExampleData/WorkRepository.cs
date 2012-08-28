@@ -11,5 +11,13 @@ namespace SampleApp.ExampleData
         public WorkRepository(ObjectContext context) : base(context)
         {
         }
+
+        public void DeleteWorkItems(IList<Work> works)
+        {
+            for(int i = works.Count - 1; i > -1; i--)
+            {
+                Delete(works[i]);
+            }
+        }
     }
 }

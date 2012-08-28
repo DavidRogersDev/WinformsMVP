@@ -1,4 +1,5 @@
-﻿using System.Data.Objects;
+﻿using System.Linq;
+using System.Data.Objects;
 
 namespace SampleApp.ExampleData
 {
@@ -6,6 +7,13 @@ namespace SampleApp.ExampleData
     {
         public ProjectRepository(ObjectContext context) : base(context)
         {
+        }
+
+        public override void Delete(Project entity)
+        {
+            entity.Tasks.SelectMany(t => t.Works).ToList().Clear();
+            entity.Tasks.Clear();
+            base.Delete(entity);
         }
     }
 }

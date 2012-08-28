@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Objects;
 using System.Linq;
 
@@ -49,6 +50,9 @@ namespace SampleApp.ExampleData
 
         public void DeleteProject(Project project)
         {
+            //  Not the best way to cascade a delete, but it'll do for this sample app.
+            ((WorkRepository)workRepository).DeleteWorkItems(project.Tasks.SelectMany(t => t.Works).ToList());
+            ((TaskRepository)taskRepository).DeleteTasks(new List<Task>(project.Tasks));
             projectRepository.Delete(project);
             projectRepository.SaveChanges(SaveOptions.AcceptAllChangesAfterSave);
         }
