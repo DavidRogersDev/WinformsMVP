@@ -49,6 +49,7 @@
     <Compile Include="Binder\AssemblyExtensions.cs" />
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategyTests.cs" />
     <Compile Include="Binder\ConventionBasedPresenterDiscoveryStrategyTests.cs" />
+    <Compile Include="Binder\DefaultPresenterFactoryTests.cs" />
     <Compile Include="Models\CreateProjectModel.cs" />
     <Compile Include="Models\MainFormModel.cs" />
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
