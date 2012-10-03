@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WinFormsMvpMain.testsettings = WinFormsMvpMain.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApplication", "SampleApplication\SampleApplication.csproj", "{C0A415D5-D985-4003-9040-236C78CDAD43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApplication", "ExampleApplication\ExampleApplication.csproj", "{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = WinFormsMvp.vsmdi
@@ -63,6 +67,26 @@ Global
 		{7F30C0C2-742F-4A78-90BE-A11D37FBED4D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7F30C0C2-742F-4A78-90BE-A11D37FBED4D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7F30C0C2-742F-4A78-90BE-A11D37FBED4D}.Release|x86.ActiveCfg = Release|Any CPU
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Debug|x86.ActiveCfg = Debug|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Debug|x86.Build.0 = Debug|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Release|Any CPU.ActiveCfg = Release|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Release|x86.ActiveCfg = Release|x86
+		{C0A415D5-D985-4003-9040-236C78CDAD43}.Release|x86.Build.0 = Release|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Debug|x86.ActiveCfg = Debug|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Debug|x86.Build.0 = Debug|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Release|Any CPU.ActiveCfg = Release|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Release|x86.ActiveCfg = Release|x86
+		{5A960F95-6EE7-4D4F-B4E8-EF0138A2754F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
