@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Reflection;
 using ExampleApplication.ExampleData;
-using ExampleApplication.Services;
 
 namespace ExampleApplication.Services
 {
@@ -13,7 +11,7 @@ namespace ExampleApplication.Services
 
         public TimeTrackerService()
         {
-            unitOfWork = new UnitOfWork(new ExampleApplication.ExampleData.TimeTrackerEntities());
+            unitOfWork = new UnitOfWork(new TimeTrackerEntities(ConfigurationManager.ConnectionStrings["TimeTrackerEntities"].ConnectionString));
         }
 
         public void CreateNewProject(string name, bool visibility, string description = null)

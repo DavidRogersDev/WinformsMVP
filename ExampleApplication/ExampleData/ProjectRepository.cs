@@ -7,6 +7,7 @@ namespace ExampleApplication.ExampleData
     {
         public ProjectRepository(ObjectContext context) : base(context)
         {
+            context.Connection.Open();
         }
 
         public override void Delete(Project entity)

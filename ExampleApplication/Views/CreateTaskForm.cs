@@ -26,8 +26,8 @@ namespace ExampleApplication.Views
 
             this.InitializeComponent();
 
-            //this.ProjectsComboBox.DataSource = Model.Projects;
-            //this.ProjectsComboBox.DisplayMember = "Name";
+            this.ProjectsComboBox.DataSource = Model.Projects;
+            this.ProjectsComboBox.DisplayMember = "Name";
         }
 
         private void InitializeComponent()
@@ -150,13 +150,13 @@ namespace ExampleApplication.Views
 
         private void CreateTaskButton_Click(object sender, EventArgs e)
         {
-            //Model.SelectedProject = this.ProjectsComboBox.SelectedItem as Project;
-            //Model.Name = NameTextBox.Text.Trim();
-            //Model.Description = DescriptionTextBox.Text.Trim();
-            //Model.Visibilty = VisibilityCheckBox.Checked;
+            Model.SelectedProject = this.ProjectsComboBox.SelectedItem as Project;
+            Model.Name = NameTextBox.Text.Trim();
+            Model.Description = DescriptionTextBox.Text.Trim();
+            Model.Visibilty = VisibilityCheckBox.Checked;
 
-            //AddTaskClicked(null, EventArgs.Empty);
-            //successPictureBox.Visible = true;
+            AddTaskClicked(null, EventArgs.Empty);
+            successPictureBox.Visible = true;
         }
 
         #region Implementation of ICreateTaskView

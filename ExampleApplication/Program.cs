@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using ExampleApplication.Ioc;
 using ExampleApplication.Views;
@@ -25,10 +23,7 @@ namespace ExampleApplication
 
         static void RegisterDependencies()
         {
-            ObjectFactory.Initialize(x =>
-            {
-                x.AddRegistry<DependancyRegistry>();
-            });
+            ObjectFactory.Initialize(x => x.AddRegistry<DependancyRegistry>());
         }
     }
 }

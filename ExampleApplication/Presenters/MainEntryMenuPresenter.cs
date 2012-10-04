@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ExampleApplication.Models;
 using ExampleApplication.Views;
 using WinFormsMvp;
@@ -12,9 +9,9 @@ namespace ExampleApplication.Presenters
     {
         public MainEntryMenuPresenter(IMainView view) : base(view)
         {
-            View.CloseFormClicked += new EventHandler(View_CloseFormClicked);
-            View.DisplayCreateProjectView += new EventHandler(view_DisplayCreateProjectView);
-            View.Load += new EventHandler(View_Load);
+            View.CloseFormClicked += View_CloseFormClicked;
+            View.DisplayCreateProjectView += view_DisplayCreateProjectView;
+            View.Load += View_Load;
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)
@@ -26,8 +23,6 @@ namespace ExampleApplication.Presenters
         {
             View.Model = new MainFormModel();
         }
-
-
 
         void view_DisplayCreateProjectView(object sender, EventArgs e)
         {

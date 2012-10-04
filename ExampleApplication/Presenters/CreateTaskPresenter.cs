@@ -29,13 +29,13 @@ namespace ExampleApplication.Presenters
 
         private void View_Load(object sender, EventArgs e)
         {
-            //View.Model = new CreateTaskModel();
-            //View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
+            View.Model = new CreateTaskModel();
+            View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
         }
 
         private void View_AddTaskClicked(object sender, EventArgs e)
         {
-            //timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Description);
+            timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Description);
         }
     }
 }
