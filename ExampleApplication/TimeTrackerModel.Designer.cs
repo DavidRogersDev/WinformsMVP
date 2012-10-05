@@ -19,12 +19,12 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("TimeTrackerModel", "FK_Task_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ExampleApplication.ExampleData.Project), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ExampleApplication.ExampleData.Task), true)]
-[assembly: EdmRelationshipAttribute("TimeTrackerModel", "FK_Work_Task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ExampleApplication.ExampleData.Task), "Work", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ExampleApplication.ExampleData.Work), true)]
+[assembly: EdmRelationshipAttribute("TimeTrackerModel", "FK_Task_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ExampleApplication.Project), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ExampleApplication.Task), true)]
+[assembly: EdmRelationshipAttribute("TimeTrackerModel", "FK_Work_Task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ExampleApplication.Task), "Work", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ExampleApplication.Work), true)]
 
 #endregion
 
-namespace ExampleApplication.ExampleData
+namespace ExampleApplication
 {
     #region Contexts
     
