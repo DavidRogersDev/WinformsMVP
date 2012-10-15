@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using ExampleApplication.ExampleData;
 using ExampleApplication.Models;
 using WinFormsMvp.Forms;
 
@@ -30,8 +29,8 @@ namespace ExampleApplication.Views
 
             this.InitializeComponent();
 
-            //this.ProjectsComboBox.DataSource = Model.Projects;
-            //this.ProjectsComboBox.DisplayMember = "Name";
+            this.ProjectsComboBox.DataSource = Model.Projects;
+            this.ProjectsComboBox.DisplayMember = "Name";
         }
 
         private void InitializeComponent()
@@ -230,10 +229,10 @@ namespace ExampleApplication.Views
 
         void AddWorkItemButton_Click(object sender, EventArgs e)
         {
-            //Model.SelectedTask  = TasksDataGridView.SelectedRows[0].DataBoundItem as Task;
-            //Model.Description = DescriptionTextBox.Text.Trim();
-            //Model.Duration = (double)DurationNumericUpDown.Value;
-            //Model.DateOfWork = DateOfWorkDateTimePicker.Value;
+            Model.SelectedTask = TasksDataGridView.SelectedRows[0].DataBoundItem as Task;
+            Model.Description = DescriptionTextBox.Text.Trim();
+            Model.Duration = (double)DurationNumericUpDown.Value;
+            Model.DateOfWork = DateOfWorkDateTimePicker.Value;
 
             AddWorkItemClicked(null, EventArgs.Empty);
         }
@@ -244,9 +243,9 @@ namespace ExampleApplication.Views
 
             if (projectsComboBox.SelectedIndex > -1)
             {
-                //Model.SelectedProject = projectsComboBox.SelectedItem as Project;
-                //ProjectedSelectionChanged(null, EventArgs.Empty);
-                //TasksDataGridView.DataSource = Model.Tasks;
+                Model.SelectedProject = projectsComboBox.SelectedItem as Project;
+                ProjectedSelectionChanged(null, EventArgs.Empty);
+                TasksDataGridView.DataSource = Model.Tasks;
             }
         }
 

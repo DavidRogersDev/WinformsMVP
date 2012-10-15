@@ -25,32 +25,32 @@ namespace ExampleApplication.Presenters
 
         void View_ProjectVisibilityToggled(object sender, EventArgs e)
         {
-            //timeTrackerService.UpdateProject(View.Model.SelectedProject);
-            //View.PopulateProjects(timeTrackerService.GetListOfProjects().ToList());
+            timeTrackerService.UpdateProject(View.Model.SelectedProject);
+            View.PopulateProjects(timeTrackerService.GetListOfProjects().ToList());
         }
 
         void View_ProjectDeleteSelected(object sender, EventArgs e)
         {
-            //timeTrackerService.DeleteProject(View.Model.SelectedProject);
-            //View.PopulateProjects(timeTrackerService.GetListOfVisibleProjects().ToList());
+            timeTrackerService.DeleteProject(View.Model.SelectedProject);
+            View.PopulateProjects(timeTrackerService.GetListOfVisibleProjects().ToList());
         }
 
         void View_TaskHasBeenSelected(object sender, EventArgs e)
         {
-            //View.PopulateWorkItemsByTaskId(timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.Id).ToList());
+            View.PopulateWorkItemsByTaskId(timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.Id).ToList());
         }
 
         void View_ProjectHasBeenSelected(object sender, EventArgs e)
         {
-            //View.PopulateTasksByProjectId(timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList());
+            View.PopulateTasksByProjectId(timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList());
         }
 
         void View_Load(object sender, EventArgs e)
         {
-            //View.Model = new ViewAllWorkModel
-            //                 {
-            //                     Projects = timeTrackerService.GetListOfProjects().ToList()
-            //                 };
+            View.Model = new ViewAllWorkModel
+                             {
+                                 Projects = timeTrackerService.GetListOfProjects().ToList()
+                             };
         }
 
     }

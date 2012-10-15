@@ -9,13 +9,14 @@ namespace ExampleApplication.Views
 {
     public class CreateProjectForm : MvpForm<CreateProjectModel>, ICreateProjectView
     {
-        TextBox NameTextBox;
-        TextBox DescriptionTextBox;
-        Label NameLabel;
-        Label DescriptionLabel;
-        CheckBox VisibilityCheckBox;
-        Button CreateProjectButton;
-        PictureBox successPictureBox;
+        private Button CloseButton;
+        private Button CreateProjectButton;
+        private Label DescriptionLabel;
+        private TextBox DescriptionTextBox;
+        private Label NameLabel;
+        private TextBox NameTextBox;
+        private PictureBox successPictureBox;
+        private CheckBox VisibilityCheckBox;
 
 
         protected override void OnLoad(EventArgs e)
@@ -39,6 +40,7 @@ namespace ExampleApplication.Views
 
         private void InitializeComponent()
         {
+            this.CloseButton = new Button(); 
             this.CreateProjectButton = new Button();
             this.NameTextBox = new TextBox();
             this.DescriptionTextBox = new TextBox();
@@ -99,6 +101,17 @@ namespace ExampleApplication.Views
             this.VisibilityCheckBox.UseVisualStyleBackColor = true;
 
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(450, 126);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(100, 23);
+            this.CloseButton.TabIndex = 8;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new EventHandler(CloseButton_Click);
+
+            // 
             // CreateProjectButton
             // 
             this.CreateProjectButton.Location = new System.Drawing.Point(75, 126);
@@ -121,7 +134,8 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.successPictureBox);
-            this.Controls.Add(CreateProjectButton);
+            this.Controls.Add(this.CloseButton);
+            this.Controls.Add(this.CreateProjectButton);
             this.Name = "CreateProjectForm";
             this.Text = "Add a New Project";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -130,6 +144,11 @@ namespace ExampleApplication.Views
             this.PerformLayout();
 
 
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseFormClicked(null, EventArgs.Empty);
         }
 
         private void CreateProjectButton_Click(object sender, EventArgs e)

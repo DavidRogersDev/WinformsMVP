@@ -309,21 +309,21 @@ namespace ExampleApplication.Views
         public event EventHandler ProjectVisibilityToggled;
         public event EventHandler TaskHasBeenSelected;
 
-        //public void PopulateProjects(IList<Project> projects)
-        //{
-        //    this.ProjectsDataGridView.DataSource = projects;
-        //}
+        public void PopulateProjects(IList<Project> projects)
+        {
+            this.ProjectsDataGridView.DataSource = projects;
+        }
 
-        //public void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject)
-        //{
-        //    this.WorkItemsDataGridView.DataSource = null;
-        //    this.TasksDataGridView.DataSource = tasksOfSelectedProject;
-        //}
+        public void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject)
+        {
+            this.WorkItemsDataGridView.DataSource = null;
+            this.TasksDataGridView.DataSource = tasksOfSelectedProject;
+        }
 
-        //public void PopulateWorkItemsByTaskId(IList<Work> workItemsOfSelectedProject)
-        //{
-        //    this.WorkItemsDataGridView.DataSource = workItemsOfSelectedProject;
-        //}
+        public void PopulateWorkItemsByTaskId(IList<Work> workItemsOfSelectedProject)
+        {
+            this.WorkItemsDataGridView.DataSource = workItemsOfSelectedProject;
+        }
 
         #endregion
     }

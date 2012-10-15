@@ -13,8 +13,8 @@ namespace ExampleApplication.Views
         event EventHandler ProjectVisibilityToggled;
         event EventHandler TaskHasBeenSelected;
 
-        //void PopulateProjects(IList<Project> projects);
-        //void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject);
-        //void PopulateWorkItemsByTaskId(IList<Work> workItemsOfSelectedProject);
+        void PopulateProjects(IList<Project> projects);
+        void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject);
+        void PopulateWorkItemsByTaskId(IList<Work> workItemsOfSelectedProject);
     }
 }

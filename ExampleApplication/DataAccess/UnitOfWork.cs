@@ -23,7 +23,6 @@ namespace ExampleApplication.ExampleData
 
         public void CreateNewProject(string name, bool visibility, string description = null)
         {
-            var projects = projectRepository.GetAllAsQueryable().ToList();
             var newProject = new Project { Name = name, Description = description, Visible = visibility };
             projectRepository.Add(newProject);
             projectRepository.SaveChanges();

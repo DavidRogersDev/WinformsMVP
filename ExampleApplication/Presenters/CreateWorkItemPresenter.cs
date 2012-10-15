@@ -33,7 +33,7 @@ namespace ExampleApplication.Presenters
             View.Model = new CreateWorkItemModel();
             try
             {
-                //View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
+                View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
             }
             catch
             {
@@ -48,12 +48,12 @@ namespace ExampleApplication.Presenters
 
         void View_ProjectedSelectionChanged(object sender, EventArgs e)
         {
-            //View.Model.Tasks = timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
+            View.Model.Tasks = timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
         }
 
         void View_AddWorkItemClicked(object sender, EventArgs e)
         {
-           // timeTrackerService.CreateNewWorkItem(View.Model.SelectedTask, View.Model.Duration, View.Model.DateOfWork, View.Model.Description);
+            timeTrackerService.CreateNewWorkItem(View.Model.SelectedTask, View.Model.Duration, View.Model.DateOfWork, View.Model.Description);
         }
 
 

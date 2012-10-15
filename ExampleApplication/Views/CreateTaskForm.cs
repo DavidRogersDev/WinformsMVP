@@ -10,15 +10,16 @@ namespace ExampleApplication.Views
 {
     public class CreateTaskForm : MvpForm<CreateTaskModel>, ICreateTaskView
     {
-        TextBox NameTextBox;
-        TextBox DescriptionTextBox;
-        Label DescriptionLabel;
-        Label NameLabel;
-        Label ProjectLabel;
-        CheckBox VisibilityCheckBox;
-        Button CreateTaskButton;
-        ComboBox ProjectsComboBox;
-        PictureBox successPictureBox;
+        private Button CloseButton;
+        private TextBox NameTextBox;
+        private TextBox DescriptionTextBox;
+        private Label DescriptionLabel;
+        private Label NameLabel;
+        private Label ProjectLabel;
+        private CheckBox VisibilityCheckBox;
+        private Button CreateTaskButton;
+        private ComboBox ProjectsComboBox;
+        private PictureBox successPictureBox;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -32,6 +33,7 @@ namespace ExampleApplication.Views
 
         private void InitializeComponent()
         {
+            this.CloseButton = new Button();
             this.CreateTaskButton = new Button();
             this.NameTextBox = new TextBox();
             this.DescriptionTextBox = new TextBox();
@@ -55,6 +57,18 @@ namespace ExampleApplication.Views
             this.NameTextBox.MaxLength = 150;
             this.NameTextBox.Size = new System.Drawing.Size(480, 20);
             this.NameTextBox.TabIndex = 1;
+
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(450, 126);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(100, 23);
+            this.CloseButton.TabIndex = 8;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new EventHandler(CloseButton_Click);
+
             // 
             // DescriptionTextBox
             // 
@@ -139,6 +153,7 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.ProjectsComboBox);
             this.Controls.Add(this.CreateTaskButton);
+            this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.successPictureBox);
             this.Name = "CreateTaskForm";
             this.Text = "Add a New Task";
@@ -157,6 +172,11 @@ namespace ExampleApplication.Views
 
             AddTaskClicked(null, EventArgs.Empty);
             successPictureBox.Visible = true;
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseFormClicked(null, EventArgs.Empty);
         }
 
         #region Implementation of ICreateTaskView

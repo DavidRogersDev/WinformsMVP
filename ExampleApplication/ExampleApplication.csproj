@@ -14,6 +14,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,12 +27,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -76,17 +76,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericRepository.cs" />
-    <Compile Include="IGenericRepository.cs" />
-    <Compile Include="ProjectRepository.cs" />
-    <Compile Include="TaskRepository.cs" />
+    <Compile Include="DataAccess\GenericRepository.cs" />
+    <Compile Include="DataAccess\IGenericRepository.cs" />
+    <Compile Include="DataAccess\ProjectRepository.cs" />
+    <Compile Include="DataAccess\TaskRepository.cs" />
     <Compile Include="TimeTrackerModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeTrackerModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="UnitOfWork.cs" />
-    <Compile Include="WorkRepository.cs" />
+    <Compile Include="DataAccess\UnitOfWork.cs" />
+    <Compile Include="DataAccess\WorkRepository.cs" />
     <Compile Include="Ioc\DependancyRegistry.cs" />
     <Compile Include="Ioc\ServiceLocator.cs" />
     <Compile Include="Models\CreateProjectModel.cs" />
@@ -155,9 +155,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="book.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="ExampleData\TimeTracker.mdf" />
     <Content Include="ExampleData\TimeTracker_log.ldf">
       <DependentUpon>TimeTracker.mdf</DependentUpon>
