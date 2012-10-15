@@ -332,13 +332,15 @@ namespace ExampleApplication
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="projectId">Initial value of the ProjectId property.</param>
         /// <param name="visible">Initial value of the Visible property.</param>
-        public static Task CreateTask(global::System.Int32 id, global::System.String name, global::System.Int32 projectId, global::System.Boolean visible)
+        /// <param name="estimate">Initial value of the Estimate property.</param>
+        public static Task CreateTask(global::System.Int32 id, global::System.String name, global::System.Int32 projectId, global::System.Boolean visible, global::System.Decimal estimate)
         {
             Task task = new Task();
             task.Id = id;
             task.Name = name;
             task.ProjectId = projectId;
             task.Visible = visible;
+            task.Estimate = estimate;
             return task;
         }
 
@@ -468,6 +470,30 @@ namespace ExampleApplication
         private global::System.Boolean _Visible;
         partial void OnVisibleChanging(global::System.Boolean value);
         partial void OnVisibleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Estimate
+        {
+            get
+            {
+                return _Estimate;
+            }
+            set
+            {
+                OnEstimateChanging(value);
+                ReportPropertyChanging("Estimate");
+                _Estimate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Estimate");
+                OnEstimateChanged();
+            }
+        }
+        private global::System.Decimal _Estimate;
+        partial void OnEstimateChanging(global::System.Decimal value);
+        partial void OnEstimateChanged();
 
         #endregion
 

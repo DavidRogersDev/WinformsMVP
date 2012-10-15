@@ -19,9 +19,9 @@ namespace ExampleApplication.Services
             unitOfWork.CreateNewProject(name, visibility, description);
         }
 
-        public void CreateNewTask(string name, bool visibility, Project project, string description = null)
+        public void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null)
         {
-            unitOfWork.CreateNewTask(name, visibility, project, description);
+            unitOfWork.CreateNewTask(name, visibility, project, estimate, description);
         }
 
         public void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null)

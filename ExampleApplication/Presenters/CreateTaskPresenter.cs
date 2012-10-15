@@ -35,7 +35,7 @@ namespace ExampleApplication.Presenters
 
         private void View_AddTaskClicked(object sender, EventArgs e)
         {
-            timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Description);
+            timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Estimate, View.Model.Description);
         }
     }
 }

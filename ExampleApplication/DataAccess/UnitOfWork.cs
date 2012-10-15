@@ -28,9 +28,9 @@ namespace ExampleApplication.ExampleData
             projectRepository.SaveChanges();
         }
 
-        public void CreateNewTask(string name, bool visibility, Project project, string description = null)
+        public void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null)
         {
-            var newTask = new Task {  Name = name, Description = description, Project = project, Visible = visibility };
+            var newTask = new Task {  Name = name, Description = description, Project = project, Estimate = estimate, Visible = visibility };
             taskRepository.Add(newTask);
             taskRepository.SaveChanges();
         }

@@ -7,7 +7,7 @@ namespace ExampleApplication.Services
     public interface ITimeTrackerService
     {
         void CreateNewProject(string name, bool visibility, string description = null);
-        void CreateNewTask(string name, bool visibility, Project project, string description = null);
+        void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null);
         void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null);
         void DeleteProject(Project project);
         IQueryable<Project> GetListOfProjects();

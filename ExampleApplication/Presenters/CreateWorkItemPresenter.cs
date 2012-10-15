@@ -23,12 +23,12 @@ namespace ExampleApplication.Presenters
             View.TaskSelectionChanged += new EventHandler(View_TaskSelectionChanged);
         }
 
-        void View_CloseFormClicked(object sender, EventArgs e)
+        private void View_CloseFormClicked(object sender, EventArgs e)
         {
             View.CloseForm();
         }
 
-        void View_Load(object sender, EventArgs e)
+        private void View_Load(object sender, EventArgs e)
         {
             View.Model = new CreateWorkItemModel();
             try
@@ -41,17 +41,17 @@ namespace ExampleApplication.Presenters
             }
         }
 
-        void View_TaskSelectionChanged(object sender, EventArgs e)
+        private void View_TaskSelectionChanged(object sender, EventArgs e)
         {
             
         }
 
-        void View_ProjectedSelectionChanged(object sender, EventArgs e)
+        private void View_ProjectedSelectionChanged(object sender, EventArgs e)
         {
             View.Model.Tasks = timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
         }
 
-        void View_AddWorkItemClicked(object sender, EventArgs e)
+        private void View_AddWorkItemClicked(object sender, EventArgs e)
         {
             timeTrackerService.CreateNewWorkItem(View.Model.SelectedTask, View.Model.Duration, View.Model.DateOfWork, View.Model.Description);
         }
