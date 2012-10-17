@@ -21,7 +21,7 @@ namespace ExampleApplication.Presenters
             View.Load += new EventHandler(View_Load);
         }
 
-        void View_CloseFormClicked(object sender, EventArgs e)
+        private void View_CloseFormClicked(object sender, EventArgs e)
         {
             View.CloseForm();
         }

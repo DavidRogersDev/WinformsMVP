@@ -253,7 +253,7 @@ namespace ExampleApplication.Views
 
         }
 
-        void ProjectsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ProjectsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
             {
@@ -275,13 +275,13 @@ namespace ExampleApplication.Views
             var m = ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"];
         }
 
-        void TasksDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void TasksDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
             TaskHasBeenSelected(null, EventArgs.Empty);
         }
 
-        void ProjectsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void ProjectsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
             {

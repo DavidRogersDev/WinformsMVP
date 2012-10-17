@@ -190,7 +190,7 @@ namespace ExampleApplication.Views
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 11;
-            this.CancelButton.Text = "Cancel";
+            this.CancelButton.Text = "Close";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new EventHandler(CancelButton_Click);
 

@@ -30,6 +30,7 @@ namespace ExampleApplication.ExampleData
 
         public void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null)
         {
+            
             var newTask = new Task {  Name = name, Description = description, Project = project, Estimate = estimate, Visible = visibility };
             taskRepository.Add(newTask);
             taskRepository.SaveChanges();
