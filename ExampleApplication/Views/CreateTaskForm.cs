@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using ExampleApplication.ExampleData;
@@ -11,15 +12,17 @@ namespace ExampleApplication.Views
     public class CreateTaskForm : MvpForm<CreateTaskModel>, ICreateTaskView
     {
         private Button CloseButton;
-        private TextBox NameTextBox;
+        private Button CreateTaskButton;
         private TextBox DescriptionTextBox;
         private Label DescriptionLabel;
+        private Label EstimateLabel;
+        private TextBox EstimateTextBox;
         private Label NameLabel;
+        private TextBox NameTextBox;
         private Label ProjectLabel;
-        private CheckBox VisibilityCheckBox;
-        private Button CreateTaskButton;
         private ComboBox ProjectsComboBox;
-        private PictureBox successPictureBox;
+        private PictureBox SuccessPictureBox;
+        private CheckBox VisibilityCheckBox;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -35,6 +38,8 @@ namespace ExampleApplication.Views
         {
             this.CloseButton = new Button();
             this.CreateTaskButton = new Button();
+            this.EstimateLabel = new Label();
+            this.EstimateTextBox = new TextBox();
             this.NameTextBox = new TextBox();
             this.DescriptionTextBox = new TextBox();
             this.DescriptionLabel = new Label();
@@ -42,12 +47,12 @@ namespace ExampleApplication.Views
             this.ProjectLabel = new Label();
             this.VisibilityCheckBox = new CheckBox();
             this.ProjectsComboBox = new ComboBox();
-            this.successPictureBox = new PictureBox();
+            this.SuccessPictureBox = new PictureBox();
             this.SuspendLayout();
 
-            this.successPictureBox.Image = new Bitmap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tick.png"), true);
-            this.successPictureBox.Location = new Point(75, 175);
-            this.successPictureBox.Visible = false;
+            this.SuccessPictureBox.Image = new Bitmap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tick.png"), true);
+            this.SuccessPictureBox.Location = new Point(75, 200);
+            this.SuccessPictureBox.Visible = false;
 
             // 
             // NameTextBox
@@ -111,17 +116,36 @@ namespace ExampleApplication.Views
             // 
             this.VisibilityCheckBox.AutoSize = true;
             this.VisibilityCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.VisibilityCheckBox.Location = new System.Drawing.Point(75, 102);
+            this.VisibilityCheckBox.Location = new System.Drawing.Point(75, 130);
             this.VisibilityCheckBox.Name = "VisibilityCheckBox";
             this.VisibilityCheckBox.Size = new System.Drawing.Size(65, 17);
             this.VisibilityCheckBox.TabIndex = 7;
-            this.VisibilityCheckBox.Text = "Visibility:";
+            this.VisibilityCheckBox.Text = "Visibility";
             this.VisibilityCheckBox.UseVisualStyleBackColor = true;
+
+            // 
+            // EstimateTextBox
+            // 
+            this.EstimateTextBox.Location = new System.Drawing.Point(75, 102);
+            this.EstimateTextBox.Name = "EstimateTextBox";
+            this.EstimateTextBox.MaxLength = 80;
+            this.EstimateTextBox.Size = new System.Drawing.Size(80, 20);
+            this.EstimateTextBox.TabIndex = 2;
+
+            // 
+            // EstimateLabel
+            // 
+            this.EstimateLabel.AutoSize = true;
+            this.EstimateLabel.Location = new System.Drawing.Point(10, 102);
+            this.EstimateLabel.Name = "EstimateLabel";
+            this.EstimateLabel.Size = new System.Drawing.Size(100, 13);
+            this.EstimateLabel.TabIndex = 4;
+            this.EstimateLabel.Text = "Estimate:";
 
             // 
             // CreateTaskButton
             // 
-            this.CreateTaskButton.Location = new System.Drawing.Point(75, 130);
+            this.CreateTaskButton.Location = new System.Drawing.Point(75, 160);
             this.CreateTaskButton.Name = "AddTaskButton";
             this.CreateTaskButton.Size = new System.Drawing.Size(100, 23);
             this.CreateTaskButton.TabIndex = 8;
@@ -148,13 +172,15 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.VisibilityCheckBox);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.EstimateLabel);
             this.Controls.Add(this.ProjectLabel);
             this.Controls.Add(this.DescriptionTextBox);
+            this.Controls.Add(this.EstimateTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.ProjectsComboBox);
             this.Controls.Add(this.CreateTaskButton);
             this.Controls.Add(this.CloseButton);
-            this.Controls.Add(this.successPictureBox);
+            this.Controls.Add(this.SuccessPictureBox);
             this.Name = "CreateTaskForm";
             this.Text = "Add a New Task";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -169,9 +195,10 @@ namespace ExampleApplication.Views
             Model.Name = NameTextBox.Text.Trim();
             Model.Description = DescriptionTextBox.Text.Trim();
             Model.Visibilty = VisibilityCheckBox.Checked;
+            Model.Estimate = decimal.Parse(EstimateTextBox.Text, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite);
 
             AddTaskClicked(null, EventArgs.Empty);
-            successPictureBox.Visible = true;
+            SuccessPictureBox.Visible = true;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

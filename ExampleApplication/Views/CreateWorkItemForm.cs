@@ -222,12 +222,12 @@ namespace ExampleApplication.Views
             this.PerformLayout();            
         }
 
-        void CancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             CloseFormClicked(null, EventArgs.Empty);
         }
 
-        void AddWorkItemButton_Click(object sender, EventArgs e)
+        private void AddWorkItemButton_Click(object sender, EventArgs e)
         {
             Model.SelectedTask = TasksDataGridView.SelectedRows[0].DataBoundItem as Task;
             Model.Description = DescriptionTextBox.Text.Trim();
@@ -237,7 +237,7 @@ namespace ExampleApplication.Views
             AddWorkItemClicked(null, EventArgs.Empty);
         }
 
-        void ProjectsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ProjectsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var projectsComboBox = sender as ComboBox;
 

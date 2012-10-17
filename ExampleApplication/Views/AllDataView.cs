@@ -39,7 +39,7 @@ namespace ExampleApplication.Views
 
             this.InitializeComponent();
 
-            //this.ProjectsDataGridView.DataSource = Model.Projects;
+            this.ProjectsDataGridView.DataSource = Model.Projects;
         }
 
         private void InitializeComponent()
@@ -255,50 +255,50 @@ namespace ExampleApplication.Views
 
         void ProjectsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
-            //{
-            //    Model.SelectedProject.Visible =
-            //        !(bool)
-            //        (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
-            //            Value;
-            //    ProjectVisibilityToggled(null, EventArgs.Empty);
-            //}
-            //else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
-            //{
-            //    ProjectDeleteSelected(null, EventArgs.Empty);
-            //}
-            //else
-            //{
-            //    ProjectHasBeenSelected(null, EventArgs.Empty);
-            //}
+            if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+            {
+                Model.SelectedProject.Visible =
+                    !(bool)
+                    (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
+                        Value;
+                ProjectVisibilityToggled(null, EventArgs.Empty);
+            }
+            else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+            {
+                ProjectDeleteSelected(null, EventArgs.Empty);
+            }
+            else
+            {
+                ProjectHasBeenSelected(null, EventArgs.Empty);
+            }
 
-            //var m = ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"];
+            var m = ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"];
         }
 
         void TasksDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
-            //TaskHasBeenSelected(null, EventArgs.Empty);
+            Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
+            TaskHasBeenSelected(null, EventArgs.Empty);
         }
 
         void ProjectsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >-1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
-            //{
-            //    Model.SelectedProject = ProjectsDataGridView.Rows[e.RowIndex].DataBoundItem as Project;
+            if (e.RowIndex > -1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
+            {
+                Model.SelectedProject = ProjectsDataGridView.Rows[e.RowIndex].DataBoundItem as Project;
 
-            //    if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewCheckBoxCell))
-            //    {
-            //        Model.SelectedProject.Visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
-            //        ProjectVisibilityToggled(null, EventArgs.Empty);
-            //    }
-            //    else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewLinkCell))
-            //    {
-            //        ProjectDeleteSelected(null, EventArgs.Empty);
-            //    }
+                if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+                {
+                    Model.SelectedProject.Visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
+                    ProjectVisibilityToggled(null, EventArgs.Empty);
+                }
+                else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+                {
+                    ProjectDeleteSelected(null, EventArgs.Empty);
+                }
 
-            //    ProjectHasBeenSelected(null, EventArgs.Empty);
-            //}
+                ProjectHasBeenSelected(null, EventArgs.Empty);
+            }
         }
 
 

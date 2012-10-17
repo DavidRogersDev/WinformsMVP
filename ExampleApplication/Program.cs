@@ -43,8 +43,12 @@ namespace ExampleApplication
         {
             //  Get a hook on the Visual Studio object so we can get a path to the sln file. 
             //  For this to work, only one Visual Studion solution can be open. Otherwise, it may get a hook on the other solution.
-            DTE dte = (DTE) System.Runtime.InteropServices.Marshal.GetActiveObject("VisualStudio.DTE");
-            return Path.GetDirectoryName(dte.Solution.FullName);
+            //DTE dte = (DTE) System.Runtime.InteropServices.Marshal.GetActiveObject("VisualStudio.DTE");
+            
+            DirectoryInfo dir = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            return Path.GetDirectoryName(dir.Parent.Parent.FullName); // HACK: but it'll do.
+
+            //return Path.GetDirectoryName(dte.Solution.FullName);
         }
 
         static void RegisterDependencies()
