@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
-using ExampleApplication.ExampleData;
+using ExampleApplication.DataAccess;
 
 namespace ExampleApplication.Services
 {
@@ -41,6 +41,11 @@ namespace ExampleApplication.Services
         public void DeleteTask(Task task)
         {
             unitOfWork.DeleteTask(task);
+        }
+
+        public void DeleteWorkItem(Work work)
+        {
+            unitOfWork.DeleteWorkItem(work);
         }
 
         public IQueryable<Project> GetListOfProjects()

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Objects;
 
-namespace ExampleApplication.ExampleData
+namespace ExampleApplication.DataAccess
 {
     public class TaskRepository : GenericRepository<Task>
     {

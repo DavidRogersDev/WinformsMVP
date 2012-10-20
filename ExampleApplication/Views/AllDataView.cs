@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using ExampleApplication.ExampleData;
+using ExampleApplication.Custom;
 using ExampleApplication.Models;
 using ExampleApplication.Presenters;
 using WinFormsMvp.Forms;
@@ -155,6 +155,8 @@ namespace ExampleApplication.Views
             this.WorkItemsDataGridView.ReadOnly = true;
             this.WorkItemsDataGridView.Size = new System.Drawing.Size(844, 150);
             this.WorkItemsDataGridView.TabIndex = 2;
+            this.WorkItemsDataGridView.CellContentClick += new DataGridViewCellEventHandler(WorkItemsDataGridView_CellContentClick);
+
             // 
             // TaskNameColumn
             // 
@@ -297,6 +299,20 @@ namespace ExampleApplication.Views
 
         }
 
+        void WorkItemsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.RowIndex < WorkItemsDataGridView.Rows.Count)
+            {
+                var selectedWorkItem = WorkItemsDataGridView.Rows[e.RowIndex].DataBoundItem as Work;
+                SelectedWorkItemEventArgs workItemEventArgs = new SelectedWorkItemEventArgs(selectedWorkItem);
+
+                if (WorkItemsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+                {
+                    WorkItemDeleteSelected(this, workItemEventArgs);
+                }
+            }
+        }
+
         void TasksDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
@@ -392,6 +408,7 @@ namespace ExampleApplication.Views
         public event EventHandler TaskHasBeenSelected;
         public event EventHandler TaskDeleteSelected;
         public event EventHandler TaskVisibilityToggled;
+        public event EventHandler<SelectedWorkItemEventArgs> WorkItemDeleteSelected;
 
         public void PopulateProjects(IList<Project> projects)
         {

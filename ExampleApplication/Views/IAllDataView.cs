@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ExampleApplication.ExampleData;
+using ExampleApplication.Custom;
 using ExampleApplication.Models;
 using WinFormsMvp;
 
@@ -14,6 +14,7 @@ namespace ExampleApplication.Views
         event EventHandler TaskHasBeenSelected;
         event EventHandler TaskDeleteSelected;
         event EventHandler TaskVisibilityToggled;
+        event EventHandler<SelectedWorkItemEventArgs> WorkItemDeleteSelected;
 
         void PopulateProjects(IList<Project> projects);
         void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject);

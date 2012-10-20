@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Data.Objects;
 
-namespace ExampleApplication.ExampleData
+namespace ExampleApplication.DataAccess
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {

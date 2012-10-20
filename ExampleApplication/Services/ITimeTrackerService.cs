@@ -10,6 +10,7 @@ namespace ExampleApplication.Services
         void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null);
         void DeleteProject(Project project);
         void DeleteTask(Task task);
+        void DeleteWorkItem(Work work);
         IQueryable<Project> GetListOfProjects();
         IQueryable<Project> GetListOfVisibleProjects();
         IQueryable<Task> GetTasksOfProject(int projectId);

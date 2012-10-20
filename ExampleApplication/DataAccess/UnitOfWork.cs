@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Objects;
 using System.Linq;
 
-namespace ExampleApplication.ExampleData
+namespace ExampleApplication.DataAccess
 {
     public class UnitOfWork : IDisposable
     {
@@ -62,6 +62,12 @@ namespace ExampleApplication.ExampleData
         {
             taskRepository.Delete(task);
             taskRepository.SaveChanges();
+        }
+
+        public void DeleteWorkItem(Work work)
+        {
+            workRepository.Delete(work);
+            workRepository.SaveChanges();
         }
 
         public IQueryable<Project> GetAllProjects()

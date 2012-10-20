@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom\SelectedWorkItemEventArgs.cs" />
     <Compile Include="DataAccess\GenericRepository.cs" />
     <Compile Include="DataAccess\IGenericRepository.cs" />
     <Compile Include="DataAccess\ProjectRepository.cs" />

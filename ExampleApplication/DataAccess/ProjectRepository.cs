@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Data.Objects;
 
-namespace ExampleApplication.ExampleData
+namespace ExampleApplication.DataAccess
 {
     public class ProjectRepository : GenericRepository<Project>
     {

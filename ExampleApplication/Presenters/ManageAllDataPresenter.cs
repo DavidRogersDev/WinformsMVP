@@ -23,6 +23,13 @@ namespace ExampleApplication.Presenters
             View.TaskHasBeenSelected += new EventHandler(View_TaskHasBeenSelected);
             View.TaskDeleteSelected += new EventHandler(View_TaskDeleteSelected);
             View.TaskVisibilityToggled += new EventHandler(View_TaskVisibilityToggled);
+            View.WorkItemDeleteSelected += new EventHandler<Custom.SelectedWorkItemEventArgs>(View_WorkItemDeleteSelected);
+        }
+
+        void View_WorkItemDeleteSelected(object sender, Custom.SelectedWorkItemEventArgs e)
+        {
+            timeTrackerService.DeleteWorkItem(e.SelectedWorkItem);
+            View.PopulateWorkItemsByTaskId(timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.Id).ToList());
         }
 
         void View_TaskVisibilityToggled(object sender, EventArgs e)
