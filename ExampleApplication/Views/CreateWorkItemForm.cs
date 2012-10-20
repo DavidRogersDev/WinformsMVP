@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using ExampleApplication.Models;
 using WinFormsMvp.Forms;
@@ -19,6 +21,7 @@ namespace ExampleApplication.Views
         private NumericUpDown DurationNumericUpDown;
         private Button AddWorkItemButton;
         private Button CancelButton;
+        private PictureBox successPictureBox;
         private DataGridViewTextBoxColumn TaskNameColumn;
         private DataGridViewTextBoxColumn TaskDescriptionColumn;
         private DataGridViewTextBoxColumn TaskEstimateColumn;
@@ -47,12 +50,18 @@ namespace ExampleApplication.Views
             this.DurationNumericUpDown = new NumericUpDown();
             this.AddWorkItemButton = new Button();
             this.CancelButton = new Button();
+            this.successPictureBox = new PictureBox();
             this.TaskNameColumn = new DataGridViewTextBoxColumn();
             this.TaskDescriptionColumn = new DataGridViewTextBoxColumn();
             this.TaskEstimateColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.TasksDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationNumericUpDown)).BeginInit();
             this.SuspendLayout();
+
+            this.successPictureBox.Image = new Bitmap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tick.png"), true);
+            this.successPictureBox.Location = new Point(45, 420);
+            this.successPictureBox.Visible = false;
+
             // 
             // DurationLabel
             // 
@@ -212,6 +221,7 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.TasksLabel);
             this.Controls.Add(this.ProjectsLabel);
             this.Controls.Add(this.DurationLabel);
+            this.Controls.Add(this.successPictureBox);
             this.Name = "AddWorkForm";
             this.Text = "Add Work Item";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -235,6 +245,8 @@ namespace ExampleApplication.Views
             Model.DateOfWork = DateOfWorkDateTimePicker.Value;
 
             AddWorkItemClicked(null, EventArgs.Empty);
+            
+            successPictureBox.Visible = true;
         }
 
         private void ProjectsComboBox_SelectedIndexChanged(object sender, EventArgs e)

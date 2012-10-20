@@ -9,6 +9,8 @@ namespace ExampleApplication.Views
 {
     public class CreateProjectForm : MvpForm<CreateProjectModel>, ICreateProjectView
     {
+        #region MyRegion
+
         private Button CloseButton;
         private Button CreateProjectButton;
         private Label DescriptionLabel;
@@ -16,7 +18,9 @@ namespace ExampleApplication.Views
         private Label NameLabel;
         private TextBox NameTextBox;
         private PictureBox successPictureBox;
-        private CheckBox VisibilityCheckBox;
+        private CheckBox VisibilityCheckBox; 
+
+        #endregion
 
 
         protected override void OnLoad(EventArgs e)
