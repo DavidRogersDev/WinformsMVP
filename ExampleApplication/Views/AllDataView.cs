@@ -22,14 +22,17 @@ namespace ExampleApplication.Views
         private DataGridViewTextBoxColumn ProjectDescriptionColumn;
         private DataGridViewCheckBoxColumn ProjectVisibleColumn;
         private DataGridViewLinkColumn ProjectDeleteColumn;
+        private Label ProjectsLabel;
         private DataGridViewTextBoxColumn TaskNameColumn;
         private DataGridViewTextBoxColumn TaskDescriptionColumn;
         private DataGridViewCheckBoxColumn TaskVisibleColumn;
         private DataGridViewLinkColumn TaskDeleteColumn;
+        private Label TasksLabel;
         private DataGridViewTextBoxColumn WorkItemDescriptionColumn;
         private DataGridViewTextBoxColumn WorkItemDurationColumn;
         private DataGridViewTextBoxColumn WorkItemDateColumn;
-        private DataGridViewLinkColumn WorkItemDeleteColumn; 
+        private DataGridViewLinkColumn WorkItemDeleteColumn;
+        private Label WorkItemsLabel;
 
         #endregion
 
@@ -51,17 +54,53 @@ namespace ExampleApplication.Views
             this.TaskDescriptionColumn = new DataGridViewTextBoxColumn();
             this.TaskVisibleColumn = new DataGridViewCheckBoxColumn();
             this.TaskDeleteColumn = new DataGridViewLinkColumn();
+            this.TasksLabel = new Label();
             this.ProjectNameColumn = new DataGridViewTextBoxColumn();
             this.ProjectDescriptionColumn = new DataGridViewTextBoxColumn();
             this.ProjectVisibleColumn = new DataGridViewCheckBoxColumn();
             this.ProjectDeleteColumn = new DataGridViewLinkColumn();
+            this.ProjectsLabel = new Label();
             this.WorkItemDescriptionColumn = new DataGridViewTextBoxColumn();
             this.WorkItemDurationColumn = new DataGridViewTextBoxColumn();
             this.WorkItemDateColumn = new DataGridViewTextBoxColumn();
             this.WorkItemDeleteColumn = new DataGridViewLinkColumn();
+            this.WorkItemsLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TasksDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkItemsDataGridView)).BeginInit();
+
+            // 
+            // ProjectsLabel
+            // 
+            this.ProjectsLabel.AutoSize = true;
+            this.ProjectsLabel.Location = new System.Drawing.Point(36, 20);
+            this.ProjectsLabel.Name = "ProjectsLabel";
+            this.ProjectsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProjectsLabel.Size = new System.Drawing.Size(35, 13);
+            this.ProjectsLabel.TabIndex = 3;
+            this.ProjectsLabel.Text = "Projects:";
+
+            // 
+            // TasksLabel
+            // 
+            this.TasksLabel.AutoSize = true;
+            this.TasksLabel.Location = new System.Drawing.Point(36, 200);
+            this.TasksLabel.Name = "TasksLabel";
+            this.TasksLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TasksLabel.Size = new System.Drawing.Size(35, 13);
+            this.TasksLabel.TabIndex = 3;
+            this.TasksLabel.Text = "Tasks:";
+
+            // 
+            // WorkItemsLabel
+            // 
+            this.WorkItemsLabel.AutoSize = true;
+            this.WorkItemsLabel.Location = new System.Drawing.Point(36, 390);
+            this.WorkItemsLabel.Name = "WorkItemsLabel";
+            this.WorkItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WorkItemsLabel.Size = new System.Drawing.Size(35, 13);
+            this.WorkItemsLabel.TabIndex = 3;
+            this.WorkItemsLabel.Text = "Work Items:";
 
             // 
             // ProjectsDataGridView
@@ -92,7 +131,7 @@ namespace ExampleApplication.Views
             this.TaskDescriptionColumn,
             this.TaskVisibleColumn,
             this.TaskDeleteColumn});
-            this.TasksDataGridView.Location = new System.Drawing.Point(36, 205);
+            this.TasksDataGridView.Location = new System.Drawing.Point(36, 225);
             this.TasksDataGridView.Name = "TasksDataGridView";
             this.TasksDataGridView.ReadOnly = true;
             this.TasksDataGridView.Size = new System.Drawing.Size(844, 150);
@@ -111,7 +150,7 @@ namespace ExampleApplication.Views
             this.WorkItemDurationColumn,
             this.WorkItemDateColumn,
             this.WorkItemDeleteColumn});
-            this.WorkItemsDataGridView.Location = new System.Drawing.Point(36, 370);
+            this.WorkItemsDataGridView.Location = new System.Drawing.Point(36, 420);
             this.WorkItemsDataGridView.Name = "WorkItemsDataGridView";
             this.WorkItemsDataGridView.ReadOnly = true;
             this.WorkItemsDataGridView.Size = new System.Drawing.Size(844, 150);
@@ -240,10 +279,13 @@ namespace ExampleApplication.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 544);
+            this.ClientSize = new System.Drawing.Size(904, 600);
             this.Controls.Add(this.WorkItemsDataGridView);
             this.Controls.Add(this.TasksDataGridView);
             this.Controls.Add(this.ProjectsDataGridView);
+            this.Controls.Add(this.ProjectsLabel);
+            this.Controls.Add(this.TasksLabel);
+            this.Controls.Add(this.WorkItemsLabel);
             this.Name = "AllDataView";
             this.Text = "AllDataView";
             this.StartPosition = FormStartPosition.CenterScreen;
