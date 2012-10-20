@@ -21,6 +21,20 @@ namespace ExampleApplication.Presenters
             View.ProjectHasBeenSelected += new EventHandler(View_ProjectHasBeenSelected);
             View.ProjectVisibilityToggled += new EventHandler(View_ProjectVisibilityToggled);
             View.TaskHasBeenSelected += new EventHandler(View_TaskHasBeenSelected);
+            View.TaskDeleteSelected += new EventHandler(View_TaskDeleteSelected);
+            View.TaskVisibilityToggled += new EventHandler(View_TaskVisibilityToggled);
+        }
+
+        void View_TaskVisibilityToggled(object sender, EventArgs e)
+        {
+            timeTrackerService.UpdateTask(View.Model.SelectedTask);
+            View.PopulateTasksByProjectId(timeTrackerService.GetTasksOfProject(View.Model.SelectedProject.Id).ToList());
+        }
+
+        void View_TaskDeleteSelected(object sender, EventArgs e)
+        {
+            timeTrackerService.DeleteTask(View.Model.SelectedTask);
+            View.PopulateTasksByProjectId(timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList());
         }
 
         void View_ProjectVisibilityToggled(object sender, EventArgs e)

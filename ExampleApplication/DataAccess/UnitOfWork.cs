@@ -58,6 +58,12 @@ namespace ExampleApplication.ExampleData
             projectRepository.SaveChanges(SaveOptions.AcceptAllChangesAfterSave);
         }
 
+        public void DeleteTask(Task task)
+        {
+            taskRepository.Delete(task);
+            taskRepository.SaveChanges();
+        }
+
         public IQueryable<Project> GetAllProjects()
          {
              return projectRepository.GetAllAsQueryable();
@@ -66,7 +72,6 @@ namespace ExampleApplication.ExampleData
         public IQueryable<Task> GetTasksOfProject(int projectId)
         {
             return taskRepository.Find(t => t.ProjectId == projectId).AsQueryable();
-
         }
 
         public IQueryable<Work> GetWorkItemsOfTask(int taskId)
@@ -82,6 +87,13 @@ namespace ExampleApplication.ExampleData
         public void UpdateProject(Project project)
         {
             //  do nothing with the project. Saving changes on the context pushes the update back to the server. 
+            //  Note: not good code to use entities in the View. But great for simple demo examples.
+            context.SaveChanges();
+        }
+
+        public void UpdateTask(Task task)
+        {
+            //  do nothing with the task. Saving changes on the context pushes the update back to the server. 
             //  Note: not good code to use entities in the View. But great for simple demo examples.
             context.SaveChanges();
         }

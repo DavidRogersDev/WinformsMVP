@@ -11,7 +11,10 @@ namespace ExampleApplication.Services
 
         public TimeTrackerService()
         {
-            unitOfWork = new UnitOfWork(new TimeTrackerEntities(ConfigurationManager.ConnectionStrings["TimeTrackerEntities"].ConnectionString));
+            unitOfWork =
+                new UnitOfWork(
+                    new TimeTrackerEntities(
+                        ConfigurationManager.ConnectionStrings["TimeTrackerEntities"].ConnectionString));
         }
 
         public void CreateNewProject(string name, bool visibility, string description = null)
@@ -19,7 +22,8 @@ namespace ExampleApplication.Services
             unitOfWork.CreateNewProject(name, visibility, description);
         }
 
-        public void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null)
+        public void CreateNewTask(string name, bool visibility, Project project, decimal estimate,
+                                  string description = null)
         {
             unitOfWork.CreateNewTask(name, visibility, project, estimate, description);
         }
@@ -34,6 +38,11 @@ namespace ExampleApplication.Services
             unitOfWork.DeleteProject(project);
         }
 
+        public void DeleteTask(Task task)
+        {
+            unitOfWork.DeleteTask(task);
+        }
+
         public IQueryable<Project> GetListOfProjects()
         {
             return unitOfWork.GetAllProjects();
@@ -45,7 +54,12 @@ namespace ExampleApplication.Services
             return unitOfWork.GetAllProjects().Where(p => p.Visible);
         }
 
-        public IQueryable<Task> GetTasksOfProject(int projectId)
+        public IQueryable<Task> GetTasksOfProject(int taskId)
+        {
+            return unitOfWork.GetTasksOfProject(taskId);
+        }
+
+        public IQueryable<Task> GetVisibleTasksOfProject(int projectId)
         {
             return unitOfWork.GetTasksOfProject(projectId).Where(p => p.Visible);
         }
@@ -58,6 +72,11 @@ namespace ExampleApplication.Services
         public void UpdateProject(Project project)
         {
             this.unitOfWork.UpdateProject(project);
+        }
+
+        public void UpdateTask(Task task)
+        {
+            this.unitOfWork.UpdateTask(task);
         }
     }
 }

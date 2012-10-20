@@ -98,6 +98,8 @@ namespace ExampleApplication.Views
             this.TasksDataGridView.Size = new System.Drawing.Size(844, 150);
             this.TasksDataGridView.TabIndex = 1;
             this.TasksDataGridView.CellClick += new DataGridViewCellEventHandler(TasksDataGridView_CellClick);
+            this.TasksDataGridView.CellContentClick += new DataGridViewCellEventHandler(TasksDataGridView_CellContentClick);
+
             // 
             // WorkItemsDataGridView
             // 
@@ -253,32 +255,70 @@ namespace ExampleApplication.Views
 
         }
 
+        void TasksDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
+            {
+                Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
+
+                if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+                {
+                    Model.SelectedTask.Visible =
+                        !(bool)
+                         (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
+                             Value;
+                    TaskVisibilityToggled(null, EventArgs.Empty);
+                }
+                else if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+                {
+                    TaskDeleteSelected(null, EventArgs.Empty);
+                }
+
+                TaskHasBeenSelected(null, EventArgs.Empty);
+            }
+        }
+
         private void ProjectsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+            if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewCheckBoxCell))
             {
                 Model.SelectedProject.Visible =
                     !(bool)
-                    (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
-                        Value;
+                     (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
+                         Value;
                 ProjectVisibilityToggled(null, EventArgs.Empty);
             }
-            else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+            else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewLinkCell))
             {
                 ProjectDeleteSelected(null, EventArgs.Empty);
             }
-            else
-            {
-                ProjectHasBeenSelected(null, EventArgs.Empty);
-            }
-
-            var m = ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"];
+         
+            ProjectHasBeenSelected(null, EventArgs.Empty);
         }
+
+
 
         private void TasksDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
-            TaskHasBeenSelected(null, EventArgs.Empty);
+            if (e.RowIndex > -1 && e.RowIndex < ProjectsDataGridView.Rows.Count)
+            {
+                Model.SelectedTask = TasksDataGridView.Rows[e.RowIndex].DataBoundItem as Task;
+
+                if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
+                {
+                    Model.SelectedTask.Visible =
+                        !(bool)
+                         (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
+                             Value;
+                    TaskVisibilityToggled(null, EventArgs.Empty);
+                }
+                else if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
+                {
+                    TaskDeleteSelected(null, EventArgs.Empty);
+                }
+
+                TaskHasBeenSelected(null, EventArgs.Empty);
+            }
         }
 
         private void ProjectsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -308,6 +348,8 @@ namespace ExampleApplication.Views
         public event EventHandler ProjectHasBeenSelected;
         public event EventHandler ProjectVisibilityToggled;
         public event EventHandler TaskHasBeenSelected;
+        public event EventHandler TaskDeleteSelected;
+        public event EventHandler TaskVisibilityToggled;
 
         public void PopulateProjects(IList<Project> projects)
         {

@@ -48,7 +48,7 @@ namespace ExampleApplication.Presenters
 
         private void View_ProjectedSelectionChanged(object sender, EventArgs e)
         {
-            View.Model.Tasks = timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
+            View.Model.Tasks = timeTrackerService.GetVisibleTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
         }
 
         private void View_AddWorkItemClicked(object sender, EventArgs e)

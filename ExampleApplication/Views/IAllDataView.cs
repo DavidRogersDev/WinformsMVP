@@ -12,6 +12,8 @@ namespace ExampleApplication.Views
         event EventHandler ProjectHasBeenSelected;
         event EventHandler ProjectVisibilityToggled;
         event EventHandler TaskHasBeenSelected;
+        event EventHandler TaskDeleteSelected;
+        event EventHandler TaskVisibilityToggled;
 
         void PopulateProjects(IList<Project> projects);
         void PopulateTasksByProjectId(IList<Task> tasksOfSelectedProject);
