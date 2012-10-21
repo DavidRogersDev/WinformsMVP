@@ -1,13 +1,14 @@
-﻿using WinFormsMvp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using WinFormsMvp;
 
 namespace WinFormsMvp.UnitTests
 {
-    
-    
+
+    // ReSharper disable InconsistentNaming
+
     /// <summary>
     ///This is an exact copy of the CollectionExtensionsTests from the original WebFormsMVP project (thanks guys!)
     ///</summary>
