@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-
 [assembly: InternalsVisibleTo("WinFormsMvp.UnitTests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100eb6fea45976e16daadfd3f49c17d7d8abec952b6acd435ceb9ea24efdcfe7b2a2a528f04a6a8269ee88a2cf4b839668a11a580caeab03762abf968cff05d0107c786dc5b7d9d97b14a13277df132222350ad4dc1dd24c03b1d10db168066fbe8ddf3f49b04b6248264479d21bfdabd79b68291da2d62a5ab17fc55819869a4e9")]
+

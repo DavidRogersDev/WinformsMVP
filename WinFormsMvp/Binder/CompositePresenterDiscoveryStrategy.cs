@@ -60,7 +60,8 @@ namespace WinFormsMvp.Binder
                 results.Add(resultsThisRound);
             }
 
-            return results.GroupBy(r => r.ViewInstances).Select(r => BuildMergedResult(r.Key, r)).First(); //TODO: this needs re-thinking. As it is working, leave it for now.
+
+            return results.GroupBy(r => r.ViewInstances).Select(r => BuildMergedResult(r.Key, r)).First(); 
         }
 
         static PresenterDiscoveryResult BuildMergedResult(IEnumerable<IView> viewInstances, IEnumerable<PresenterDiscoveryResult> results)

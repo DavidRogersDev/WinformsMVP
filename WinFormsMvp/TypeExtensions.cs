@@ -7,6 +7,12 @@ namespace WinFormsMvp
     internal static class TypeExtensions
     {
         static readonly IDictionary<RuntimeTypeHandle, IEnumerable<Type>> implementationTypeToViewInterfacesCache = new Dictionary<RuntimeTypeHandle, IEnumerable<Type>>();
+
+        /// <summary>
+        /// Get a collection of all the Interfaces to which this object can be assigned
+        /// </summary>
+        /// <param name="implementationType"></param>
+        /// <returns></returns>
         internal static IEnumerable<Type> GetViewInterfaces(this Type implementationType)
         {
             // We use the type handle as the cache key because they're fast

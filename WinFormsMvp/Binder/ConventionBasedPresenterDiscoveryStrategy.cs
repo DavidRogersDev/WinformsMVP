@@ -35,10 +35,7 @@ namespace WinFormsMvp.Binder
                 "Control",
                 "View",
                 "Form",
-                "Handler",
-                "WebService",
-                "Service"
-            }; //   TODO: see if this will work with items other than UserControls and Forms
+            }; 
 
         /// <summary>
         /// Override this property to extend the list of suffixes that are automatically stripped from view instances when generating presenter type name candidates.
@@ -145,11 +142,17 @@ namespace WinFormsMvp.Binder
             );
         }
 
+        /// <summary>
+        /// We are only interested in the custom interface which we created for our view. This method carves out the two infrastructure-related
+        /// interfaces i.e. IView and IView`1
+        /// </summary>
+        /// <param name="viewInterfaces">The interfaces identified as relevant to this request.</param>
+        /// <returns>Bunch of strings with potential Presenter Type names for the Presenter to bind to.</returns>
         internal static IEnumerable<string> GetPresenterTypeNamesFromViewInterfaceTypeNames(IEnumerable<Type> viewInterfaces)
         {
             // Trim the "I" and "View" from the start & end respectively of the interface names
             return viewInterfaces
-                .Where(i => i.Name != "IView" && i.Name != "IView`1") //TODO: need to change the ` character as I have not used that convention
+                .Where(i => i.Name != "IView" && i.Name != "IView`1") 
                 .Select(i => i.Name.TrimStart('I').TrimFromEnd("View"));
         }
 
@@ -157,7 +160,6 @@ namespace WinFormsMvp.Binder
         {
             // Check for existance of supported suffixes and if found, remove and use result as basis for presenter type name
             // e.g. HelloWorldControl => HelloWorldPresenter
-            //      WidgetsWebService => WidgetsPresenter
             var presenterTypeName = (from suffix in viewInstanceSuffixes
                                      where viewType.Name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
                                      select viewType.Name.TrimFromEnd(suffix))
