@@ -67,10 +67,6 @@ namespace WinFormsMvp.Binder
             }
         }
 
-        static readonly ICompositeViewTypeFactory compositeViewTypeFactory = new DefaultCompositeViewTypeFactory();
-
-        readonly IList<IPresenter> presenters = new List<IPresenter>();
-
         /// <summary>
         /// Occurs when the binder creates a new presenter instance. Useful for
         /// populating extra information into presenters.
@@ -87,35 +83,6 @@ namespace WinFormsMvp.Binder
             
         }
 
-
-
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="PresenterBinder"/> class.
-        ///// </summary>
-        ///// <param name="hosts">The array of hosts, useful in scenarios like ASP.NET master pages.</param>
-        ///// <param name="httpContext">The owning HTTP context.</param>
-        ///// <param name="traceContext">The tracing context.</param>
-        //internal PresenterBinder(IEnumerable<object> hosts)
-        //{
-        //    this.hosts = hosts.ToList();
-
-        //    foreach (var selfHostedView in hosts.OfType<IView>())
-        //    {
-                
-        //    }
-        //}
-
-        /// <summary>
-        /// Registers a view instance as being a candidate for binding. If
-        /// <see cref="PerformBinding()"/> has not been called, the view will
-        /// be queued until that time. If <see cref="PerformBinding()"/> has
-        /// already been called, binding is attempted instantly.
-        /// </summary>
-        //public void RegisterView(IView viewInstance)
-        //{
-        //    PerformBinding(viewInstance);
-        //}
-
         /// <summary>
         /// Attempts to bind any already registered views.
         /// </summary>
@@ -123,57 +90,17 @@ namespace WinFormsMvp.Binder
         {
             try
             {
-                var newPresenters = PerformBinding(
+                PerformBinding(
                     viewInstance,
                     DiscoveryStrategy,
                     p => OnPresenterCreated(new PresenterCreatedEventArgs(p)),
                     Factory);
 
-                //presenters.AddRange(newPresenters);
-                //presenters.Clear();
             }
             catch (Exception e)
             {
 
             }
-        }
-
-        /// <summary>
-        /// Closes the message bus, releases each of the views from the
-        /// presenters then releases each of the presenters from the factory
-        /// (useful in IoC scenarios).
-        /// </summary>
-        public void Release()
-        {
-            //traceContext.Write(this, () => "Releasing presenter binder.");
-
-            //MessageCoordinator.Close();
-            //lock (presenters)
-            //{
-            //    foreach (var presenter in presenters)
-            //    {
-            //        var presenter1 = presenter;
-
-            //        traceContext.Write(this, () => string.Format(
-            //            CultureInfo.InvariantCulture,
-            //            "Calling ReleaseView on presenter of type {0}.",
-            //            presenter1.GetType().FullName));
-
-            //        var presenterThatWeNeedToCallReleaseViewOn = presenter as IViewLifecycleManager;
-            //        if (presenterThatWeNeedToCallReleaseViewOn != null)
-            //        {
-            //            presenterThatWeNeedToCallReleaseViewOn.ReleaseView();
-            //        }
-
-            //        traceContext.Write(this, () => string.Format(
-            //            CultureInfo.InvariantCulture,
-            //            "Releasing presenter of type {0} back to the presenter factory.",
-            //            presenter1.GetType().FullName));
-
-            //        factory.Release(presenter);
-            //    }
-            //    presenters.Clear();
-            //}
         }
 
         private void OnPresenterCreated(PresenterCreatedEventArgs args)
@@ -194,12 +121,12 @@ namespace WinFormsMvp.Binder
                 candidate,
                 presenterDiscoveryStrategy);
 
-            var newPresenters = BuildPresenters(
+            var newPresenter = BuildPresenter(
                 presenterCreatedCallback,
                 presenterFactory,
-                new PresenterBinding[] {bindings});
+                new[] {bindings});
 
-            return newPresenters;
+            return newPresenter;
         }
 
         static PresenterBinding GetBindings(IView candidate, IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
@@ -223,7 +150,7 @@ namespace WinFormsMvp.Binder
             ));
         }
 
-        static IPresenter BuildPresenters(
+        static IPresenter BuildPresenter(
             Action<IPresenter> presenterCreatedCallback,
             IPresenterFactory presenterFactory,
             IEnumerable<PresenterBinding> bindings)
@@ -233,7 +160,7 @@ namespace WinFormsMvp.Binder
                     BuildPresenters(
                         presenterCreatedCallback,
                         presenterFactory,
-                        binding)).ToList().ElementAt(0);
+                        binding)).ToList().First();
         }
 
         static IPresenter BuildPresenters(
@@ -241,25 +168,7 @@ namespace WinFormsMvp.Binder
             IPresenterFactory presenterFactory,
             PresenterBinding binding)
         {
-            IView viewToCreateFor = null;
-
-            switch (binding.BindingMode)
-            {
-                case BindingMode.Default:
-                    viewToCreateFor = binding.ViewInstance;
-                    break;
-                //case BindingMode.SharedPresenter:
-                //    //viewToCreateFor = new[]
-                //    //{
-                //    //    CreateCompositeView(binding.ViewType, binding.ViewInstance)
-                //    //};
-                //    break;
-                default:
-                    throw new NotSupportedException(string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported by this method.",
-                        binding.BindingMode));
-            }
+            IView viewToCreateFor = binding.ViewInstance; 
 
             return BuildPresenter(
                     presenterCreatedCallback,
@@ -283,15 +192,5 @@ namespace WinFormsMvp.Binder
             return presenter;
         }
 
-        //internal static IView CreateCompositeView(Type viewType, IEnumerable<IView> childViews)
-        //{
-        //    var compositeViewType = compositeViewTypeFactory.BuildCompositeViewType(viewType);
-        //    var view = (ICompositeView)Activator.CreateInstance(compositeViewType);
-        //    foreach (var v in childViews)
-        //    {
-        //        view.Add(v);
-        //    }
-        //    return view;
-        //}
     }
 }
