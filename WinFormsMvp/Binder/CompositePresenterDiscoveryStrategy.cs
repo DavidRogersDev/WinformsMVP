@@ -60,7 +60,6 @@ namespace WinFormsMvp.Binder
                 results.Add(resultsThisRound);
             }
 
-
             return results.GroupBy(r => r.ViewInstances).Select(r => BuildMergedResult(r.Key, r)).First(); 
         }
 
