@@ -114,9 +114,6 @@ namespace ExampleApplication.DataAccess
                         queryAsObjectSet = queryAsObjectSet.Include(includeProperty);
                     }
 
-                    queryAsObjectSet = queryAsObjectSet.Include(includeProperties);
-
-
                     if (ReferenceEquals(null, orderBy))
                     {
                         return queryAsObjectSet.AsEnumerable();
