@@ -67,8 +67,10 @@
     <Compile Include="CollectionExtensionsTest.cs" />
     <Compile Include="CompositeViewTests.cs" />
     <Compile Include="Models\CreateProjectModel.cs" />
+    <Compile Include="Models\CreateTaskModel.cs" />
     <Compile Include="Models\MainFormModel.cs" />
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
+    <Compile Include="Presenters\CreateTaskPresenter.cs" />
     <Compile Include="Presenters\MainEntryViewPresnter.cs" />
     <Compile Include="PresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,7 +79,11 @@
     <Compile Include="Views\CreateProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Views\CreateTaskView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Views\ICreateProjectView.cs" />
+    <Compile Include="Views\ICreateTaskView.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>

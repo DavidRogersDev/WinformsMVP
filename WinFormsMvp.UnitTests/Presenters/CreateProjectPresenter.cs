@@ -1,6 +1,4 @@
-﻿using System;
-using WinFormsMvp;
-using WinFormsMvp.UnitTests.Views;
+﻿using WinFormsMvp.UnitTests.Views;
 
 namespace WinFormsMvp.UnitTests.Presenters
 {

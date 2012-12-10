@@ -31,5 +31,20 @@ namespace WinFormsMvp.UnitTests.Binder
             Assert.IsTrue(actualBinding.Bindings.First().PresenterType == typeof(CreateProjectPresenter));
 
         }
+
+        [TestMethod]
+        public  void Get_Binding_When_Both_Binding_Mechansims_Used()
+        {
+            //  Arrange
+            var strategy = new ConventionBasedPresenterDiscoveryStrategy();
+            IView<CreateTaskModel> createTaskView = new CreateTaskView();
+
+            //Act
+            var actualBinding = strategy.GetBinding(createTaskView);
+
+            //  Assert
+            Assert.IsTrue(actualBinding.Bindings.Any());
+            Assert.IsTrue(actualBinding.Bindings.First().PresenterType == typeof(CreateTaskPresenter));
+        }
     }
 }

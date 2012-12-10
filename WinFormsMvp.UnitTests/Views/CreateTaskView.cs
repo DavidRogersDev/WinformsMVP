@@ -4,16 +4,10 @@ using WinFormsMvp.UnitTests.Presenters;
 
 namespace WinFormsMvp.UnitTests.Views
 {
-    [PresenterBinding(typeof(MainEntryMenuPresenter))]
-    public class MainView : WinFormsMvp.Forms.MvpForm<MainFormModel>, IMainView
+    [PresenterBinding(typeof(CreateTaskPresenter))]
+    public class CreateTaskView : WinFormsMvp.Forms.MvpForm<CreateTaskModel>, ICreateTaskView
     {
-        public MainView()
-        {
-
-        }
-
         public event EventHandler CloseFormClicked;
-
         public event EventHandler DisplayCreateProjectView;
 
         public void DisplayView()
