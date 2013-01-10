@@ -10,6 +10,8 @@ namespace ExampleApplication.Views
 {
     public class CreateTaskForm : MvpForm<CreateTaskModel>, ICreateTaskView
     {
+        #region Private Variables
+
         private Button CloseButton;
         private Button CreateTaskButton;
         private TextBox DescriptionTextBox;
@@ -18,19 +20,17 @@ namespace ExampleApplication.Views
         private TextBox EstimateTextBox;
         private Label NameLabel;
         private TextBox NameTextBox;
-        private Label ProjectLabel;
-        private ComboBox ProjectsComboBox;
+        private ProjectChooserControl projectChooserControl;
         private PictureBox SuccessPictureBox;
         private CheckBox VisibilityCheckBox;
+
+        #endregion
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             this.InitializeComponent();
-
-            this.ProjectsComboBox.DataSource = Model.Projects;
-            this.ProjectsComboBox.DisplayMember = "Name";
         }
 
         private void InitializeComponent()
@@ -43,10 +43,9 @@ namespace ExampleApplication.Views
             this.DescriptionTextBox = new TextBox();
             this.DescriptionLabel = new Label();
             this.NameLabel = new Label();
-            this.ProjectLabel = new Label();
             this.VisibilityCheckBox = new CheckBox();
-            this.ProjectsComboBox = new ComboBox();
             this.SuccessPictureBox = new PictureBox();
+            this.projectChooserControl = new ProjectChooserControl();
             this.SuspendLayout();
 
             this.SuccessPictureBox.Image = new Bitmap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tick.png"), true);
@@ -103,12 +102,12 @@ namespace ExampleApplication.Views
             // 
             // ProjectLabel
             // 
-            this.ProjectLabel.AutoSize = true;
-            this.ProjectLabel.Location = new System.Drawing.Point(10, 22);
-            this.ProjectLabel.Name = "ProjectLabel";
-            this.ProjectLabel.Size = new System.Drawing.Size(38, 13);
-            this.ProjectLabel.TabIndex = 4;
-            this.ProjectLabel.Text = "Project:";
+            //this.ProjectLabel.AutoSize = true;
+            //this.ProjectLabel.Location = new System.Drawing.Point(10, 22);
+            //this.ProjectLabel.Name = "ProjectLabel";
+            //this.ProjectLabel.Size = new System.Drawing.Size(38, 13);
+            //this.ProjectLabel.TabIndex = 4;
+            //this.ProjectLabel.Text = "Project:";
 
             // 
             // VisibilityCheckBox
@@ -153,17 +152,14 @@ namespace ExampleApplication.Views
             this.CreateTaskButton.Click += new EventHandler(CreateTaskButton_Click);
 
             // 
-            // ProjectsComboBox
+            // ProjectChooserControl
             // 
-            this.ProjectsComboBox.FormattingEnabled = true;
-            this.ProjectsComboBox.Location = new System.Drawing.Point(75, 18);
-            this.ProjectsComboBox.Name = "ProjectsComboBox";
-            this.ProjectsComboBox.Size = new System.Drawing.Size(480, 21);
-            this.ProjectsComboBox.TabIndex = 9;
-            this.ProjectsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.projectChooserControl.Location = new Point(10, 18);
+            this.projectChooserControl.Name = "bla";
+            this.projectChooserControl.Size = new Size(490,30);
 
             // 
-            // Form1
+            // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -172,14 +168,13 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.EstimateLabel);
-            this.Controls.Add(this.ProjectLabel);
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.EstimateTextBox);
             this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.ProjectsComboBox);
             this.Controls.Add(this.CreateTaskButton);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.SuccessPictureBox);
+            this.Controls.Add(this.projectChooserControl);
             this.Name = "CreateTaskForm";
             this.Text = "Add a New Task";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -190,7 +185,7 @@ namespace ExampleApplication.Views
 
         private void CreateTaskButton_Click(object sender, EventArgs e)
         {
-            Model.SelectedProject = this.ProjectsComboBox.SelectedItem as Project;
+            Model.SelectedProject = this.projectChooserControl.SelectedProject;
             Model.Name = NameTextBox.Text.Trim();
             Model.Description = DescriptionTextBox.Text.Trim();
             Model.Visibilty = VisibilityCheckBox.Checked;

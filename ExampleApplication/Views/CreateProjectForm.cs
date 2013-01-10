@@ -9,7 +9,7 @@ namespace ExampleApplication.Views
 {
     public class CreateProjectForm : MvpForm<CreateProjectModel>, ICreateProjectView
     {
-        #region MyRegion
+        #region Private variables
 
         private Button CloseButton;
         private Button CreateProjectButton;

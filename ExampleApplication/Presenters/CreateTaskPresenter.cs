@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using ExampleApplication.Ioc;
 using ExampleApplication.Models;
 using ExampleApplication.Services;
@@ -30,7 +29,7 @@ namespace ExampleApplication.Presenters
         private void View_Load(object sender, EventArgs e)
         {
             View.Model = new CreateTaskModel();
-            View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
+            //View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
         }
 
         private void View_AddTaskClicked(object sender, EventArgs e)

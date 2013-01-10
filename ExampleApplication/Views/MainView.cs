@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ExampleApplication.Models;
 using ExampleApplication.Presenters;
@@ -20,7 +17,7 @@ namespace ExampleApplication.Views
 
         public MainView()
         {
-
+            
         }
 
         protected override void OnLoad(EventArgs e)
@@ -101,10 +98,10 @@ namespace ExampleApplication.Views
             this.Controls.Add(this.ExitLinkLabel);
             this.Name = "MainForm";
             this.Text = "WinFormsMvp - Sample App";
+
             this.StartPosition = FormStartPosition.CenterScreen;
 
             this.ResumeLayout(false);
-
         }
 
         void ExitLinkLabel_Click(object sender, EventArgs e)

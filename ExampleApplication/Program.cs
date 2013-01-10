@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using EnvDTE;
 using ExampleApplication.Ioc;
 using ExampleApplication.Views;
 using StructureMap;
