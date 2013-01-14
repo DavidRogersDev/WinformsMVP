@@ -7,7 +7,7 @@ namespace ExampleApplication.Ioc
 	{
 		public DependancyRegistry()
 		{
-			For<ITimeTrackerService>().Add<TimeTrackerService>();
+			For<ITimeTrackerService>().Singleton().Add<TimeTrackerService>();
 		}
 	}
 }
