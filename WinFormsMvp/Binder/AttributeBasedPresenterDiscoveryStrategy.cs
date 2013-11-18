@@ -132,23 +132,6 @@ namespace WinFormsMvp.Binder
                 var attributes = sourceType
                     .GetCustomAttributes(typeof(PresenterBindingAttribute), true)
                     .OfType<PresenterBindingAttribute>()
-                    .ToArray();
-
-                if (attributes.Any(a =>
-                        a.BindingMode == BindingMode.SharedPresenter &&
-                        a.ViewType == null
-                    ))
-                {
-                    throw new NotSupportedException(string.Format(
-                        CultureInfo.InvariantCulture,
-                        "When a {1} is applied with BindingMode={2}, the ViewType must be explicitly specified. One of the bindings on {0} violates this restriction.",
-                        sourceType.FullName,
-                        typeof(PresenterBindingAttribute).Name,
-                        Enum.GetName(typeof(BindingMode), BindingMode.SharedPresenter)
-                    ));
-                }
-
-                attributes = attributes
                     .Select(pba =>
                         new PresenterBindingAttribute(pba.PresenterType)
                         {

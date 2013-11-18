@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WinFormsMvp.Binder;
 using WinFormsMvp.UnitTests.Presenters;
 using WinFormsMvp.UnitTests.Views;
@@ -28,6 +24,21 @@ namespace WinFormsMvp.UnitTests.Binder
 
             //  Assert
             Assert.IsInstanceOfType(actualPresenter, typeof(CreateProjectPresenter));
+        }
+
+        [TestMethod]
+        public void CreatePresenterWithNonGenericView()
+        {
+            //  Arrange
+            DefaultPresenterFactory defaultPresenterFactory = new DefaultPresenterFactory();
+            LaunchView view = new LaunchView();
+            //LaunchPresenter createProjectPresenter = new LaunchPresenter(view);
+
+            //  Act
+            var actualPresenter = defaultPresenterFactory.Create(typeof(LaunchPresenter), typeof(LaunchView), view);
+
+            //  Assert
+            Assert.IsInstanceOfType(actualPresenter, typeof(LaunchPresenter));
         }
     }
 }

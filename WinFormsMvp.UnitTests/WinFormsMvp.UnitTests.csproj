@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +72,7 @@
     <Compile Include="Models\MainFormModel.cs" />
     <Compile Include="Presenters\CreateProjectPresenter.cs" />
     <Compile Include="Presenters\CreateTaskPresenter.cs" />
+    <Compile Include="Presenters\LaunchPresenter.cs" />
     <Compile Include="Presenters\MainEntryViewPresnter.cs" />
     <Compile Include="PresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,7 +86,14 @@
     </Compile>
     <Compile Include="Views\ICreateProjectView.cs" />
     <Compile Include="Views\ICreateTaskView.cs" />
+    <Compile Include="Views\ILaunchView.cs" />
     <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\LaunchView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LaunchView.Designer.cs">
+      <DependentUpon>LaunchView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
