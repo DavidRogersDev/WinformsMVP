@@ -3,9 +3,9 @@ using WinFormsMvp.Forms;
 
 namespace LicenceTracker.Views
 {
-    public partial class LicenceTrackerViewSlice : MvpForm<AddPersonModel>
+    public partial class AddPersonViewSlice : MvpForm<AddPersonModel>
     {
-        public LicenceTrackerViewSlice()
+        public AddPersonViewSlice()
         {
             InitializeComponent();
         }

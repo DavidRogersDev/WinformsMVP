@@ -70,12 +70,19 @@
     <Compile Include="Entities\SoftwareType.cs" />
     <Compile Include="Models\AddPersonModel.cs" />
     <Compile Include="Models\AddProductModel.cs" />
+    <Compile Include="Models\AddSoftwareTypeModel.cs" />
     <Compile Include="Models\LaunchViewModel.cs" />
     <Compile Include="Presenters\AddPersonPresenter.cs" />
     <Compile Include="Presenters\AddProductPresenter.cs" />
+    <Compile Include="Presenters\AddSoftwareTypePresenter.cs" />
     <Compile Include="Presenters\LaunchPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ISoftwareService.cs" />
     <Compile Include="Services\SoftwareService.cs" />
     <Compile Include="Views\AddPersonView.cs">
@@ -84,14 +91,27 @@
     <Compile Include="Views\AddPersonView.Designer.cs">
       <DependentUpon>AddPersonView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPersonViewSlice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddPersonViewSlice.Designer.cs">
+      <DependentUpon>AddPersonViewSlice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddProductView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\AddProductView.Designer.cs">
       <DependentUpon>AddProductView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddSoftwareType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddSoftwareType.Designer.cs">
+      <DependentUpon>AddSoftwareType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IAddPersonView.cs" />
     <Compile Include="Views\IAddProductView.cs" />
+    <Compile Include="Views\IAddSoftwareTypeView.cs" />
     <Compile Include="Views\ILaunchView.cs" />
     <Compile Include="Views\LaunchView.cs">
       <SubType>Form</SubType>
@@ -99,26 +119,19 @@
     <Compile Include="Views\LaunchView.Designer.cs">
       <DependentUpon>LaunchView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\LicenceTrackerViewSlice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\LicenceTrackerViewSlice.Designer.cs">
-      <DependentUpon>LicenceTrackerViewSlice.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Views\AddPersonView.resx">
       <DependentUpon>AddPersonView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddProductView.resx">
       <DependentUpon>AddProductView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddSoftwareType.resx">
+      <DependentUpon>AddSoftwareType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LaunchView.resx">
       <DependentUpon>LaunchView.cs</DependentUpon>
@@ -145,6 +158,15 @@
       <Project>{f211df11-2b89-4ffc-a9b8-4ba9cdf41a9f}</Project>
       <Name>WinFormsMvp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\software_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\softwareType_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\msewtz_Business_Person.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

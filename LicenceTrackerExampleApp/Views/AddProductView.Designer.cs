@@ -39,14 +39,14 @@
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(212, 55);
+            this.NameTextBox.Location = new System.Drawing.Point(80, 35);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(100, 20);
             this.NameTextBox.TabIndex = 0;
             // 
             // DescriptionTextBox
             // 
-            this.DescriptionTextBox.Location = new System.Drawing.Point(212, 92);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(80, 72);
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.Size = new System.Drawing.Size(100, 20);
             this.DescriptionTextBox.TabIndex = 1;
@@ -54,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(170, 59);
+            this.label1.Location = new System.Drawing.Point(38, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 2;
@@ -63,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(145, 96);
+            this.label2.Location = new System.Drawing.Point(13, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 3;
@@ -71,7 +71,7 @@
             // 
             // AddProductButton
             // 
-            this.AddProductButton.Location = new System.Drawing.Point(212, 176);
+            this.AddProductButton.Location = new System.Drawing.Point(80, 156);
             this.AddProductButton.Name = "AddProductButton";
             this.AddProductButton.Size = new System.Drawing.Size(120, 23);
             this.AddProductButton.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             this.SoftwareTypesComboBox.DisplayMember = "Value";
             this.SoftwareTypesComboBox.FormattingEnabled = true;
-            this.SoftwareTypesComboBox.Location = new System.Drawing.Point(212, 132);
+            this.SoftwareTypesComboBox.Location = new System.Drawing.Point(80, 112);
             this.SoftwareTypesComboBox.Name = "SoftwareTypesComboBox";
             this.SoftwareTypesComboBox.Size = new System.Drawing.Size(121, 21);
             this.SoftwareTypesComboBox.TabIndex = 5;
@@ -92,7 +92,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(174, 136);
+            this.label3.Location = new System.Drawing.Point(42, 116);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 6;
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 307);
+            this.ClientSize = new System.Drawing.Size(247, 212);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SoftwareTypesComboBox);
             this.Controls.Add(this.AddProductButton);
@@ -111,7 +111,7 @@
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Name = "AddProductView";
-            this.Text = "Add Product Form";
+            this.Text = "Add a New Product";
             this.ResumeLayout(false);
             this.PerformLayout();
 

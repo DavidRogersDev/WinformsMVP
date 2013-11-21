@@ -12,6 +12,7 @@ namespace WinFormsMvp.Forms
         public MvpUserControl()
         {
             presenterBinder.PerformBinding(this);
+            ThrowExceptionIfNoPresenterBound = true;
         }
 
         #region Implementation of IView<TModel>
@@ -26,10 +27,8 @@ namespace WinFormsMvp.Forms
 
         #region Implementation of IView
 
-        public bool ThrowExceptionIfNoPresenterBound
-        {
-            get { return false; } // todo: need to consider the use of this in this new environment!!!
-        }
+        public bool ThrowExceptionIfNoPresenterBound { get; private set; }
+
 
         #endregion
     }

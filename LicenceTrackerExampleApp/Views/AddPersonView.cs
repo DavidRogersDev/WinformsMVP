@@ -2,7 +2,7 @@
 using System;
 namespace LicenceTracker.Views
 {
-    public partial class AddPersonView : LicenceTrackerViewSlice , IAddPersonView
+    public partial class AddPersonView : AddPersonViewSlice, IAddPersonView
     {
         public AddPersonView()
         {

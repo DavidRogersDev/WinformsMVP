@@ -33,7 +33,7 @@
             // 
             // CloseFormButton
             // 
-            this.CloseFormButton.Location = new System.Drawing.Point(143, 154);
+            this.CloseFormButton.Location = new System.Drawing.Point(222, 50);
             this.CloseFormButton.Name = "CloseFormButton";
             this.CloseFormButton.Size = new System.Drawing.Size(75, 23);
             this.CloseFormButton.TabIndex = 0;

@@ -24,5 +24,13 @@ namespace LicenceTracker.Services
         {
             return licenceTrackerContext.SoftwareTypes;
         }
+
+
+        public SoftwareType AddSoftwareType(SoftwareType softwareType)
+        {
+            var newType = licenceTrackerContext.SoftwareTypes.Add(softwareType);
+            licenceTrackerContext.SaveChanges();
+            return newType;
+        }
     }
 }
