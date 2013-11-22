@@ -33,6 +33,7 @@
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -78,11 +79,22 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(89, 197);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(78, 23);
+            this.CloseButton.TabIndex = 5;
+            this.CloseButton.Text = "&Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // AddSoftwareType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 211);
+            this.ClientSize = new System.Drawing.Size(274, 228);
+            this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.NameTextBox);
@@ -102,5 +114,6 @@
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TextBox DescriptionTextBox;
         private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button CloseButton;
     }
 }

@@ -40,16 +40,17 @@ namespace LicenceTracker.Views
         {
             Close();
         }
-
-
-
-
-
+                
         public int Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public Dictionary<int, string> SoftwareTypes { get; set; }
         public int TypeId { get; set; }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseFormClicked(this, EventArgs.Empty);
+        }
 
 
 

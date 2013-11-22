@@ -35,6 +35,7 @@
             this.AddProductButton = new System.Windows.Forms.Button();
             this.SoftwareTypesComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameTextBox
@@ -98,11 +99,22 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Type:";
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(80, 189);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(75, 23);
+            this.CloseButton.TabIndex = 7;
+            this.CloseButton.Text = "&Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // AddProductView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 212);
+            this.ClientSize = new System.Drawing.Size(247, 223);
+            this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SoftwareTypesComboBox);
             this.Controls.Add(this.AddProductButton);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.Button AddProductButton;
         private System.Windows.Forms.ComboBox SoftwareTypesComboBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button CloseButton;
     }
 }

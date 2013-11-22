@@ -30,5 +30,10 @@ namespace LicenceTracker.Views
             AddProductClicked(this, EventArgs.Empty);
         }
 
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseFormClicked(this, EventArgs.Empty);
+        }
+
     }
 }

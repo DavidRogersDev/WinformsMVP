@@ -1,25 +1,30 @@
-﻿using LicenceTracker.Views;
+﻿using LicenceTracker.Entities;
+using LicenceTracker.Services;
+using LicenceTracker.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WinFormsMvp;
 
 namespace LicenceTracker.Presenters
 {
     public class AddPersonPresenter : Presenter<IAddPersonView>
     {
+        private readonly ISoftwareService softwareService;
         public AddPersonPresenter(IAddPersonView view)
             :base(view)
         {
             View.CloseFormClicked += View_CloseFormClicked;
             View.AddPersonClicked += View_AddPersonClicked;
+            View.Load += View_Load;
+        }
+
+        void View_Load(object sender, EventArgs e)
+        {
+            View.Model.NewPerson = new Person();
         }
 
         void View_AddPersonClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            softwareService.AddNewPerson(View.Model.NewPerson);
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)

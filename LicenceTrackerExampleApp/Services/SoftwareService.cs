@@ -14,10 +14,11 @@ namespace LicenceTracker.Services
             licenceTrackerContext = new LicenceTrackerContext();
         }
 
-        public void AddNewProduct(Software product)
+        public Software AddNewProduct(Software product)
         {
             var newProduct = licenceTrackerContext.SoftwareProducts.Add(product);
             licenceTrackerContext.SaveChanges();
+            return newProduct;
         }
 
         public IQueryable<SoftwareType> GetSoftwareTypes()
@@ -29,6 +30,13 @@ namespace LicenceTracker.Services
         public SoftwareType AddSoftwareType(SoftwareType softwareType)
         {
             var newType = licenceTrackerContext.SoftwareTypes.Add(softwareType);
+            licenceTrackerContext.SaveChanges();
+            return newType;
+        }
+
+        public Person AddNewPerson(Person person)
+        {
+            var newType = licenceTrackerContext.People.Add(person);
             licenceTrackerContext.SaveChanges();
             return newType;
         }
