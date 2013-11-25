@@ -1,4 +1,5 @@
 ﻿using LicenceTracker.Entities;
+using LicenceTracker.Models;
 using LicenceTracker.Services;
 using LicenceTracker.Views;
 using System;
@@ -12,6 +13,7 @@ namespace LicenceTracker.Presenters
         public AddPersonPresenter(IAddPersonView view)
             :base(view)
         {
+            softwareService = new SoftwareService();
             View.CloseFormClicked += View_CloseFormClicked;
             View.AddPersonClicked += View_AddPersonClicked;
             View.Load += View_Load;
@@ -19,7 +21,7 @@ namespace LicenceTracker.Presenters
 
         void View_Load(object sender, EventArgs e)
         {
-            View.Model.NewPerson = new Person();
+            View.Model = new AddPersonModel { NewPerson = new Person() };
         }
 
         void View_AddPersonClicked(object sender, EventArgs e)

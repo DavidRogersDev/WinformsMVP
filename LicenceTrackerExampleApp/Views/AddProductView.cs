@@ -50,10 +50,6 @@ namespace LicenceTracker.Views
         private void CloseButton_Click(object sender, EventArgs e)
         {
             CloseFormClicked(this, EventArgs.Empty);
-        }
-
-
-
-        
+        }        
     }
 }

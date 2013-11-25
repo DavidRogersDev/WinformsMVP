@@ -7,7 +7,7 @@ namespace LicenceTracker.Views
     {
         public AddPersonViewSlice()
         {
-            InitializeComponent();
+            
         }
     }
 }

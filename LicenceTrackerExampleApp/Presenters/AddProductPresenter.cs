@@ -40,9 +40,9 @@ namespace LicenceTracker.Presenters
         {
             Dictionary<int, string> softwareTypes = new Dictionary<int, string>(model.AllSoftwareTypes.Count);
 
-            foreach (var bla in model.AllSoftwareTypes.Select(x => new KeyValuePair<int, string>(x.Id, x.Name)))
+            foreach (var softwareType in model.AllSoftwareTypes.Select(x => new KeyValuePair<int, string>(x.Id, x.Name)))
             {
-                softwareTypes.Add(bla.Key, bla.Value);
+                softwareTypes.Add(softwareType.Key, softwareType.Value);
             }
 
             View.SoftwareTypes = softwareTypes;
