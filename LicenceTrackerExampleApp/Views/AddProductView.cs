@@ -33,6 +33,8 @@ namespace LicenceTracker.Views
             
 
             AddProductClicked(this, EventArgs.Empty);
+
+            MessageBox.Show("The new product has been added successfully.");
         }
 
 

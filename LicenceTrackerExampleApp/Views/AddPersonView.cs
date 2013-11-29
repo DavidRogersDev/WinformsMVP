@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Windows.Forms;
 namespace LicenceTracker.Views
 {
     public partial class AddPersonView : AddPersonViewSlice, IAddPersonView
@@ -30,6 +31,8 @@ namespace LicenceTracker.Views
             Model.NewPerson.LastName = LastNameTextBox.Text.Trim();
 
             AddPersonClicked(this, EventArgs.Empty);
+
+            MessageBox.Show("The new person has been added successfully.");
         }
     }
 }

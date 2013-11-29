@@ -36,7 +36,7 @@
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(197, 227);
+            this.ExitButton.Location = new System.Drawing.Point(163, 209);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(75, 23);
             this.ExitButton.TabIndex = 0;
@@ -87,13 +87,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(279, 248);
             this.Controls.Add(this.AddSoftwareTypeButton);
             this.Controls.Add(this.AddLicenceButton);
             this.Controls.Add(this.AddPersonButton);
             this.Controls.Add(this.ExitButton);
             this.Name = "LaunchView";
-            this.Text = "LaunchView";
+            this.Text = "Admin Screen";
             this.ResumeLayout(false);
 
         }

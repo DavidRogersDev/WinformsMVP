@@ -1,5 +1,6 @@
 ﻿using LicenceTracker.Models;
 using System;
+using System.Windows.Forms;
 using WinFormsMvp.Forms;
 
 namespace LicenceTracker.Views
@@ -28,6 +29,8 @@ namespace LicenceTracker.Views
             newSoftwareType.Description = DescriptionTextBox.Text.Trim();
 
             AddProductClicked(this, EventArgs.Empty);
+
+            MessageBox.Show("The new Software Type has been added successfully.");
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

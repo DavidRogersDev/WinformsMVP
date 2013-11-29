@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 namespace LicenceTracker.Db
 {
-    public class LicenceTrackerInitializer : DropCreateDatabaseAlways<LicenceTrackerContext>
+    public class LicenceTrackerInitializer : DropCreateDatabaseIfModelChanges<LicenceTrackerContext>
     {
         protected override void Seed(LicenceTrackerContext context)
         {
