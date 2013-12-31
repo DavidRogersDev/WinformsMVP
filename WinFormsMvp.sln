@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMvp.Unity", "WinFor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMvp.PresenterFactoryUnitTests", "WinFormsMvp.PresenterFactoryUnitTests\WinFormsMvp.PresenterFactoryUnitTests.csproj", "{BD9166D6-D5AB-4001-A467-D8EE7CEDE022}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMvp.StructureMap", "WinFormsMvp.StructureMap\WinFormsMvp.StructureMap.csproj", "{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = WinFormsMvp.vsmdi
@@ -70,6 +72,16 @@ Global
 		{BD9166D6-D5AB-4001-A467-D8EE7CEDE022}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BD9166D6-D5AB-4001-A467-D8EE7CEDE022}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BD9166D6-D5AB-4001-A467-D8EE7CEDE022}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
