@@ -10,10 +10,10 @@ namespace LicenceTracker.Presenters
     public class AddPersonPresenter : Presenter<IAddPersonView>
     {
         private readonly ISoftwareService softwareService;
-        public AddPersonPresenter(IAddPersonView view)
+        public AddPersonPresenter(IAddPersonView view, ISoftwareService softwareService)
             :base(view)
         {
-            softwareService = new SoftwareService();
+            this.softwareService = softwareService;
             View.CloseFormClicked += View_CloseFormClicked;
             View.AddPersonClicked += View_AddPersonClicked;
             View.Load += View_Load;

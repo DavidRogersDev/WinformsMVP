@@ -1,5 +1,4 @@
-﻿using LicenceTracker.Models;
-using LicenceTracker.Views;
+﻿using LicenceTracker.Views;
 using WinFormsMvp;
 
 namespace LicenceTracker.Presenters

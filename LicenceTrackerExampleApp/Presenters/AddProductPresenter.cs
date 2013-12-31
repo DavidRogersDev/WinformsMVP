@@ -14,13 +14,13 @@ namespace LicenceTracker.Presenters
         private readonly ISoftwareService softwareService;
         private AddProductModel model;
 
-        public AddProductPresenter(IAddProductView view)
+        public AddProductPresenter(IAddProductView view, ISoftwareService softwareService)
             : base(view)
         {
             View.CloseFormClicked += View_CloseFormClicked;
             View.Load += View_Load;
             View.AddProductClicked += View_AddProductClicked;
-            softwareService = new SoftwareService();
+            this.softwareService = softwareService;
             model = new AddProductModel { AllSoftwareTypes = softwareService.GetSoftwareTypes().ToList() };
         }
 

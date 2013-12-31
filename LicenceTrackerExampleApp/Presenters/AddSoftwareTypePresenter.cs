@@ -10,13 +10,13 @@ namespace LicenceTracker.Presenters
     public class AddSoftwareTypePresenter : Presenter<IAddSoftwareTypeView>
     {
         ISoftwareService softwareService;
-        public AddSoftwareTypePresenter(IAddSoftwareTypeView view)
+        public AddSoftwareTypePresenter(IAddSoftwareTypeView view, ISoftwareService softwareService)
             : base(view)
         {
             View.AddProductClicked += View_AddProductClicked;
             View.CloseFormClicked += View_CloseFormClicked;
             View.Load += View_Load;
-            softwareService = new SoftwareService();
+            this.softwareService = softwareService;
         }
 
         void View_Load(object sender, EventArgs e)
