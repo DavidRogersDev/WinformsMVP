@@ -57,8 +57,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\envdte.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\Assemblies\StructureMap.dll</HintPath>
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -82,10 +82,7 @@
     <Compile Include="DataAccess\ProjectRepository.cs" />
     <Compile Include="DataAccess\TaskRepository.cs" />
     <Compile Include="Models\ChooseProjectModel.cs" />
-    <Compile Include="Models\TestItModel.cs" />
     <Compile Include="Presenters\ChooseProjectPresenter.cs" />
-    <Compile Include="Presenters\TestItPresenter.cs" />
-    <Compile Include="Presenters\TestMePresenter.cs" />
     <Compile Include="TimeTrackerModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -121,28 +118,17 @@
     <Compile Include="Views\CreateWorkItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\IAllDataView.cs" />
     <Compile Include="Views\ICreateProjectView.cs" />
     <Compile Include="Views\ICreateTaskView.cs" />
     <Compile Include="Views\ICreateWorkItemView.cs" />
     <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\ITestItView.cs" />
     <Compile Include="Views\IProjectChooser.cs" />
-    <Compile Include="Views\ITestMeView.cs" />
     <Compile Include="Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ProjectChooserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\TestIt.cs">
-      <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -154,14 +140,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\TestIt.resx">
-      <DependentUpon>TestIt.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <EntityDeploy Include="TimeTrackerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TimeTrackerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

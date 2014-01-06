@@ -27,7 +27,7 @@ namespace ExampleApplication
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestIt());
+            Application.Run(new MainView());
         }
 
         private static string GetStartupProjectName()
