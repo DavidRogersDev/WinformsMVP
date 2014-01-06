@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ *   This class is taken from the webformsmvpcontrib project https://webformsmvpcontrib.codeplex.com/ .
+ *   All copyright is owned by that project and it is used here under the MIT licence.
+ */
+
+using System;
 using StructureMap;
 using StructureMap.Pipeline;
 using WinFormsMvp.Binder;
