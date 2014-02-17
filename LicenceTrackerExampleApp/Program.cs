@@ -27,7 +27,7 @@ namespace LicenceTracker
 
             _unityContainer = new UnityContainer();
 
-            _unityContainer.RegisterType<ISoftwareService, SoftwareService>(new ContainerControlledLifetimeManager());
+            _unityContainer.RegisterType<ISoftwareService, SoftwareService>(new TransientLifetimeManager());
             PresenterBinder.Factory = new UnityPresenterFactory(_unityContainer);
 
 

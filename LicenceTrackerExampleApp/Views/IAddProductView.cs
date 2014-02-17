@@ -1,9 +1,5 @@
-﻿using LicenceTracker.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WinFormsMvp;
 
 namespace LicenceTracker.Views
@@ -19,6 +15,6 @@ namespace LicenceTracker.Views
         int TypeId { get; set; }
         Dictionary<int, string> SoftwareTypes { get; set; }
 
-        void Exit();
+        void Exit(IPresenter presenter);
     }
 }

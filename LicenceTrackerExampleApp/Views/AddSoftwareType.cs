@@ -1,6 +1,8 @@
 ﻿using LicenceTracker.Models;
 using System;
 using System.Windows.Forms;
+using WinFormsMvp;
+using WinFormsMvp.Binder;
 using WinFormsMvp.Forms;
 
 namespace LicenceTracker.Views
@@ -17,9 +19,10 @@ namespace LicenceTracker.Views
         public AddSoftwareTypeModel Model { get; set; }
 
 
-        public void Exit()
+        public void Exit(IPresenter presenter)
         {
             Close();
+            PresenterBinder.Factory.Release(presenter);
         }
 
         private void AddButton_Click(object sender, EventArgs e)

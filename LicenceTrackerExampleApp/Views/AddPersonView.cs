@@ -1,6 +1,9 @@
 ﻿
 using System;
 using System.Windows.Forms;
+using WinFormsMvp;
+using WinFormsMvp.Binder;
+
 namespace LicenceTracker.Views
 {
     public partial class AddPersonView : AddPersonViewSlice, IAddPersonView
@@ -20,9 +23,10 @@ namespace LicenceTracker.Views
 
         public event System.EventHandler AddPersonClicked;
 
-        public void Exit()
+        public void Exit(IPresenter presenter)
         {
             Close();
+            PresenterBinder.Factory.Release(presenter);
         }
 
         private void AddPersonButton_Click(object sender, EventArgs e)

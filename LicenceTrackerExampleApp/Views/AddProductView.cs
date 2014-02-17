@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using WinFormsMvp;
+using WinFormsMvp.Binder;
 using WinFormsMvp.Forms;
 
 namespace LicenceTracker.Views
@@ -37,16 +39,17 @@ namespace LicenceTracker.Views
             MessageBox.Show("The new product has been added successfully.");
         }
 
-
-        public void Exit()
-        {
-            Close();
-        }
-                
         public int Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public Dictionary<int, string> SoftwareTypes { get; set; }
+
+        public void Exit(IPresenter presenter)
+        {
+            Close();
+            PresenterBinder.Factory.Release(presenter);
+        }
+
         public int TypeId { get; set; }
 
         private void CloseButton_Click(object sender, EventArgs e)

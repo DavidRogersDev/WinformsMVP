@@ -1,13 +1,14 @@
 ﻿using LicenceTracker.Db;
 using LicenceTracker.Entities;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace LicenceTracker.Services
 {
-    public class SoftwareService : ISoftwareService
+    public class SoftwareService : ISoftwareService, IDisposable
     {
         private readonly LicenceTrackerContext licenceTrackerContext;
+        private bool _disposed = false;
 
         public SoftwareService()
         {
@@ -39,6 +40,24 @@ namespace LicenceTracker.Services
             var newType = licenceTrackerContext.People.Add(person);
             licenceTrackerContext.SaveChanges();
             return newType;
+        }
+
+        public void Dispose()
+        {
+            CleanUp(true);
+            GC.SuppressFinalize(this);
+        }
+        private void CleanUp(bool disposing)
+        {
+            // Be sure we have not already been disposed!
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    licenceTrackerContext.Dispose();
+                }
+            }
+            _disposed = true;
         }
     }
 }

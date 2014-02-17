@@ -7,7 +7,7 @@ using WinFormsMvp;
 
 namespace LicenceTracker.Presenters
 {
-    public class AddSoftwareTypePresenter : Presenter<IAddSoftwareTypeView>
+    public class AddSoftwareTypePresenter : Presenter<IAddSoftwareTypeView>, IDisposable
     {
         ISoftwareService softwareService;
         public AddSoftwareTypePresenter(IAddSoftwareTypeView view, ISoftwareService softwareService)
@@ -26,12 +26,19 @@ namespace LicenceTracker.Presenters
 
         void View_CloseFormClicked(object sender, EventArgs e)
         {
-            View.Exit();
+            View.Exit(this);
         }
 
         void View_AddProductClicked(object sender, EventArgs e)
         {
             softwareService.AddSoftwareType(View.Model.NewSoftwareType);
+        }
+
+        public void Dispose()
+        {
+            var disposableService = softwareService as IDisposable;
+            if (disposableService != null)
+                disposableService.Dispose();
         }
     }
 }

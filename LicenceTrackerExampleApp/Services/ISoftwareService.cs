@@ -1,4 +1,5 @@
-﻿using LicenceTracker.Entities;
+﻿using System;
+using LicenceTracker.Entities;
 using System.Linq;
 
 namespace LicenceTracker.Services

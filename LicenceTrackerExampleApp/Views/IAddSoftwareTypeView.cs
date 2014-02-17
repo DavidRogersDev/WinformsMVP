@@ -10,6 +10,6 @@ namespace LicenceTracker.Views
         event EventHandler CloseFormClicked;
         event EventHandler AddProductClicked;
         
-        void Exit();
+        void Exit(IPresenter presenter);
     }
 }
