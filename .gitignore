@@ -32,5 +32,8 @@ TestResult.xml
 TestResults/*
 Thumbs.db
 
-# Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
-!packages/*/build/
+# =========================
+# Nuget Packages
+# =========================
+packages/*
+!packages/repositories.config
