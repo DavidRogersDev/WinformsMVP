@@ -7,19 +7,16 @@ namespace WinFormsMvp.Binder
     {
         readonly Type presenterType;
         readonly Type viewType;
-        readonly BindingMode bindingMode;
         readonly IView viewInstance;
 
         /// <summary/>
         public PresenterBinding(
             Type presenterType,
             Type viewType,
-            BindingMode bindingMode,
             IView viewInstance)
         {
             this.presenterType = presenterType;
             this.viewType = viewType;
-            this.bindingMode = bindingMode;
             this.viewInstance = viewInstance;
         }
 
@@ -34,13 +31,7 @@ namespace WinFormsMvp.Binder
         {
             get { return viewType; }
         }
-
-        /// <summary/>
-        public BindingMode BindingMode
-        {
-            get { return bindingMode; }
-        }
-
+        
         /// <summary/>
         public IView ViewInstance
         {
@@ -62,7 +53,6 @@ namespace WinFormsMvp.Binder
             return
                 PresenterType == target.PresenterType &&
                 ViewType == target.ViewType &&
-                BindingMode == target.BindingMode &&
                 ViewInstance.Equals(target.ViewInstance); // todo: override Equals of IView perhaps.
         }
 
@@ -77,7 +67,6 @@ namespace WinFormsMvp.Binder
             return
                 PresenterType.GetHashCode() |
                 ViewType.GetHashCode() |
-                BindingMode.GetHashCode() |
                 ViewInstance.GetHashCode();
         }
     }

@@ -4,6 +4,7 @@ using LicenceTracker.Services;
 using LicenceTracker.Views;
 using System;
 using WinFormsMvp;
+using WinFormsMvp.Binder;
 
 namespace LicenceTracker.Presenters
 {
@@ -22,11 +23,15 @@ namespace LicenceTracker.Presenters
         void View_Load(object sender, EventArgs e)
         {
             View.Model = new AddPersonModel { NewPerson = new Person() };
+
+            var dave = "Hi i'm Dave";
         }
 
         void View_AddPersonClicked(object sender, EventArgs e)
         {
             softwareService.AddNewPerson(View.Model.NewPerson);
+
+            var bla = Items.GetItem<Software>("hi dave");
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)

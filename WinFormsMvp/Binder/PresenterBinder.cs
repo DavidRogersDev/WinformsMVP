@@ -67,6 +67,12 @@ namespace WinFormsMvp.Binder
             }
         }
 
+        private static IAppState appState;
+        public static IAppState MessageCoordinator
+        {
+            get { return appState ?? (appState = new AppState()); }
+        }
+
         /// <summary>
         /// Occurs when the binder creates a new presenter instance. Useful for
         /// populating extra information into presenters.
@@ -93,6 +99,7 @@ namespace WinFormsMvp.Binder
                 PerformBinding(
                     viewInstance,
                     DiscoveryStrategy,
+                    MessageCoordinator,
                     p => OnPresenterCreated(new PresenterCreatedEventArgs(p)),
                     Factory);
 
@@ -114,6 +121,7 @@ namespace WinFormsMvp.Binder
         static IPresenter PerformBinding(
             IView candidate,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
+            IAppState appState,
             Action<IPresenter> presenterCreatedCallback,
             IPresenterFactory presenterFactory)
         {
@@ -123,6 +131,7 @@ namespace WinFormsMvp.Binder
 
             var newPresenter = BuildPresenter(
                 presenterCreatedCallback,
+                appState,
                 presenterFactory,
                 new[] {bindings});
 
@@ -152,6 +161,7 @@ namespace WinFormsMvp.Binder
 
         static IPresenter BuildPresenter(
             Action<IPresenter> presenterCreatedCallback,
+            IAppState appState,
             IPresenterFactory presenterFactory,
             IEnumerable<PresenterBinding> bindings)
         {
@@ -159,12 +169,14 @@ namespace WinFormsMvp.Binder
                 .Select(binding =>
                     BuildPresenters(
                         presenterCreatedCallback,
+                        appState,
                         presenterFactory,
                         binding)).ToList().First();
         }
 
         static IPresenter BuildPresenters(
             Action<IPresenter> presenterCreatedCallback,
+            IAppState appState,
             IPresenterFactory presenterFactory,
             PresenterBinding binding)
         {
@@ -172,6 +184,7 @@ namespace WinFormsMvp.Binder
 
             return BuildPresenter(
                     presenterCreatedCallback,
+                    appState,
                     presenterFactory,
                     binding,
                     viewToCreateFor);
@@ -179,12 +192,16 @@ namespace WinFormsMvp.Binder
 
         static IPresenter BuildPresenter(
             Action<IPresenter> presenterCreatedCallback,
+            IAppState appState,
             IPresenterFactory presenterFactory,
             PresenterBinding binding,
             IView viewInstance)
         {
 
             var presenter = presenterFactory.Create(binding.PresenterType, binding.ViewType, viewInstance);
+
+            presenter.Items = appState;
+
             if (presenterCreatedCallback != null)
             {
                 presenterCreatedCallback(presenter);
