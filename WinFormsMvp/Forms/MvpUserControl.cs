@@ -11,8 +11,9 @@ namespace WinFormsMvp.Forms
 
         public MvpUserControl()
         {
-            presenterBinder.PerformBinding(this);
             ThrowExceptionIfNoPresenterBound = true;
+
+            presenterBinder.PerformBinding(this);
         }
 
         #region Implementation of IView<TModel>

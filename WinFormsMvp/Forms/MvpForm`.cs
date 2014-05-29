@@ -9,8 +9,9 @@ namespace WinFormsMvp.Forms
 
         public MvpForm()
         {
-            presenterBinder.PerformBinding(this);
             ThrowExceptionIfNoPresenterBound = true;
+
+            presenterBinder.PerformBinding(this);
         }
 
         public bool ThrowExceptionIfNoPresenterBound { get; private set; }

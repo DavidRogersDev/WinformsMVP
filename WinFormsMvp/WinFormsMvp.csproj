@@ -65,7 +65,6 @@
     <Compile Include="BindingMode.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="CompositeView`TView.cs" />
-    <Compile Include="Forms\AddPersonModel.cs" />
     <Compile Include="Forms\MvpForm`.cs">
       <SubType>Form</SubType>
     </Compile>

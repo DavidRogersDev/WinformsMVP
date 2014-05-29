@@ -8,8 +8,9 @@ namespace WinFormsMvp.Forms
         private readonly PresenterBinder presenterBinder = new PresenterBinder();
         public MvpUserControl()
         {
-            presenterBinder.PerformBinding(this);
             ThrowExceptionIfNoPresenterBound = true;
+
+            presenterBinder.PerformBinding(this);
         }
 
         public bool ThrowExceptionIfNoPresenterBound { get; private set; }
