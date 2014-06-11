@@ -14,5 +14,7 @@
         {
             get { return view; }
         }
+
+        public IAppState Items { get; set; }
     }
 }

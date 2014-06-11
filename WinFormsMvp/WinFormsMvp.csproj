@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppState.cs" />
     <Compile Include="Binder\AssemblyExtensions.cs" />
     <Compile Include="Binder\AttributeBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Binder\CompositePresenterDiscoveryStrategy.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Binder\PresenterBinding.cs" />
     <Compile Include="Binder\PresenterCreatedEventArgs.cs" />
     <Compile Include="Binder\PresenterDiscoveryResult.cs" />
-    <Compile Include="BindingMode.cs" />
+    <Compile Include="IAppState.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="CompositeView`TView.cs" />
     <Compile Include="Forms\MvpForm`.cs">

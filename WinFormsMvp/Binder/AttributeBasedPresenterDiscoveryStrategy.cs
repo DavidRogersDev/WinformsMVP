@@ -47,28 +47,25 @@ namespace WinFormsMvp.Binder
                     {
                         messages.Add(string.Format(
                             CultureInfo.InvariantCulture,
-                            "found, but ignored, a [PresenterBinding] attribute on view instance {0} (presenter type: {1}, view type: {2}, binding mode: {3}) because the view type on the attribute is not compatible with the type of the view instance",
+                            "found, but ignored, a [PresenterBinding] attribute on view instance {0} (presenter type: {1}, view type: {2}) because the view type on the attribute is not compatible with the type of the view instance",
                             viewType.FullName,
                             attribute.PresenterType.FullName,
-                            attribute.ViewType.FullName,
-                            attribute.BindingMode
+                            attribute.ViewType.FullName
                                          ));
                         continue;
                     }
 
                     messages.Add(string.Format(
                         CultureInfo.InvariantCulture,
-                        "found a [PresenterBinding] attribute on view instance {0} (presenter type: {1}, view type: {2}, binding mode: {3})",
+                        "found a [PresenterBinding] attribute on view instance {0} (presenter type: {1}, view type: {2})",
                         viewType.FullName,
                         attribute.PresenterType.FullName,
-                        attribute.ViewType.FullName,
-                        attribute.BindingMode
+                        attribute.ViewType.FullName
                                      ));
 
                     bindings.Add(new PresenterBinding(
                                      attribute.PresenterType,
                                      attribute.ViewType,
-                                     attribute.BindingMode,
                                      viewInstance
                                      ));
                 }
@@ -85,35 +82,6 @@ namespace WinFormsMvp.Binder
                 bindings
                 );
 
-        }
-
-        /********************  Not used ********************/  
-        static IEnumerable<IView> GetViewInstancesToBind(IEnumerable<IView> pendingViewInstances, IView viewInstance, Type viewType, ICollection<string> messages, PresenterBindingAttribute attribute)
-        {
-            IEnumerable<IView> viewInstancesToBind;
-            switch (attribute.BindingMode)
-            {
-                case BindingMode.Default:
-                    viewInstancesToBind = new[] { viewInstance };
-                    break;
-                case BindingMode.SharedPresenter:
-                    viewInstancesToBind = pendingViewInstances
-                        .Where(v => attribute.ViewType.IsAssignableFrom(viewType))
-                        .ToArray();
-
-                    messages.Add(string.Format(
-                        CultureInfo.InvariantCulture,
-                        "including {0} more view instances in the binding because the binding mode is {1} and they are compatible with the view type {2}",
-                        viewInstancesToBind.Count() - 1,
-                        attribute.BindingMode,
-                        attribute.ViewType.FullName
-                    ));
-
-                    break;
-                default:
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Binding mode {0} is not supported", attribute.BindingMode));
-            }
-            return viewInstancesToBind;
         }
 
         /// <summary>
@@ -135,8 +103,7 @@ namespace WinFormsMvp.Binder
                     .Select(pba =>
                         new PresenterBindingAttribute(pba.PresenterType)
                         {
-                            ViewType = pba.ViewType ?? sourceType,
-                            BindingMode = pba.BindingMode
+                            ViewType = pba.ViewType ?? sourceType
                         })
                     .ToArray();
 

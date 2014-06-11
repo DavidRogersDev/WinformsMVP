@@ -31,3 +31,9 @@ _ReSharper*
 TestResult.xml
 TestResults/*
 Thumbs.db
+
+# =========================
+# Nuget Packages
+# =========================
+packages/*
+!packages/repositories.config

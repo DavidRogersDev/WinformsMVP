@@ -79,7 +79,7 @@ namespace WinFormsMvp.Binder
                 searchResult.Message,
                 searchResult.PresenterType == null
                     ? new PresenterBinding[0]
-                    : new[] { new PresenterBinding(searchResult.PresenterType, viewType, BindingMode.Default, viewInstance) }
+                    : new[] { new PresenterBinding(searchResult.PresenterType, viewType, viewInstance) }
             );
         }
 

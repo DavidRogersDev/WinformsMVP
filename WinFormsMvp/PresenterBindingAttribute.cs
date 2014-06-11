@@ -13,7 +13,6 @@ namespace WinFormsMvp
         {
             PresenterType = presenterType;
             ViewType = null;
-            BindingMode = BindingMode.Default;
         }
 
         /// <summary />
@@ -21,8 +20,5 @@ namespace WinFormsMvp
         
         /// <summary />
         public Type ViewType { get; set; }
-        
-        /// <summary />
-        public BindingMode BindingMode { get; set; }
     }
 }

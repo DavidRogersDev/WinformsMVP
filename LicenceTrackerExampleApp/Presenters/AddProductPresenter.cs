@@ -1,4 +1,5 @@
-﻿using LicenceTracker.Entities;
+﻿using System.Diagnostics;
+using LicenceTracker.Entities;
 using LicenceTracker.Models;
 using LicenceTracker.Services;
 using LicenceTracker.Views;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WinFormsMvp;
+using WinFormsMvp.Binder;
 
 namespace LicenceTracker.Presenters
 {
@@ -34,6 +36,8 @@ namespace LicenceTracker.Presenters
             };
             softwareService.AddNewProduct(model.NewSoftwareProduct);
             View.Id = model.NewSoftwareProduct.Id;
+
+            Items.AddItem("hi dave", model.NewSoftwareProduct);
         }
 
         void View_Load(object sender, EventArgs e)
@@ -46,6 +50,7 @@ namespace LicenceTracker.Presenters
             }
 
             View.SoftwareTypes = softwareTypes;
+            string bla = string.Empty;
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)
