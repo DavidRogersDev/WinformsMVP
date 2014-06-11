@@ -14,6 +14,8 @@ namespace WinFormsMvp
 
         public void AddItem<T>(string key, T item)
         {
+            if(string.IsNullOrWhiteSpace(key))
+                throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
             _items.Add(key, item);
         }
 
@@ -25,7 +27,7 @@ namespace WinFormsMvp
         public T GetItem<T>(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
 
             return _items[key];
         }
@@ -38,7 +40,13 @@ namespace WinFormsMvp
 
         public void RemoveItem<T>(string key)
         {
-            _items.Remove(key);
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
+
+            if(HasItem(key))
+                _items.Remove(key);
+            else
+                throw new KeyNotFoundException(string.Format("There is no key with a value of {0} in AppState.", key));
         }
     }
 }
