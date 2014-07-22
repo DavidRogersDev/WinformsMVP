@@ -37,7 +37,7 @@ namespace LicenceTracker.Presenters
             softwareService.AddNewProduct(model.NewSoftwareProduct);
             View.Id = model.NewSoftwareProduct.Id;
 
-            Items.AddItem("hi dave", model.NewSoftwareProduct);
+            //Items.AddItem("hi dave", model.NewSoftwareProduct);
         }
 
         void View_Load(object sender, EventArgs e)

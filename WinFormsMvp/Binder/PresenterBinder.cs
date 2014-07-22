@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using WinFormsMvp.Messaging;
 
 namespace WinFormsMvp.Binder
 {
@@ -71,6 +72,12 @@ namespace WinFormsMvp.Binder
         public static IAppState MessageCoordinator
         {
             get { return appState ?? (appState = new AppState()); }
+        }
+
+        private static MessageBus messageBus;
+        public static MessageBus MessageBus
+        {
+            get { return messageBus ?? (messageBus = new MessageBus()); }
         }
 
         /// <summary>

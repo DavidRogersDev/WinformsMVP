@@ -5,6 +5,7 @@ using LicenceTracker.Views;
 using System;
 using WinFormsMvp;
 using WinFormsMvp.Binder;
+using WinFormsMvp.Messaging;
 
 namespace LicenceTracker.Presenters
 {
@@ -31,7 +32,10 @@ namespace LicenceTracker.Presenters
         {
             softwareService.AddNewPerson(View.Model.NewPerson);
 
-            var bla = Items.GetItem<Software>("hi dave");
+            //var bla = Items.GetItem<Software>("hi dave");
+
+            PresenterBinder.MessageBus.Send(new GenericMessage<Person>(View.Model.NewPerson), Constants.MyToken);
+
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)

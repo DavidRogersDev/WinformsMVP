@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Db\LicenceTrackerContext.cs" />
     <Compile Include="Db\LicenceTrackerInitializer.cs" />
     <Compile Include="Entities\Enums\CustomEnums.cs" />
