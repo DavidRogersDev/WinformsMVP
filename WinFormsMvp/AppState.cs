@@ -5,6 +5,7 @@ namespace WinFormsMvp
 {
     public class AppState : IAppState
     {
+        private static readonly object ThreadLock = new object();
         readonly IDictionary<string, dynamic> _items;
 
         public AppState()
@@ -16,12 +17,19 @@ namespace WinFormsMvp
         {
             if(string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
-            _items.Add(key, item);
+
+            lock (ThreadLock)
+            {
+                _items.Add(key, item);
+            }
         }
 
         public void Clear()
         {
-            _items.Clear();
+            lock (ThreadLock)
+            {
+                _items.Clear();
+            }
         }
 
         public T GetItem<T>(string key)
@@ -29,12 +37,18 @@ namespace WinFormsMvp
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
 
-            return _items[key];
+            lock (ThreadLock)
+            {
+                return _items[key];
+            }
         }
 
         public bool HasItem(string key)
         {
-            return _items.ContainsKey(key);
+            lock (ThreadLock)
+            {
+                return _items.ContainsKey(key);
+            }
         }
 
 
@@ -43,10 +57,17 @@ namespace WinFormsMvp
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException("key", "The key cannot be either null, or an empty string.");
 
-            if(HasItem(key))
-                _items.Remove(key);
+            if (HasItem(key))
+            {
+                lock (ThreadLock)
+                {
+                    _items.Remove(key);
+                }
+            }
             else
+            {
                 throw new KeyNotFoundException(string.Format("There is no key with a value of {0} in AppState.", key));
+            }
         }
     }
 }
