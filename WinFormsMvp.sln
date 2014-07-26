@@ -18,9 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMvp.PresenterFactoryUnitTests", "WinFormsMvp.PresenterFactoryUnitTests\WinFormsMvp.PresenterFactoryUnitTests.csproj", "{BD9166D6-D5AB-4001-A467-D8EE7CEDE022}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMvp.StructureMap", "WinFormsMvp.StructureMap\WinFormsMvp.StructureMap.csproj", "{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}"
-   ProjectSection(ProjectDependencies) = postProject
-		{F211DF11-2B89-4FFC-A9B8-4BA9CDF41A9F} = {F211DF11-2B89-4FFC-A9B8-4BA9CDF41A9F}
-   EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
