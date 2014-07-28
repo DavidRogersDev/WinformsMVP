@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using WinFormsMvp.Messaging;
 
@@ -121,6 +124,103 @@ namespace WinFormsMvp.UnitTests
             Assert.AreNotEqual(testContentA2, ReceivedContentStringA1);
         }
 
+        [TestMethod]
+        public void InnerListIsEmptyAfterUnregisterIsCalled()
+        {
+            const int token1 = 1234;
+            const int token2 = 4567;
+
+            Reset();
+            var messageBus = new MessageBus();
+
+            Action<string> action1 = m => ReceivedContentStringA1 = m;
+            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action3 = m => ReceivedContentStringB = m;
+
+            messageBus.Register(this, token1, action1);
+            messageBus.Register(this, token2, action2);
+            messageBus.Register(this, token2, action3);
+
+            messageBus.Unregister(this, token1, action1);
+            messageBus.Unregister(this, token2, action2);
+            messageBus.Unregister(this, token2, action3);
+
+            var type = typeof(MessageBus);
+
+            // _commandCollection is an instance, private member
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+
+            // Retrieve a FieldInfo instance corresponding to the field
+            FieldInfo field = type.GetField("_recipientsStrictAction", flags);
+
+            var innerRecipientsDictionary = field.GetValue(messageBus) as Dictionary<Type, List<MessageBus.WeakActionAndToken>>;
+
+            Assert.IsFalse(innerRecipientsDictionary.Any());
+        }
+        
+        [TestMethod]
+        public void InnerListIsEmptyAfterUnregisterIsCalledWhereTwoActionsRegisteredForOneToken()
+        {
+            const int token2 = 4567;
+
+            Reset();
+            var messageBus = new MessageBus();
+
+            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action3 = m => ReceivedContentStringB = m;
+
+            messageBus.Register(this, token2, action2);
+            messageBus.Register(this, token2, action3);
+
+            //  Only unregister token2 and don't specify an action
+            messageBus.Unregister<string>(this, token2);
+
+            var type = typeof(MessageBus);
+
+            // _commandCollection is an instance, private member
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+
+            // Retrieve a FieldInfo instance corresponding to the field
+            FieldInfo field = type.GetField("_recipientsStrictAction", flags);
+
+            var innerRecipientsDictionary = field.GetValue(messageBus) as Dictionary<Type, List<MessageBus.WeakActionAndToken>>;
+
+            Assert.IsFalse(innerRecipientsDictionary.Any());
+        }
+        
+        [TestMethod]
+        public void InnerListHasOneItemLeftAfterUnregisterIsCalledWhereTwoActionsRegisteredForOneTokenAndThereIsAThirdDifferentRegistration()
+        {
+            const int token1 = 1234;
+            const int token2 = 4567;
+
+            Reset();
+            var messageBus = new MessageBus();
+
+            Action<string> action1 = m => ReceivedContentStringA1 = m;
+            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action3 = m => ReceivedContentStringB = m;
+
+            messageBus.Register(this, token1, action1);
+            messageBus.Register(this, token2, action2);
+            messageBus.Register(this, token2, action3);
+
+            //  Only unregister token2 and don't specify an action
+            messageBus.Unregister<string>(this, token2);
+
+            var type = typeof(MessageBus);
+
+            // _commandCollection is an instance, private member
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+
+            // Retrieve a FieldInfo instance corresponding to the field
+            FieldInfo field = type.GetField("_recipientsStrictAction", flags);
+
+            var innerRecipientsDictionary = field.GetValue(messageBus) as Dictionary<Type, List<MessageBus.WeakActionAndToken>>;
+
+            Assert.IsTrue(innerRecipientsDictionary.Count == 1);
+            
+        }
 
         [TestMethod]
         public void TestRegisterUnregisterOneActionWithToken()

@@ -200,7 +200,7 @@ namespace WinFormsMvp.Messaging
         }
 
 
-        private struct WeakActionAndToken
+        internal struct WeakActionAndToken
         {
             public WeakAction Action;
 
