@@ -40,7 +40,7 @@ namespace WinFormsMvp.UnitTests
             private set;
         }
 
-        public string ReceivedContentStringA2
+        public string ReceivedContentStringA
         {
             get;
             private set;
@@ -134,7 +134,7 @@ namespace WinFormsMvp.UnitTests
             var messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
-            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action2 = m => ReceivedContentStringA = m;
             Action<string> action3 = m => ReceivedContentStringB = m;
 
             messageBus.Register(this, token1, action1);
@@ -166,7 +166,7 @@ namespace WinFormsMvp.UnitTests
             Reset();
             var messageBus = new MessageBus();
 
-            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action2 = m => ReceivedContentStringA = m;
             Action<string> action3 = m => ReceivedContentStringB = m;
 
             messageBus.Register(this, token2, action2);
@@ -198,7 +198,7 @@ namespace WinFormsMvp.UnitTests
             var messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
-            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action2 = m => ReceivedContentStringA = m;
             Action<string> action3 = m => ReceivedContentStringB = m;
 
             messageBus.Register(this, token1, action1);
@@ -236,7 +236,7 @@ namespace WinFormsMvp.UnitTests
             var messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
-            Action<string> action2 = m => ReceivedContentStringA2 = m;
+            Action<string> action2 = m => ReceivedContentStringA = m;
             Action<string> action3 = m => ReceivedContentStringB = m;
 
             messageBus.Register(this, token1, action1);
@@ -247,7 +247,7 @@ namespace WinFormsMvp.UnitTests
             messageBus.Send(testContent2, token2);
 
             Assert.AreEqual(testContent1, ReceivedContentStringA1);
-            Assert.AreEqual(testContent2, ReceivedContentStringA2);
+            Assert.AreEqual(testContent2, ReceivedContentStringA);
             Assert.AreEqual(testContent2, ReceivedContentStringB);
 
             messageBus.Unregister(this, token2, action3);
@@ -255,8 +255,48 @@ namespace WinFormsMvp.UnitTests
             messageBus.Send(testContent4, token2);
 
             Assert.AreEqual(testContent3, ReceivedContentStringA1);
-            Assert.AreEqual(testContent4, ReceivedContentStringA2);
+            Assert.AreEqual(testContent4, ReceivedContentStringA);
             Assert.AreEqual(testContent2, ReceivedContentStringB);
+        }  
+        
+        [TestMethod]
+        public void InnerListHasOneItemAfterUnregisterIsCalledForSpecificActionWhereTwoActionsRegisteredForOneToken()
+        {
+            const string testContent1 = "efgh";
+            const string testContent2 = "mnop";
+            const int token = 4567;
+
+            Reset();
+            var messageBus = new MessageBus();
+
+            Action<string> action1 = m => ReceivedContentStringA = m;
+            Action<string> action2 = m => ReceivedContentStringB = m;
+
+            messageBus.Register(this, token, action1);
+            messageBus.Register(this, token, action2);
+
+            messageBus.Send(testContent1, token);
+
+            Assert.AreEqual(testContent1, ReceivedContentStringA);
+            Assert.AreEqual(testContent1, ReceivedContentStringB);
+
+            messageBus.Unregister(this, token, action2); // only unregister action2. Leave action1.
+
+            var type = typeof(MessageBus);
+
+            // _commandCollection is an instance, private member
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+
+            // Retrieve a FieldInfo instance corresponding to the field
+            FieldInfo field = type.GetField("_recipientsStrictAction", flags);
+
+            var innerRecipientsDictionary = field.GetValue(messageBus) as Dictionary<Type, List<MessageBus.WeakActionAndToken>>;
+
+            messageBus.Send(testContent2, token);
+
+            Assert.AreEqual(testContent2, ReceivedContentStringA);
+            Assert.AreEqual(testContent1, ReceivedContentStringB);
+            Assert.IsTrue(innerRecipientsDictionary.Count == 1);
         }
 
         [TestMethod]
@@ -272,26 +312,26 @@ namespace WinFormsMvp.UnitTests
             var messageBus = new MessageBus();
 
             messageBus.Register<string>(this, token1, m => ReceivedContentStringA1 = m);
-            messageBus.Register<string>(this, token2, m => ReceivedContentStringA2 = m);
+            messageBus.Register<string>(this, token2, m => ReceivedContentStringA = m);
 
             Assert.AreEqual(null, ReceivedContentStringA1);
-            Assert.AreEqual(null, ReceivedContentStringA2);
+            Assert.AreEqual(null, ReceivedContentStringA);
 
             messageBus.Send(testContent1, token1);
 
             Assert.AreEqual(testContent1, ReceivedContentStringA1);
-            Assert.AreEqual(null, ReceivedContentStringA2);
+            Assert.AreEqual(null, ReceivedContentStringA);
 
             messageBus.Send(testContent2, token2);
 
             Assert.AreEqual(testContent1, ReceivedContentStringA1);
-            Assert.AreEqual(testContent2, ReceivedContentStringA2);
+            Assert.AreEqual(testContent2, ReceivedContentStringA);
 
             messageBus.Unregister<string>(this, token1);
             messageBus.Send(testContent3, token1);
 
             Assert.AreEqual(testContent1, ReceivedContentStringA1);
-            Assert.AreEqual(testContent2, ReceivedContentStringA2);
+            Assert.AreEqual(testContent2, ReceivedContentStringA);
         }
 
         //// Helpers
@@ -299,7 +339,7 @@ namespace WinFormsMvp.UnitTests
         private void Reset()
         {
             ReceivedContentStringA1 = null;
-            ReceivedContentStringA2 = null;
+            ReceivedContentStringA = null;
             ReceivedContentStringB = null;
             ReceivedContentInt = default(int);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using WinFormsMvp.Forms;
 
 namespace LicenceTracker.Views
@@ -13,7 +14,15 @@ namespace LicenceTracker.Views
         public event EventHandler CloseFormClicked;
         public event EventHandler AddPersonClicked;
         public event EventHandler AddSoftwareClicked;
+        public BindingList<LogEvent> LiveLog { get; set; }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            LogBindingSource.DataSource = LiveLog;
+            lstLiveLog.DataSource = LogBindingSource;
+        }
 
         public void Exit()
         {

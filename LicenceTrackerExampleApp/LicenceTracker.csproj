@@ -134,6 +134,7 @@
     <Compile Include="Views\LaunchView.Designer.cs">
       <DependentUpon>LaunchView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\LogEvent.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

@@ -30,7 +30,7 @@ namespace LicenceTracker.Presenters
         {
             softwareService.AddNewPerson(View.Model.NewPerson);
 
-            PresenterBinder.MessageBus.Send(new GenericMessage<Person>(View.Model.NewPerson), Constants.MyToken);
+            PresenterBinder.MessageBus.Send(new GenericMessage<Person>(View.Model.NewPerson), Constants.PersonAddedToken);
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)

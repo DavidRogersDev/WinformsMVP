@@ -5,6 +5,7 @@ using LicenceTracker.Views;
 using System;
 using WinFormsMvp;
 using WinFormsMvp.Binder;
+using WinFormsMvp.Messaging;
 
 namespace LicenceTracker.Presenters
 {
@@ -34,6 +35,9 @@ namespace LicenceTracker.Presenters
         void View_AddProductClicked(object sender, EventArgs e)
         {
             _softwareService.AddSoftwareType(View.Model.NewSoftwareType);
+
+            PresenterBinder.MessageBus.Send(
+                new GenericMessage<SoftwareType>(View.Model.NewSoftwareType), Constants.SoftwareTypeAddedToken);
         }
 
         public void Dispose()

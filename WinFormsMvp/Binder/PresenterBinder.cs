@@ -69,7 +69,7 @@ namespace WinFormsMvp.Binder
         }
 
         private static IAppState appState;
-        public static IAppState MessageCoordinator
+        public static IAppState ApplicationState
         {
             get { return appState ?? (appState = new AppState()); }
         }
@@ -106,7 +106,7 @@ namespace WinFormsMvp.Binder
                 PerformBinding(
                     viewInstance,
                     DiscoveryStrategy,
-                    MessageCoordinator,
+                    ApplicationState,
                     p => OnPresenterCreated(new PresenterCreatedEventArgs(p)),
                     Factory);
 

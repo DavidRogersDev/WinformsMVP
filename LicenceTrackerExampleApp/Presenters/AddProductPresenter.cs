@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WinFormsMvp;
 using WinFormsMvp.Binder;
+using WinFormsMvp.Messaging;
 
 namespace LicenceTracker.Presenters
 {
@@ -36,6 +37,8 @@ namespace LicenceTracker.Presenters
             };
             _softwareService.AddNewProduct(model.NewSoftwareProduct);
             View.Id = model.NewSoftwareProduct.Id;
+
+            PresenterBinder.MessageBus.Send(new GenericMessage<Software>(model.NewSoftwareProduct), Constants.ProductAddedToken);
         }
 
         void View_Load(object sender, EventArgs e)

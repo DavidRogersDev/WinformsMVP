@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ExitButton = new System.Windows.Forms.Button();
             this.AddLicenceButton = new System.Windows.Forms.Button();
             this.AddPersonButton = new System.Windows.Forms.Button();
             this.AddSoftwareTypeButton = new System.Windows.Forms.Button();
+            this.LogBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lstLiveLog = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)(this.LogBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ExitButton
@@ -83,17 +87,27 @@
             this.AddSoftwareTypeButton.UseVisualStyleBackColor = true;
             this.AddSoftwareTypeButton.Click += new System.EventHandler(this.AddSoftwareTypeButton_Click);
             // 
+            // lstLiveLog
+            // 
+            this.lstLiveLog.FormattingEnabled = true;
+            this.lstLiveLog.Location = new System.Drawing.Point(41, 258);
+            this.lstLiveLog.Name = "lstLiveLog";
+            this.lstLiveLog.Size = new System.Drawing.Size(197, 43);
+            this.lstLiveLog.TabIndex = 4;
+            // 
             // LaunchView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 248);
+            this.ClientSize = new System.Drawing.Size(279, 313);
+            this.Controls.Add(this.lstLiveLog);
             this.Controls.Add(this.AddSoftwareTypeButton);
             this.Controls.Add(this.AddLicenceButton);
             this.Controls.Add(this.AddPersonButton);
             this.Controls.Add(this.ExitButton);
             this.Name = "LaunchView";
             this.Text = "Admin Screen";
+            ((System.ComponentModel.ISupportInitialize)(this.LogBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -104,5 +118,7 @@
         private System.Windows.Forms.Button AddPersonButton;
         private System.Windows.Forms.Button AddLicenceButton;
         private System.Windows.Forms.Button AddSoftwareTypeButton;
+        private System.Windows.Forms.BindingSource LogBindingSource;
+        private System.Windows.Forms.ListBox lstLiveLog;
     }
 }
