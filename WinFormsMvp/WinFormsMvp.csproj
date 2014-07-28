@@ -98,6 +98,7 @@
     <Compile Include="Messaging\MessageBase.cs" />
     <Compile Include="Messaging\MessageBus.cs" />
     <Compile Include="Messaging\WeakAction.cs" />
+    <Compile Include="Messaging\WeakAction`T.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

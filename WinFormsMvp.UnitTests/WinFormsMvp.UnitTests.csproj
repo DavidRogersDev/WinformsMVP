@@ -71,6 +71,8 @@
     <Compile Include="Binder\DefaultPresenterFactoryTests.cs" />
     <Compile Include="CollectionExtensionsTest.cs" />
     <Compile Include="CompositeViewTests.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="MessengerRegisterUnregisterTest.cs" />
     <Compile Include="Models\CreateProjectModel.cs" />
     <Compile Include="Models\CreateTaskModel.cs" />
     <Compile Include="Models\MainFormModel.cs" />

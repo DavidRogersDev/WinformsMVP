@@ -24,23 +24,19 @@ namespace LicenceTracker.Presenters
         void View_Load(object sender, EventArgs e)
         {
             View.Model = new AddPersonModel { NewPerson = new Person() };
-
-            var dave = "Hi i'm Dave";
         }
 
         void View_AddPersonClicked(object sender, EventArgs e)
         {
             softwareService.AddNewPerson(View.Model.NewPerson);
 
-            //var bla = Items.GetItem<Software>("hi dave");
-
             PresenterBinder.MessageBus.Send(new GenericMessage<Person>(View.Model.NewPerson), Constants.MyToken);
-
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)
         {
-            View.Exit(this);
+            View.Exit();
+            PresenterBinder.Factory.Release(this);
         }
 
         public void Dispose()

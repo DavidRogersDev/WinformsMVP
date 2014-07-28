@@ -23,10 +23,9 @@ namespace LicenceTracker.Views
 
         public event System.EventHandler AddPersonClicked;
 
-        public void Exit(IPresenter presenter)
+        public void Exit()
         {
             Close();
-            PresenterBinder.Factory.Release(presenter);
         }
 
         private void AddPersonButton_Click(object sender, EventArgs e)

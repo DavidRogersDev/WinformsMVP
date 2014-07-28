@@ -4,19 +4,20 @@ using LicenceTracker.Services;
 using LicenceTracker.Views;
 using System;
 using WinFormsMvp;
+using WinFormsMvp.Binder;
 
 namespace LicenceTracker.Presenters
 {
     public class AddSoftwareTypePresenter : Presenter<IAddSoftwareTypeView>, IDisposable
     {
-        ISoftwareService softwareService;
+        readonly ISoftwareService _softwareService;
         public AddSoftwareTypePresenter(IAddSoftwareTypeView view, ISoftwareService softwareService)
             : base(view)
         {
             View.AddProductClicked += View_AddProductClicked;
             View.CloseFormClicked += View_CloseFormClicked;
             View.Load += View_Load;
-            this.softwareService = softwareService;
+            _softwareService = softwareService;
         }
 
         void View_Load(object sender, EventArgs e)
@@ -26,17 +27,18 @@ namespace LicenceTracker.Presenters
 
         void View_CloseFormClicked(object sender, EventArgs e)
         {
-            View.Exit(this);
+            View.Exit();
+            PresenterBinder.Factory.Release(this);
         }
 
         void View_AddProductClicked(object sender, EventArgs e)
         {
-            softwareService.AddSoftwareType(View.Model.NewSoftwareType);
+            _softwareService.AddSoftwareType(View.Model.NewSoftwareType);
         }
 
         public void Dispose()
         {
-            var disposableService = softwareService as IDisposable;
+            var disposableService = _softwareService as IDisposable;
             if (disposableService != null)
                 disposableService.Dispose();
         }

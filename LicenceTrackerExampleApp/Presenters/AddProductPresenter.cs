@@ -13,7 +13,7 @@ namespace LicenceTracker.Presenters
 {
     public class AddProductPresenter : Presenter<IAddProductView>, IDisposable
     {
-        private readonly ISoftwareService softwareService;
+        private readonly ISoftwareService _softwareService;
         private AddProductModel model;
 
         public AddProductPresenter(IAddProductView view, ISoftwareService softwareService)
@@ -22,7 +22,7 @@ namespace LicenceTracker.Presenters
             View.CloseFormClicked += View_CloseFormClicked;
             View.Load += View_Load;
             View.AddProductClicked += View_AddProductClicked;
-            this.softwareService = softwareService;
+            _softwareService = softwareService;
             model = new AddProductModel { AllSoftwareTypes = softwareService.GetSoftwareTypes().ToList() };
         }
 
@@ -34,10 +34,8 @@ namespace LicenceTracker.Presenters
                 Name = View.Name,
                 TypeId = View.TypeId,
             };
-            softwareService.AddNewProduct(model.NewSoftwareProduct);
+            _softwareService.AddNewProduct(model.NewSoftwareProduct);
             View.Id = model.NewSoftwareProduct.Id;
-
-            //Items.AddItem("hi dave", model.NewSoftwareProduct);
         }
 
         void View_Load(object sender, EventArgs e)
@@ -50,17 +48,17 @@ namespace LicenceTracker.Presenters
             }
 
             View.SoftwareTypes = softwareTypes;
-            string bla = string.Empty;
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)
         {
-            View.Exit(this);
+            View.Exit();
+            PresenterBinder.Factory.Release(this);
         }
 
         public void Dispose()
         {
-            var disposableService = softwareService as IDisposable;
+            var disposableService = _softwareService as IDisposable;
             if (disposableService != null)
                 disposableService.Dispose();
         }

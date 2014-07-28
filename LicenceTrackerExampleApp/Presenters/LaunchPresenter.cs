@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using LicenceTracker.Entities;
+﻿using LicenceTracker.Entities;
 using LicenceTracker.Views;
+using System;
+using System.Diagnostics;
 using WinFormsMvp;
 using WinFormsMvp.Binder;
 using WinFormsMvp.Messaging;
@@ -26,23 +26,25 @@ namespace LicenceTracker.Presenters
             Trace.WriteLine(msg.Content.FirstName);
         }
 
-        void View_AddSoftwareClicked(object sender, System.EventArgs e)
+        void View_AddSoftwareClicked(object sender, EventArgs e)
         {
             View.ShowAddProductView();
         }
 
-        void View_AddPersonClicked(object sender, System.EventArgs e)
+        void View_AddPersonClicked(object sender, EventArgs e)
         {
             View.ShowAddPersonView();
         }
 
-        void View_Load(object sender, System.EventArgs e)
+        void View_Load(object sender, EventArgs e)
         {
             
         }
 
-        void View_CloseFormClicked(object sender, System.EventArgs e)
+        void View_CloseFormClicked(object sender, EventArgs e)
         {
+            PresenterBinder.MessageBus.Unregister(this, Constants.MyToken, new Action<GenericMessage<Person>>(DoIt));
+            
             View.Exit();
         }
     }

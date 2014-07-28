@@ -1,4 +1,25 @@
-﻿using System;
+﻿// ****************************************************************************
+//  Based on messenger class in MVVM Light toolkit
+// <copyright file="NotificationMessageGeneric.cs" company="GalaSoft Laurent Bugnion">
+// Copyright © GalaSoft Laurent Bugnion 2009-2011
+// </copyright>
+// ****************************************************************************
+// <author>Laurent Bugnion</author>
+// <email>laurent@galasoft.ch</email>
+// <date>13.4.2009</date>
+// <project>GalaSoft.MvvmLight.Messaging</project>
+// <web>http://www.galasoft.ch</web>
+// <license>
+// See license.txt in this project or http://www.galasoft.ch/license_MIT.txt
+// </license>
+// ****************************************************************************
+
+
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +27,7 @@ namespace WinFormsMvp.Messaging
 {
     public class MessageBus : IMessageBus
     {
-        Dictionary<Type, List<WeakActionAndToken>> _recipientsStrictAction = new Dictionary<Type, List<WeakActionAndToken>>();
+        readonly Dictionary<Type, List<WeakActionAndToken>> _recipientsStrictAction = new Dictionary<Type, List<WeakActionAndToken>>();
 
         public void Register<TMessage>(object recipient, object token, Action<TMessage> action)
         {
@@ -36,6 +57,8 @@ namespace WinFormsMvp.Messaging
                 };
                 list.Add(item);
             }
+
+            CleanupList(_recipientsStrictAction);
         }
 
         public virtual void Send<TMessage>(TMessage message, object token)
@@ -62,7 +85,7 @@ namespace WinFormsMvp.Messaging
                 }
             }
 
-            //Cleanup();
+            CleanupList(_recipientsStrictAction);
         }
 
         private static void SendToList<TMessage>(
@@ -96,26 +119,86 @@ namespace WinFormsMvp.Messaging
             }
         }
 
+        private static void CleanupList(IDictionary<Type, List<WeakActionAndToken>> lists)
+        {
+            if (lists == null)
+            {
+                return;
+            }
+
+            lock (lists)
+            {
+                var listsToRemove = new List<Type>();
+                foreach (var list in lists)
+                {
+                    var recipientsToRemove = list.Value.Where(item => item.Action == null || !item.Action.IsAlive).ToList();
+
+                    foreach (WeakActionAndToken recipient in recipientsToRemove)
+                    {
+                        list.Value.Remove(recipient);
+                    }
+
+                    if (list.Value.Count == 0)
+                    {
+                        listsToRemove.Add(list.Key);
+                    }
+                }
+
+                foreach (Type key in listsToRemove)
+                {
+                    lists.Remove(key);
+                }
+            }
+        }
+
         private static bool Implements(Type instanceType, Type interfaceType)
         {
-            if (interfaceType == null
-                || instanceType == null)
-            {
+            if (interfaceType == null || instanceType == null)
                 return false;
-            }
 
             Type[] interfaces = instanceType.GetInterfaces();
 
-            foreach (Type currentInterface in interfaces)
+            return interfaces.Any(currentInterface => currentInterface == interfaceType);
+        }
+
+        public virtual void Unregister<TMessage>(object recipient, object token)
+        {
+            Unregister<TMessage>(recipient, token, null);
+        }
+
+        public virtual void Unregister<TMessage>(object recipient, object token, Action<TMessage> action)
+        {
+            UnregisterFromLists(recipient, token, action, _recipientsStrictAction);
+            CleanupList(_recipientsStrictAction);
+        }
+
+        private static void UnregisterFromLists<TMessage>(
+                    object recipient,
+                    object token,
+                    Action<TMessage> action,
+                    Dictionary<Type, List<WeakActionAndToken>> lists)
+        {
+            Type messageType = typeof(TMessage);
+
+            if (recipient == null || lists == null || lists.Count == 0 || !lists.ContainsKey(messageType))
+                return;
+
+            lock (lists)
             {
-                if (currentInterface == interfaceType)
+                foreach (WeakActionAndToken item in lists[messageType])
                 {
-                    return true;
+                    var weakActionCasted = item.Action as WeakAction<TMessage>;
+
+                    if (weakActionCasted != null && recipient == weakActionCasted.Target
+                        && (action == null || action == weakActionCasted.Action)
+                        && (token == null || token.Equals(item.Token)))
+                    {
+                        item.Action.MarkForDeletion();
+                    }
                 }
             }
-
-            return false;
         }
+
 
         private struct WeakActionAndToken
         {

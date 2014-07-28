@@ -19,10 +19,9 @@ namespace LicenceTracker.Views
         public AddSoftwareTypeModel Model { get; set; }
 
 
-        public void Exit(IPresenter presenter)
+        public void Exit()
         {
             Close();
-            PresenterBinder.Factory.Release(presenter);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
