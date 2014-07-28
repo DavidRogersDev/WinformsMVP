@@ -1,5 +1,4 @@
-﻿using LicenceTracker.Entities;
-using LicenceTracker.Models;
+﻿using LicenceTracker.Models;
 using System;
 using WinFormsMvp;
 
@@ -10,6 +9,6 @@ namespace LicenceTracker.Views
         event EventHandler CloseFormClicked;
         event EventHandler AddProductClicked;
         
-        void Exit(IPresenter presenter);
+        void Exit();
     }
 }

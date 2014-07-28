@@ -44,10 +44,9 @@ namespace LicenceTracker.Views
         public string Name { get; set; }
         public Dictionary<int, string> SoftwareTypes { get; set; }
 
-        public void Exit(IPresenter presenter)
+        public void Exit()
         {
             Close();
-            PresenterBinder.Factory.Release(presenter);
         }
 
         public int TypeId { get; set; }

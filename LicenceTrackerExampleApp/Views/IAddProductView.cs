@@ -15,6 +15,6 @@ namespace LicenceTracker.Views
         int TypeId { get; set; }
         Dictionary<int, string> SoftwareTypes { get; set; }
 
-        void Exit(IPresenter presenter);
+        void Exit();
     }
 }

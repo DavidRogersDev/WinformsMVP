@@ -1,5 +1,5 @@
-﻿using LicenceTracker.Models;
-using System;
+﻿using System;
+using System.ComponentModel;
 using WinFormsMvp;
 
 namespace LicenceTracker.Views
@@ -9,6 +9,8 @@ namespace LicenceTracker.Views
         event EventHandler CloseFormClicked;
         event EventHandler AddPersonClicked;
         event EventHandler AddSoftwareClicked;
+
+        BindingList<LogEvent> LiveLog { get; set; }
 
         void ShowAddPersonView();
         void ShowAddProductView();

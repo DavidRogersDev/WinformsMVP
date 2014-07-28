@@ -92,6 +92,13 @@
     <Compile Include="IPresenter`T.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IView`T.cs" />
+    <Compile Include="Messaging\GenericMessage.cs" />
+    <Compile Include="Messaging\IExecuteWithObject.cs" />
+    <Compile Include="Messaging\IMessageBus.cs" />
+    <Compile Include="Messaging\MessageBase.cs" />
+    <Compile Include="Messaging\MessageBus.cs" />
+    <Compile Include="Messaging\WeakAction.cs" />
+    <Compile Include="Messaging\WeakAction`T.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

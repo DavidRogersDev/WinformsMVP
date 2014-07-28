@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using WinFormsMvp.Messaging;
 
 namespace WinFormsMvp.Binder
 {
@@ -68,9 +69,15 @@ namespace WinFormsMvp.Binder
         }
 
         private static IAppState appState;
-        public static IAppState MessageCoordinator
+        public static IAppState ApplicationState
         {
             get { return appState ?? (appState = new AppState()); }
+        }
+
+        private static MessageBus messageBus;
+        public static MessageBus MessageBus
+        {
+            get { return messageBus ?? (messageBus = new MessageBus()); }
         }
 
         /// <summary>
@@ -99,7 +106,7 @@ namespace WinFormsMvp.Binder
                 PerformBinding(
                     viewInstance,
                     DiscoveryStrategy,
-                    //MessageCoordinator,
+                    ApplicationState,
                     p => OnPresenterCreated(new PresenterCreatedEventArgs(p)),
                     Factory);
 
@@ -121,7 +128,7 @@ namespace WinFormsMvp.Binder
         static IPresenter PerformBinding(
             IView candidate,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
-            //IAppState appState,
+            IAppState appState,
             Action<IPresenter> presenterCreatedCallback,
             IPresenterFactory presenterFactory)
         {
