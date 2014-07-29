@@ -161,6 +161,12 @@ namespace WinFormsMvp.Messaging
             return interfaces.Any(currentInterface => currentInterface == interfaceType);
         }
 
+        public virtual void Unregister<TMessage>(object recipient)
+        {
+            Unregister<TMessage>(recipient, null, null);
+        }
+
+
         public virtual void Unregister<TMessage>(object recipient, object token)
         {
             Unregister<TMessage>(recipient, token, null);

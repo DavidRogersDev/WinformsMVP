@@ -89,6 +89,68 @@ namespace WinFormsMvp.UnitTests
             Assert.AreEqual(testContentDateTime, ReceivedContentDateTime1);
             Assert.AreEqual(testContentInt, ReceivedContentInt);
         }
+        
+        [TestMethod]
+        public void TestUnRegisterObjectOnlyOverloadWithOneHandler()
+        {
+            const string testContentString = "abcd";
+            const string testContentStringAfterUnregister = "efgh";
+
+            Reset();
+            var messageBus = new MessageBus();
+            
+            messageBus.Register<string>(this, TestConstants.MyStringToken, m => ReceivedContentStringA1 = m);
+
+            Assert.AreEqual(null, ReceivedContentStringA1);
+
+            messageBus.Send(testContentString, TestConstants.MyStringToken);
+
+            Assert.AreEqual(testContentString, ReceivedContentStringA1);
+
+            messageBus.Unregister<string>(this); // Use overload which just uses object
+
+            messageBus.Send(testContentStringAfterUnregister, TestConstants.MyStringToken);
+
+            Assert.AreNotEqual(testContentStringAfterUnregister, ReceivedContentStringA1);
+        }
+        
+        [TestMethod]
+        public void TestUnRegisterObjectOnlyOverloadWithMoreThanOneHandler()
+        {
+            const string testContentString1 = "abcd1";
+            const string testContentString2 = "abcd2";
+            const string testContentStringAfterUnregister = "efgh";
+
+            Action<string> action1 = m => ReceivedContentStringA = m;
+            Action<string> action2 = m => ReceivedContentStringA1 = m;
+            Action<string> action3 = m => ReceivedContentStringB = m;
+                
+            Reset();
+            var messageBus = new MessageBus();
+            
+            messageBus.Register<string>(this, TestConstants.MyStringToken, action1);
+            messageBus.Register<string>(this, TestConstants.MyStringToken, action2);
+            messageBus.Register<string>(this, TestConstants.MyContentToken, action3);
+
+            Assert.AreEqual(null, ReceivedContentStringA);
+            Assert.AreEqual(null, ReceivedContentStringA1);
+            Assert.AreEqual(null, ReceivedContentStringB);
+
+            messageBus.Send(testContentString1, TestConstants.MyStringToken);
+            messageBus.Send(testContentString2, TestConstants.MyContentToken);
+
+            Assert.AreEqual(testContentString1, ReceivedContentStringA);
+            Assert.AreEqual(testContentString1, ReceivedContentStringA1);
+            Assert.AreEqual(testContentString2, ReceivedContentStringB);
+
+            messageBus.Unregister<string>(this); // Use overload which just uses object 
+
+            messageBus.Send(testContentStringAfterUnregister, TestConstants.MyStringToken);
+            messageBus.Send(testContentStringAfterUnregister, TestConstants.MyContentToken);
+
+            Assert.AreNotEqual(testContentStringAfterUnregister, ReceivedContentStringA1);
+            Assert.AreNotEqual(testContentStringAfterUnregister, ReceivedContentStringB);
+        }
 
         [TestMethod]
         public void TestUnregisterOneAction()
