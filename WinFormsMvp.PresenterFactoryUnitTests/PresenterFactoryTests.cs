@@ -20,7 +20,7 @@ namespace WinFormsMvp.PresenterFactoryUnitTests
         }
 
         [TestMethod]
-        public void Create_ShouldReturnDistinctInstanceForEachCall()
+        public virtual void Create_ShouldReturnDistinctInstanceForEachCall()
         {
             var factory = BuildFactory();
             var viewInstance = new View1();

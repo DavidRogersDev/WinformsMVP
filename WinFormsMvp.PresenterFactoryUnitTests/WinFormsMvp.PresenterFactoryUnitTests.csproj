@@ -53,6 +53,10 @@
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -67,12 +71,17 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NinjectPresenterFactoryTests.cs" />
     <Compile Include="PresenterFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureMapPresenterFactoryTests.cs" />
     <Compile Include="UnityPresenterFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WinFormsMvp.Ninject\WinFormsMvp.Ninject.csproj">
+      <Project>{646770C2-B519-4296-8035-F4C1A5DFB7D3}</Project>
+      <Name>WinFormsMvp.Ninject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinFormsMvp.StructureMap\WinFormsMvp.StructureMap.csproj">
       <Project>{B1CCE4B6-0D35-4043-AC66-6A31FA0E3C79}</Project>
       <Name>WinFormsMvp.StructureMap</Name>
