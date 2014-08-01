@@ -74,8 +74,8 @@ namespace WinFormsMvp.Binder
             get { return appState ?? (appState = new AppState()); }
         }
 
-        private static MessageBus messageBus;
-        public static MessageBus MessageBus
+        private static IMessageBus messageBus;
+        public static IMessageBus MessageBus
         {
             get { return messageBus ?? (messageBus = new MessageBus()); }
         }

@@ -61,7 +61,7 @@ namespace WinFormsMvp.UnitTests
             const int testContentInt = 42;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
             
             messageBus.Register<string>(this, TestConstants.MyStringToken, m => ReceivedContentStringA1 = m);
             messageBus.Register<DateTime>(this, TestConstants.MyDateTimeToken, m => ReceivedContentDateTime1 = m);
@@ -97,7 +97,7 @@ namespace WinFormsMvp.UnitTests
             const string testContentStringAfterUnregister = "efgh";
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
             
             messageBus.Register<string>(this, TestConstants.MyStringToken, m => ReceivedContentStringA1 = m);
 
@@ -126,7 +126,7 @@ namespace WinFormsMvp.UnitTests
             Action<string> action3 = m => ReceivedContentStringB = m;
                 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
             
             messageBus.Register<string>(this, TestConstants.MyStringToken, action1);
             messageBus.Register<string>(this, TestConstants.MyStringToken, action2);
@@ -159,7 +159,7 @@ namespace WinFormsMvp.UnitTests
             const string testContentA2 = "efgh";
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<TestMessageA> actionA1 = m => ReceivedContentStringA1 = m.Content;
 
@@ -193,7 +193,7 @@ namespace WinFormsMvp.UnitTests
             const int token2 = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
             Action<string> action2 = m => ReceivedContentStringA = m;
@@ -226,7 +226,7 @@ namespace WinFormsMvp.UnitTests
             const int token2 = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<string> action2 = m => ReceivedContentStringA = m;
             Action<string> action3 = m => ReceivedContentStringB = m;
@@ -257,7 +257,7 @@ namespace WinFormsMvp.UnitTests
             const int token2 = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
             Action<string> action2 = m => ReceivedContentStringA = m;
@@ -295,7 +295,7 @@ namespace WinFormsMvp.UnitTests
             const int token2 = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA1 = m;
             Action<string> action2 = m => ReceivedContentStringA = m;
@@ -329,7 +329,7 @@ namespace WinFormsMvp.UnitTests
             const int token = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             Action<string> action1 = m => ReceivedContentStringA = m;
             Action<string> action2 = m => ReceivedContentStringB = m;
@@ -371,7 +371,7 @@ namespace WinFormsMvp.UnitTests
             const int token2 = 4567;
 
             Reset();
-            var messageBus = new MessageBus();
+            IMessageBus messageBus = new MessageBus();
 
             messageBus.Register<string>(this, token1, m => ReceivedContentStringA1 = m);
             messageBus.Register<string>(this, token2, m => ReceivedContentStringA = m);
@@ -448,12 +448,6 @@ namespace WinFormsMvp.UnitTests
             {
                 get;
                 private set;
-            }
-
-            internal void RegisterWith(MessageBus messenger)
-            {
-                //messenger.Register<TestMessageA>(this, m => ReceivedContentA = m.Content);
-                //messenger.Register<TestMessageB>(this, m => ReceivedContentB = m.Content);
             }
         }
 
