@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ExampleApplication.DataAccess.EF;
+using ExampleApplication.Models;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using ExampleApplication.Models;
 using WinFormsMvp.Forms;
 
 namespace ExampleApplication.Views
@@ -239,14 +240,26 @@ namespace ExampleApplication.Views
 
         private void AddWorkItemButton_Click(object sender, EventArgs e)
         {
-            Model.SelectedTask = TasksDataGridView.SelectedRows[0].DataBoundItem as Task;
-            Model.Description = DescriptionTextBox.Text.Trim();
-            Model.Duration = (double)DurationNumericUpDown.Value;
-            Model.DateOfWork = DateOfWorkDateTimePicker.Value;
+            if (TasksDataGridView.SelectedRows.Count > 0)
+            {
+                Model.SelectedTask = TasksDataGridView.SelectedRows[0].DataBoundItem as Task;
+                Model.Description = DescriptionTextBox.Text.Trim();
+                Model.Duration = (double) DurationNumericUpDown.Value;
+                Model.DateOfWork = DateOfWorkDateTimePicker.Value;
 
-            AddWorkItemClicked(null, EventArgs.Empty);
-            
-            successPictureBox.Visible = true;
+                AddWorkItemClicked(null, EventArgs.Empty);
+
+                successPictureBox.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show(
+                    "You need to select a Task from the grid", 
+                    "No Task Selected", 
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
         }
 
         private void ProjectsComboBox_SelectedIndexChanged(object sender, EventArgs e)

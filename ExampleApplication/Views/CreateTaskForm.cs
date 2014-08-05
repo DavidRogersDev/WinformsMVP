@@ -30,7 +30,7 @@ namespace ExampleApplication.Views
         {
             base.OnLoad(e);
 
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()
@@ -185,7 +185,7 @@ namespace ExampleApplication.Views
 
         private void CreateTaskButton_Click(object sender, EventArgs e)
         {
-            Model.SelectedProject = this.projectChooserControl.SelectedProject;
+            Model.SelectedProject = projectChooserControl.SelectedProject;
             Model.Name = NameTextBox.Text.Trim();
             Model.Description = DescriptionTextBox.Text.Trim();
             Model.Visibilty = VisibilityCheckBox.Checked;
@@ -197,6 +197,7 @@ namespace ExampleApplication.Views
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
+            projectChooserControl.Exit();
             CloseFormClicked(null, EventArgs.Empty);
         }
 
@@ -207,7 +208,7 @@ namespace ExampleApplication.Views
 
         public void CloseForm()
         {
-            this.Close();
+            Close();
         }
 
         #endregion

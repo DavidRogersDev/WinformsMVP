@@ -1,31 +1,34 @@
-﻿using System;
-using System.Linq;
-using ExampleApplication.Ioc;
-using ExampleApplication.Models;
+﻿using ExampleApplication.Models;
 using ExampleApplication.Services;
 using ExampleApplication.Views;
+using System;
+using System.Linq;
 using WinFormsMvp;
+using WinFormsMvp.Binder;
 
 namespace ExampleApplication.Presenters
 {
-    public class CreateWorkItemPresenter : Presenter<ICreateWorkItemView>
+    public class CreateWorkItemPresenter : Presenter<ICreateWorkItemView>, IDisposable
     {
-        private readonly ITimeTrackerService timeTrackerService;
+        private readonly ITimeTrackerService _timeTrackerService;
+        private bool _disposed;
 
-        public CreateWorkItemPresenter(ICreateWorkItemView view) : base(view)
+        public CreateWorkItemPresenter(ICreateWorkItemView view, ITimeTrackerService timeTrackerService)
+            : base(view)
         {
-            timeTrackerService = ServiceLocator.Resolve<ITimeTrackerService>();
+            _timeTrackerService = timeTrackerService;
 
-            View.Load += new EventHandler(View_Load);
-            View.CloseFormClicked += new EventHandler(View_CloseFormClicked);
-            View.AddWorkItemClicked += new EventHandler(View_AddWorkItemClicked);
-            View.ProjectedSelectionChanged += new EventHandler(View_ProjectedSelectionChanged);
-            View.TaskSelectionChanged += new EventHandler(View_TaskSelectionChanged);
+            View.Load += View_Load;
+            View.CloseFormClicked += View_CloseFormClicked;
+            View.AddWorkItemClicked += View_AddWorkItemClicked;
+            View.ProjectedSelectionChanged += View_ProjectedSelectionChanged;
+            View.TaskSelectionChanged += View_TaskSelectionChanged;
         }
 
         private void View_CloseFormClicked(object sender, EventArgs e)
         {
             View.CloseForm();
+            PresenterBinder.Factory.Release(this);
         }
 
         private void View_Load(object sender, EventArgs e)
@@ -33,7 +36,7 @@ namespace ExampleApplication.Presenters
             View.Model = new CreateWorkItemModel();
             try
             {
-                View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
+                View.Model.Projects = _timeTrackerService.GetListOfVisibleProjects().ToList();
             }
             catch
             {
@@ -48,14 +51,28 @@ namespace ExampleApplication.Presenters
 
         private void View_ProjectedSelectionChanged(object sender, EventArgs e)
         {
-            View.Model.Tasks = timeTrackerService.GetVisibleTasksOfProject((int)View.Model.SelectedProject.Id).ToList();
+            View.Model.Tasks = _timeTrackerService.GetVisibleTasksOfProject((int)View.Model.SelectedProject.id).ToList();
         }
 
         private void View_AddWorkItemClicked(object sender, EventArgs e)
         {
-            timeTrackerService.CreateNewWorkItem(View.Model.SelectedTask, View.Model.Duration, View.Model.DateOfWork, View.Model.Description);
+            _timeTrackerService.CreateNewWorkItem(View.Model.SelectedTask, View.Model.Duration, View.Model.DateOfWork, View.Model.Description);
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _timeTrackerService.Dispose();
+                _disposed = true;
+            }
+        }
 
     }
 }

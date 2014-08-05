@@ -1,4 +1,5 @@
 ﻿using System;
+using ExampleApplication.DataAccess.EF;
 
 namespace ExampleApplication.Custom
 {

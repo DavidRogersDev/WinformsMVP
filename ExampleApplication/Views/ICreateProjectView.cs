@@ -10,6 +10,5 @@ namespace ExampleApplication.Views
         event EventHandler CloseFormClicked;
 
         void CloseForm();
-
     }
 }

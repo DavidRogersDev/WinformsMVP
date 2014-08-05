@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using ExampleApplication.DataAccess.EF;
 using ExampleApplication.Models;
 using ExampleApplication.Presenters;
 using WinFormsMvp;
@@ -22,6 +24,13 @@ namespace ExampleApplication.Views
 
             this.ProjectsComboBox.DataSource = Model.Projects;
             this.ProjectsComboBox.DisplayMember = "Name";
+        }
+
+        public event EventHandler CloseControl;
+
+        public void Exit()
+        {
+            CloseControl(this, EventArgs.Empty);
         }
 
         public Project SelectedProject

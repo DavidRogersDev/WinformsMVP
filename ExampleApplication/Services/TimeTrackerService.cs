@@ -1,87 +1,135 @@
-﻿using System;
-using System.Configuration;
+﻿using ExampleApplication.DataAccess.EF;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using ExampleApplication.DataAccess;
 
 namespace ExampleApplication.Services
 {
     public class TimeTrackerService : ITimeTrackerService
     {
-        private UnitOfWork unitOfWork;
+        private readonly TimetrackerContext _context;
+        private bool _disposed;
 
         public TimeTrackerService()
         {
-            unitOfWork =
-                new UnitOfWork(
-                    new TimeTrackerEntities(
-                        ConfigurationManager.ConnectionStrings["TimeTrackerEntities"].ConnectionString));
+            _context = new TimetrackerContext();
         }
 
         public void CreateNewProject(string name, bool visibility, string description = null)
         {
-            unitOfWork.CreateNewProject(name, visibility, description);
+            var newProject = new Project
+            {
+                name = name,
+                description = description,
+                visible = visibility
+            };
+
+            _context.Projects.Add(newProject);
+            _context.SaveChanges();
         }
 
         public void CreateNewTask(string name, bool visibility, Project project, decimal estimate,
                                   string description = null)
         {
-            unitOfWork.CreateNewTask(name, visibility, project, estimate, description);
+            var newTask = new Task
+            {
+                name = name,
+                description = description,
+                visible = visibility,
+                Project = project
+            };
+
+            _context.Tasks.Add(newTask);
+            _context.SaveChanges();
         }
 
         public void CreateNewWorkItem(Task task, double duration, DateTime dateOfWork, string description = null)
         {
-            unitOfWork.CreateNewWorkItem(task, duration, dateOfWork, description);
+            var newWork = new Work
+            {
+                Task = task, 
+                description = description,
+                duration = (decimal)duration,
+                dateOfWork = dateOfWork
+            };
+
+            _context.Works.Add(newWork);
+            _context.SaveChanges();
+
         }
 
         public void DeleteProject(Project project)
         {
-            unitOfWork.DeleteProject(project);
+            _context.Projects.Remove(project);
+            _context.SaveChanges();
         }
 
         public void DeleteTask(Task task)
         {
-            unitOfWork.DeleteTask(task);
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
         }
 
         public void DeleteWorkItem(Work work)
         {
-            unitOfWork.DeleteWorkItem(work);
+            _context.Works.Remove(work);
+            _context.SaveChanges();
         }
 
-        public IQueryable<Project> GetListOfProjects()
+        public IEnumerable<Project> GetListOfProjects()
         {
-            return unitOfWork.GetAllProjects();
+            return _context.Projects;
         }
 
 
-        public IQueryable<Project> GetListOfVisibleProjects()
+        public IEnumerable<Project> GetListOfVisibleProjects()
         {
-            return unitOfWork.GetAllProjects().Where(p => p.Visible);
+            return _context.Projects.Where(p => p.visible);
         }
 
-        public IQueryable<Task> GetTasksOfProject(int taskId)
+        public IEnumerable<Task> GetTasksOfProject(int projectId)
         {
-            return unitOfWork.GetTasksOfProject(taskId);
+            return _context.Tasks.Where(t => t.projectId == projectId);
         }
 
-        public IQueryable<Task> GetVisibleTasksOfProject(int projectId)
+        public IEnumerable<Task> GetVisibleTasksOfProject(int projectId)
         {
-            return unitOfWork.GetTasksOfProject(projectId).Where(p => p.Visible);
+            return _context.Tasks.Where(task => task.projectId == projectId && task.visible);
+
         }
 
-        public IQueryable<Work> GetWorkItemsOfTask(int taskId)
+        public IEnumerable<Work> GetWorkItemsOfTask(int taskId)
         {
-            return unitOfWork.GetWorkItemsOfTask(taskId);
+            return _context.Works.Where(w => w.taskId == taskId);
         }
 
         public void UpdateProject(Project project)
         {
-            this.unitOfWork.UpdateProject(project);
+            _context.Entry(project).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void UpdateTask(Task task)
         {
-            this.unitOfWork.UpdateTask(task);
+            _context.Entry(task).State = EntityState.Modified;
+            _context.SaveChanges();
+
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _context.Dispose();
+                _disposed = true;
+            }
         }
     }
 }

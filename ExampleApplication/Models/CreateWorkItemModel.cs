@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExampleApplication.DataAccess.EF;
 
 namespace ExampleApplication.Models
 {

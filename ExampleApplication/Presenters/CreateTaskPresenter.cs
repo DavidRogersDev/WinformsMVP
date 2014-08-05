@@ -1,40 +1,57 @@
-﻿using System;
-using ExampleApplication.Ioc;
-using ExampleApplication.Models;
+﻿using ExampleApplication.Models;
 using ExampleApplication.Services;
 using ExampleApplication.Views;
+using System;
 using WinFormsMvp;
+using WinFormsMvp.Binder;
 
 namespace ExampleApplication.Presenters
 {
-    public class CreateTaskPresenter : Presenter<ICreateTaskView>
+    public class CreateTaskPresenter : Presenter<ICreateTaskView>, IDisposable
     {
-        private readonly ITimeTrackerService timeTrackerService;
+        private readonly ITimeTrackerService _timeTrackerService;
+        private bool _disposed;
 
-        public CreateTaskPresenter(ICreateTaskView view)
+        public CreateTaskPresenter(ICreateTaskView view, ITimeTrackerService timeTrackerService)
             : base(view)
         {
-            timeTrackerService = ServiceLocator.Resolve<ITimeTrackerService>();
+            _timeTrackerService = timeTrackerService;
 
-            View.Load += new EventHandler(View_Load);
-            View.CloseFormClicked += new EventHandler(View_CloseFormClicked);
-            View.AddTaskClicked += new EventHandler(View_AddTaskClicked);
+            View.Load += View_Load;
+            View.CloseFormClicked += View_CloseFormClicked;
+            View.AddTaskClicked += View_AddTaskClicked;
         }
 
         void View_CloseFormClicked(object sender, EventArgs e)
         {
             View.CloseForm();
+            PresenterBinder.Factory.Release(this);
         }
 
         private void View_Load(object sender, EventArgs e)
         {
             View.Model = new CreateTaskModel();
-            //View.Model.Projects = timeTrackerService.GetListOfVisibleProjects().ToList();
         }
 
         private void View_AddTaskClicked(object sender, EventArgs e)
         {
-            timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Estimate, View.Model.Description);
+            _timeTrackerService.CreateNewTask(View.Model.Name, View.Model.Visibilty, View.Model.SelectedProject, View.Model.Estimate, View.Model.Description);
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _timeTrackerService.Dispose();
+                _disposed = true;
+            }
+        }
+
     }
 }

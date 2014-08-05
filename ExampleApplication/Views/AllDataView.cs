@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using ExampleApplication.Custom;
+using ExampleApplication.DataAccess.EF;
 using ExampleApplication.Models;
 using ExampleApplication.Presenters;
 using WinFormsMvp.Forms;
@@ -291,12 +293,18 @@ namespace ExampleApplication.Views
             this.Name = "AllDataView";
             this.Text = "AllDataView";
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.Closing += AllDataView_Closing;
 
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TasksDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkItemsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
+        }
+
+        private void AllDataView_Closing(object sender, CancelEventArgs e)
+        {
+            CloseFormClicked(null, EventArgs.Empty);
         }
 
         void WorkItemsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -321,7 +329,7 @@ namespace ExampleApplication.Views
 
                 if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedTask.Visible =
+                    Model.SelectedTask.visible =
                         !(bool)
                          (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
                              Value;
@@ -340,7 +348,7 @@ namespace ExampleApplication.Views
         {
             if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewCheckBoxCell))
             {
-                Model.SelectedProject.Visible =
+                Model.SelectedProject.visible =
                     !(bool)
                      (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
                          Value;
@@ -364,7 +372,7 @@ namespace ExampleApplication.Views
 
                 if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedTask.Visible =
+                    Model.SelectedTask.visible =
                         !(bool)
                          (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
                              Value;
@@ -387,7 +395,7 @@ namespace ExampleApplication.Views
 
                 if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedProject.Visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
+                    Model.SelectedProject.visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
                     ProjectVisibilityToggled(null, EventArgs.Empty);
                 }
                 else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
@@ -402,6 +410,7 @@ namespace ExampleApplication.Views
 
         #region Implementation of IAllDataView
 
+        public event EventHandler CloseFormClicked;
         public event EventHandler ProjectDeleteSelected;
         public event EventHandler ProjectHasBeenSelected;
         public event EventHandler ProjectVisibilityToggled;
@@ -409,6 +418,11 @@ namespace ExampleApplication.Views
         public event EventHandler TaskDeleteSelected;
         public event EventHandler TaskVisibilityToggled;
         public event EventHandler<SelectedWorkItemEventArgs> WorkItemDeleteSelected;
+
+        public void CloseForm()
+        {
+            CloseFormClicked(this, EventArgs.Empty);
+        }
 
         public void PopulateProjects(IList<Project> projects)
         {

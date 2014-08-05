@@ -1,9 +1,10 @@
+using ExampleApplication.DataAccess.EF;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace ExampleApplication.Services
 {
-    public interface ITimeTrackerService
+    public interface ITimeTrackerService : IDisposable
     {
         void CreateNewProject(string name, bool visibility, string description = null);
         void CreateNewTask(string name, bool visibility, Project project, decimal estimate, string description = null);
@@ -11,11 +12,11 @@ namespace ExampleApplication.Services
         void DeleteProject(Project project);
         void DeleteTask(Task task);
         void DeleteWorkItem(Work work);
-        IQueryable<Project> GetListOfProjects();
-        IQueryable<Project> GetListOfVisibleProjects();
-        IQueryable<Task> GetTasksOfProject(int projectId);
-        IQueryable<Task> GetVisibleTasksOfProject(int taskId);
-        IQueryable<Work> GetWorkItemsOfTask(int taskId);
+        IEnumerable<Project> GetListOfProjects();
+        IEnumerable<Project> GetListOfVisibleProjects();
+        IEnumerable<Task> GetTasksOfProject(int projectId);
+        IEnumerable<Task> GetVisibleTasksOfProject(int taskId);
+        IEnumerable<Work> GetWorkItemsOfTask(int taskId);
         void UpdateProject(Project project);
         void UpdateTask(Task project);
     }
