@@ -7,29 +7,29 @@ namespace ExampleApplication.DataAccess.EF.Mapping
         public TaskMap()
         {
             // Primary Key
-            this.HasKey(t => t.id);
+            this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.name)
+            this.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(150);
 
-            this.Property(t => t.description)
+            this.Property(t => t.Description)
                 .HasMaxLength(250);
 
             // Table & Column Mappings
             this.ToTable("Task");
-            this.Property(t => t.id).HasColumnName("id");
-            this.Property(t => t.name).HasColumnName("name");
-            this.Property(t => t.description).HasColumnName("description");
-            this.Property(t => t.projectId).HasColumnName("projectId");
-            this.Property(t => t.visible).HasColumnName("visible");
-            this.Property(t => t.estimate).HasColumnName("estimate");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Description).HasColumnName("Description");
+            this.Property(t => t.ProjectId).HasColumnName("ProjectId");
+            this.Property(t => t.Visible).HasColumnName("Visible");
+            this.Property(t => t.Estimate).HasColumnName("Estimate");
 
             // Relationships
             this.HasRequired(t => t.Project)
                 .WithMany(t => t.Tasks)
-                .HasForeignKey(d => d.projectId);
+                .HasForeignKey(d => d.ProjectId);
 
         }
     }

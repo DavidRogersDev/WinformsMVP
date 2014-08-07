@@ -10,12 +10,12 @@ namespace ExampleApplication.DataAccess.EF
             this.Works = new List<Work>();
         }
 
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public int projectId { get; set; }
-        public bool visible { get; set; }
-        public decimal estimate { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int ProjectId { get; set; }
+        public bool Visible { get; set; }
+        public decimal Estimate { get; set; }
         public virtual Project Project { get; set; }
         public virtual ICollection<Work> Works { get; set; }
     }

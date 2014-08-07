@@ -36,19 +36,19 @@ namespace ExampleApplication.Presenters
         void View_WorkItemDeleteSelected(object sender, Custom.SelectedWorkItemEventArgs e)
         {
             _timeTrackerService.DeleteWorkItem(e.SelectedWorkItem);
-            View.PopulateWorkItemsByTaskId(_timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.id).ToList());
+            View.PopulateWorkItemsByTaskId(_timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.Id).ToList());
         }
 
         void View_TaskVisibilityToggled(object sender, EventArgs e)
         {
             _timeTrackerService.UpdateTask(View.Model.SelectedTask);
-            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject(View.Model.SelectedProject.id).ToList());
+            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject(View.Model.SelectedProject.Id).ToList());
         }
 
         void View_TaskDeleteSelected(object sender, EventArgs e)
         {
             _timeTrackerService.DeleteTask(View.Model.SelectedTask);
-            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.id).ToList());
+            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList());
         }
 
         void View_ProjectVisibilityToggled(object sender, EventArgs e)
@@ -65,12 +65,12 @@ namespace ExampleApplication.Presenters
 
         void View_TaskHasBeenSelected(object sender, EventArgs e)
         {
-            View.PopulateWorkItemsByTaskId(_timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.id).ToList());
+            View.PopulateWorkItemsByTaskId(_timeTrackerService.GetWorkItemsOfTask((int)View.Model.SelectedTask.Id).ToList());
         }
 
         void View_ProjectHasBeenSelected(object sender, EventArgs e)
         {
-            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.id).ToList());
+            View.PopulateTasksByProjectId(_timeTrackerService.GetTasksOfProject((int)View.Model.SelectedProject.Id).ToList());
         }
 
         void View_Load(object sender, EventArgs e)

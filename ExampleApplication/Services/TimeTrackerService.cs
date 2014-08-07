@@ -20,9 +20,9 @@ namespace ExampleApplication.Services
         {
             var newProject = new Project
             {
-                name = name,
-                description = description,
-                visible = visibility
+                Name = name,
+                Description = description,
+                Visible = visibility
             };
 
             _context.Projects.Add(newProject);
@@ -34,10 +34,11 @@ namespace ExampleApplication.Services
         {
             var newTask = new Task
             {
-                name = name,
-                description = description,
-                visible = visibility,
-                Project = project
+                Name = name,
+                Description = description,
+                Visible = visibility,
+                ProjectId = project.Id,
+                Estimate = estimate
             };
 
             _context.Tasks.Add(newTask);
@@ -49,9 +50,9 @@ namespace ExampleApplication.Services
             var newWork = new Work
             {
                 Task = task, 
-                description = description,
-                duration = (decimal)duration,
-                dateOfWork = dateOfWork
+                Description = description,
+                Duration = (decimal)duration,
+                DateOfWork = dateOfWork
             };
 
             _context.Works.Add(newWork);
@@ -85,23 +86,23 @@ namespace ExampleApplication.Services
 
         public IEnumerable<Project> GetListOfVisibleProjects()
         {
-            return _context.Projects.Where(p => p.visible);
+            return _context.Projects.Where(p => p.Visible);
         }
 
         public IEnumerable<Task> GetTasksOfProject(int projectId)
         {
-            return _context.Tasks.Where(t => t.projectId == projectId);
+            return _context.Tasks.Where(t => t.ProjectId == projectId);
         }
 
         public IEnumerable<Task> GetVisibleTasksOfProject(int projectId)
         {
-            return _context.Tasks.Where(task => task.projectId == projectId && task.visible);
+            return _context.Tasks.Where(task => task.ProjectId == projectId && task.Visible);
 
         }
 
         public IEnumerable<Work> GetWorkItemsOfTask(int taskId)
         {
-            return _context.Works.Where(w => w.taskId == taskId);
+            return _context.Works.Where(w => w.TaskId == taskId);
         }
 
         public void UpdateProject(Project project)

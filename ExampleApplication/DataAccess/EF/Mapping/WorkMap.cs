@@ -7,24 +7,24 @@ namespace ExampleApplication.DataAccess.EF.Mapping
         public WorkMap()
         {
             // Primary Key
-            this.HasKey(t => t.id);
+            this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.description)
+            this.Property(t => t.Description)
                 .HasMaxLength(500);
 
             // Table & Column Mappings
             this.ToTable("Work");
-            this.Property(t => t.id).HasColumnName("id");
-            this.Property(t => t.taskId).HasColumnName("taskId");
-            this.Property(t => t.duration).HasColumnName("duration");
-            this.Property(t => t.description).HasColumnName("description");
-            this.Property(t => t.dateOfWork).HasColumnName("dateOfWork");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.TaskId).HasColumnName("TaskId");
+            this.Property(t => t.Duration).HasColumnName("Duration");
+            this.Property(t => t.Description).HasColumnName("Description");
+            this.Property(t => t.DateOfWork).HasColumnName("DateOfWork");
 
             // Relationships
             this.HasRequired(t => t.Task)
                 .WithMany(t => t.Works)
-                .HasForeignKey(d => d.taskId);
+                .HasForeignKey(d => d.TaskId);
 
         }
     }

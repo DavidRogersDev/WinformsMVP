@@ -7,22 +7,22 @@ namespace ExampleApplication.DataAccess.EF.Mapping
         public ProjectMap()
         {
             // Primary Key
-            this.HasKey(t => t.id);
+            this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.name)
+            this.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            this.Property(t => t.description)
+            this.Property(t => t.Description)
                 .HasMaxLength(250);
 
             // Table & Column Mappings
             this.ToTable("Project");
-            this.Property(t => t.id).HasColumnName("id");
-            this.Property(t => t.name).HasColumnName("name");
-            this.Property(t => t.description).HasColumnName("description");
-            this.Property(t => t.visible).HasColumnName("visible");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Description).HasColumnName("Description");
+            this.Property(t => t.Visible).HasColumnName("Visible");
         }
     }
 }

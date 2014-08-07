@@ -10,10 +10,10 @@ namespace ExampleApplication.DataAccess.EF
             this.Tasks = new List<Task>();
         }
 
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public bool visible { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public bool Visible { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
     }
 }

@@ -329,7 +329,7 @@ namespace ExampleApplication.Views
 
                 if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedTask.visible =
+                    Model.SelectedTask.Visible =
                         !(bool)
                          (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
                              Value;
@@ -348,7 +348,7 @@ namespace ExampleApplication.Views
         {
             if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof (DataGridViewCheckBoxCell))
             {
-                Model.SelectedProject.visible =
+                Model.SelectedProject.Visible =
                     !(bool)
                      (ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"] as DataGridViewCheckBoxCell).
                          Value;
@@ -372,7 +372,7 @@ namespace ExampleApplication.Views
 
                 if (TasksDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedTask.visible =
+                    Model.SelectedTask.Visible =
                         !(bool)
                          (TasksDataGridView.Rows[e.RowIndex].Cells["TaskVisibleColumn"] as DataGridViewCheckBoxCell).
                              Value;
@@ -395,7 +395,7 @@ namespace ExampleApplication.Views
 
                 if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewCheckBoxCell))
                 {
-                    Model.SelectedProject.visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
+                    Model.SelectedProject.Visible = !(bool)(ProjectsDataGridView.Rows[e.RowIndex].Cells["ProjectVisibleColumn"]).Value;
                     ProjectVisibilityToggled(null, EventArgs.Empty);
                 }
                 else if (ProjectsDataGridView.CurrentCell.OwningColumn.CellType == typeof(DataGridViewLinkCell))
