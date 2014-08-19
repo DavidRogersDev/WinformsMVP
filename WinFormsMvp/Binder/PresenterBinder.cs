@@ -147,7 +147,11 @@ namespace WinFormsMvp.Binder
 
         static PresenterBinding GetBindings(IView candidate, IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
         {
+            Tracing.Verbose("Finding presenter bindings using {0}", presenterDiscoveryStrategy.GetType().Name);
+
             var result = presenterDiscoveryStrategy.GetBinding(candidate);
+
+            Tracing.Verbose(typeof(PresenterBinder), BuildTraceMessagesForBindings(presenterDiscoveryStrategy, result));
 
             ThrowExceptionsForViewsWithNoPresenterBound(result);
 
@@ -204,6 +208,11 @@ namespace WinFormsMvp.Binder
             PresenterBinding binding,
             IView viewInstance)
         {
+            Tracing.Verbose("Creating presenter of type {0} for view of type {1}. (The actual view instance is of type {2}.)",
+                binding.PresenterType.FullName,
+                binding.ViewType.FullName,
+                viewInstance.GetType().FullName
+                );
 
             var presenter = presenterFactory.Create(binding.PresenterType, binding.ViewType, viewInstance);
 
@@ -216,5 +225,32 @@ namespace WinFormsMvp.Binder
             return presenter;
         }
 
+        static string BuildTraceMessagesForBindings(IPresenterDiscoveryStrategy presenterDiscoveryStrategy, PresenterDiscoveryResult result)
+        {
+            var strategyName = presenterDiscoveryStrategy.GetType().FullName;
+
+            return string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"Found a presenter binding for {0} using {1}.
+
+{2}
+
+{3}",
+                    string.Join(", ", result.ViewInstances.Select(v => v.GetType().FullName).ToArray()),
+                    strategyName,
+                    result.Message,
+                    string.Join("\r\n\r\n",
+                        result.Bindings
+                            .Select(b => string.Format(
+                                CultureInfo.InvariantCulture,
+                                @"Presenter type: {0}
+    View type: {1}",
+                                b.PresenterType.FullName,
+                                b.ViewType.FullName
+                            ))
+                            .ToArray()
+                    )
+                );
+        }
     }
 }
