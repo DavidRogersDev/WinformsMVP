@@ -115,12 +115,7 @@ namespace WinFormsMvp
             if (string.IsNullOrEmpty(message))
                 return;
 
-            Verbose("WinFormsMvp", string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}: {1}",
-                sourceType.Name,
-                message
-            ));
+            Verbose(string.Format(CultureInfo.InvariantCulture,"{0}: {1}",sourceType.Name, message));
         }
     }
 }

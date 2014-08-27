@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using WinFormsMvp.Messaging;
@@ -9,7 +10,8 @@ namespace WinFormsMvp.Binder
     /// <summary/>
     public sealed class PresenterBinder
     {
-        static IPresenterFactory factory;
+        private static IPresenterFactory factory;
+
         ///<summary>
         /// Gets or sets the factory that the binder will use to create
         /// new presenter instances. This is pre-initialized to a
@@ -20,10 +22,7 @@ namespace WinFormsMvp.Binder
         ///<exception cref="InvalidOperationException">Thrown if the property is being set for a second time.</exception>
         public static IPresenterFactory Factory
         {
-            get
-            {
-                return factory ?? (factory = new DefaultPresenterFactory());
-            }
+            get { return factory ?? (factory = new DefaultPresenterFactory()); }
             set
             {
                 if (value == null)
@@ -34,14 +33,15 @@ namespace WinFormsMvp.Binder
                 {
                     throw new InvalidOperationException(
                         factory is DefaultPresenterFactory
-                        ? "The factory has already been set, and can be not changed at a later time. In this case, it has been set to the default implementation. This happens if the factory is used before being explicitly set. If you wanted to supply your own factory, you need to do this in your Application_Start event."
-                        : "You can only set your factory once, and should really do this in Application_Start.");
+                            ? "The factory has already been set, and can be not changed at a later time. In this case, it has been set to the default implementation. This happens if the factory is used before being explicitly set. If you wanted to supply your own factory, you need to do this in your Application_Start event."
+                            : "You can only set your factory once, and should really do this in Application_Start.");
                 }
                 factory = value;
             }
         }
 
-        static IPresenterDiscoveryStrategy discoveryStrategy;
+        private static IPresenterDiscoveryStrategy discoveryStrategy;
+
         ///<summary>
         /// Gets or sets the strategy that the binder will use to discover which presenters should be bound to which views.
         /// This is pre-initialized to a default implementation but can be overriden if desired. To combine multiple
@@ -69,12 +69,14 @@ namespace WinFormsMvp.Binder
         }
 
         private static IAppState appState;
+
         public static IAppState ApplicationState
         {
             get { return appState ?? (appState = new AppState()); }
         }
 
         private static IMessageBus messageBus;
+
         public static IMessageBus MessageBus
         {
             get { return messageBus ?? (messageBus = new MessageBus()); }
@@ -93,7 +95,7 @@ namespace WinFormsMvp.Binder
         /// <param name="httpContext">The owning HTTP context.</param>
         public PresenterBinder()
         {
-            
+
         }
 
         /// <summary>
@@ -125,7 +127,7 @@ namespace WinFormsMvp.Binder
             }
         }
 
-        static IPresenter PerformBinding(
+        private static IPresenter PerformBinding(
             IView candidate,
             IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
             IAppState appState,
@@ -145,32 +147,33 @@ namespace WinFormsMvp.Binder
             return newPresenter;
         }
 
-        static PresenterBinding GetBindings(IView candidate, IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
+        private static PresenterBinding GetBindings(IView candidate,
+            IPresenterDiscoveryStrategy presenterDiscoveryStrategy)
         {
             Tracing.Verbose("Finding presenter bindings using {0}", presenterDiscoveryStrategy.GetType().Name);
 
             var result = presenterDiscoveryStrategy.GetBinding(candidate);
 
-            Tracing.Verbose(typeof(PresenterBinder), BuildTraceMessagesForBindings(presenterDiscoveryStrategy, result));
+            Tracing.Verbose(typeof (PresenterBinder), BuildTraceMessagesForBindings(presenterDiscoveryStrategy, result));
 
             ThrowExceptionsForViewsWithNoPresenterBound(result);
 
-            return  result.Bindings.Single();
+            return result.Bindings.Single();
         }
 
-        static void ThrowExceptionsForViewsWithNoPresenterBound(PresenterDiscoveryResult result)
+        private static void ThrowExceptionsForViewsWithNoPresenterBound(PresenterDiscoveryResult result)
         {
-            if(result.Bindings.Empty() && result.ViewInstances.Where(v => v.ThrowExceptionIfNoPresenterBound).Any())
+            if (result.Bindings.Empty() && result.ViewInstances.Where(v => v.ThrowExceptionIfNoPresenterBound).Any())
 
-            throw new InvalidOperationException(string.Format(
-                CultureInfo.InvariantCulture,
-                @"Failed to find presenter for view instance of {0}.{1} If you do not want this exception to be thrown, set ThrowExceptionIfNoPresenterBound to false on your view.",
-                result.ViewInstances.Where(v => v.ThrowExceptionIfNoPresenterBound).Single().GetType().FullName,
-                result.Message
-            ));
+                throw new InvalidOperationException(string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"Failed to find presenter for view instance of {0}.{1} If you do not want this exception to be thrown, set ThrowExceptionIfNoPresenterBound to false on your view.",
+                    result.ViewInstances.Where(v => v.ThrowExceptionIfNoPresenterBound).Single().GetType().FullName,
+                    result.Message
+                    ));
         }
 
-        static IPresenter BuildPresenter(
+        private static IPresenter BuildPresenter(
             Action<IPresenter> presenterCreatedCallback,
             //IAppState appState,
             IPresenterFactory presenterFactory,
@@ -185,30 +188,31 @@ namespace WinFormsMvp.Binder
                         binding)).ToList().First();
         }
 
-        static IPresenter BuildPresenters(
+        private static IPresenter BuildPresenters(
             Action<IPresenter> presenterCreatedCallback,
             //IAppState appState,
             IPresenterFactory presenterFactory,
             PresenterBinding binding)
         {
-            IView viewToCreateFor = binding.ViewInstance; 
+            IView viewToCreateFor = binding.ViewInstance;
 
             return BuildPresenter(
-                    presenterCreatedCallback,
-                    //appState,
-                    presenterFactory,
-                    binding,
-                    viewToCreateFor);
+                presenterCreatedCallback,
+                //appState,
+                presenterFactory,
+                binding,
+                viewToCreateFor);
         }
 
-        static IPresenter BuildPresenter(
+        private static IPresenter BuildPresenter(
             Action<IPresenter> presenterCreatedCallback,
             //IAppState appState,
             IPresenterFactory presenterFactory,
             PresenterBinding binding,
             IView viewInstance)
         {
-            Tracing.Verbose("Creating presenter of type {0} for view of type {1}. (The actual view instance is of type {2}.)",
+            Tracing.Verbose(
+                "Creating presenter of type {0} for view of type {1}. (The actual view instance is of type {2}.)",
                 binding.PresenterType.FullName,
                 binding.ViewType.FullName,
                 viewInstance.GetType().FullName
@@ -225,31 +229,26 @@ namespace WinFormsMvp.Binder
             return presenter;
         }
 
-        static string BuildTraceMessagesForBindings(IPresenterDiscoveryStrategy presenterDiscoveryStrategy, PresenterDiscoveryResult result)
+        private static string BuildTraceMessagesForBindings(IPresenterDiscoveryStrategy presenterDiscoveryStrategy,
+            PresenterDiscoveryResult result)
         {
             var strategyName = presenterDiscoveryStrategy.GetType().FullName;
 
             return string.Format(
-                    CultureInfo.InvariantCulture,
-                    @"Found a presenter binding for {0} using {1}.
-
-{2}
-
-{3}",
-                    string.Join(", ", result.ViewInstances.Select(v => v.GetType().FullName).ToArray()),
-                    strategyName,
-                    result.Message,
-                    string.Join("\r\n\r\n",
-                        result.Bindings
-                            .Select(b => string.Format(
-                                CultureInfo.InvariantCulture,
-                                @"Presenter type: {0}
-    View type: {1}",
-                                b.PresenterType.FullName,
-                                b.ViewType.FullName
-                            ))
-                            .ToArray()
-                    )
+                CultureInfo.InvariantCulture,
+                @"Found a presenter binding for {0} using {1}.{2}{3}",
+                string.Join(", ", result.ViewInstances.Select(v => v.GetType().FullName).ToArray()),
+                strategyName,
+                string.Format("{0}{0}{1}{0}", Environment.NewLine, result.Message),
+                string.Format("{0}{1}", Environment.NewLine,
+                    string.Join(Environment.NewLine,
+                        result.Bindings.Select(b => string.Format(CultureInfo.InvariantCulture,
+                            @"Presenter type: {0} {1}View type: {2}",
+                            b.PresenterType.FullName,
+                            Environment.NewLine,
+                            b.ViewType.FullName
+                            )).ToArray()
+                        ))
                 );
         }
     }
