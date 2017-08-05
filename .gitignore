@@ -1,0 +1,41 @@
+ReleasedBinaries/*
+*\build
+*\release
+*\Release
+*\debug
+*\Debug
+*.suo
+*.dep
+*.aps
+*.vbw
+*.obj
+*.ncb
+*.plg
+*.bsc
+*.ilk 
+*.exp
+*.sbr
+*.opt
+*.pdb
+*.idb
+*.pch
+*.res
+*.user
+*\bin
+*\Bin
+*\obj
+_ReSharper*
+*.exe
+*.csproj.user
+*.resharper.user
+*.cache
+TestResult.xml
+TestResults/*
+Thumbs.db
+
+# =========================
+# Nuget Packages
+# =========================
+src/packages/*
+!src/packages/repositories.config
+!NuGet.exe
