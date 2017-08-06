@@ -54,8 +54,6 @@
             <see cref="M:SimpleInjector.Container.AddRegistration(System.Type,SimpleInjector.Registration)"/> or anything related to registering from multiple threads concurrently.
             </para>
             </remarks>
-            <summary>This is where we putt all obsolete stuff that we can't just remove right now, but will
-            in the future.</summary>
             <summary>Methods for batch registration.</summary>
             <summary>Methods for registration of collections.</summary>
             <summary>Methods for conditional registrations.</summary>
@@ -180,187 +178,6 @@
         <member name="M:SimpleInjector.Container.Dispose(System.Boolean)">
             <summary>Releases all instances that are cached by the <see cref="T:SimpleInjector.Container"/> object.</summary>
             <param name="disposing">True for a normal dispose operation; false to finalize the handle.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.#ctor(SimpleInjector.ContainerOptions)">
-            <summary>Initializes a new instance of the <see cref="T:SimpleInjector.Container"/> class.</summary>
-            <param name="options">The container options.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="options"/> is a null
-            reference.</exception>
-            <exception cref="T:System.ArgumentException">Thrown when supplied <paramref name="options"/> is an instance
-            that already is supplied to another <see cref="T:SimpleInjector.Container"/> instance. Every container must get
-            its own <see cref="T:SimpleInjector.ContainerOptions"/> instance.</exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle``1">
-            <summary>
-            Registers a single concrete instance that will be constructed using constructor injection and will
-            be returned when this instance is requested by type <typeparamref name="TConcrete"/>. 
-            This <typeparamref name="TConcrete"/> must be thread-safe when working in a multi-threaded 
-            environment.
-            If <typeparamref name="TConcrete"/> implements <see cref="T:System.IDisposable"/>, a created instance will
-            get disposed when <see cref="M:SimpleInjector.Container.Dispose">Container.Dispose</see> gets called.
-            </summary>
-            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when this container instance is locked and can not be altered, or when 
-            <typeparamref name="TConcrete"/> has already been registered.
-            </exception>
-            <exception cref="T:System.ArgumentException">Thrown when the <typeparamref name="TConcrete"/> is a type
-            that can not be created by the container.</exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle``2">
-            <summary>
-            Registers that the same a single instance of type <typeparamref name="TImplementation"/> will be 
-            returned every time an <typeparamref name="TService"/> type is requested. If 
-            <typeparamref name="TService"/> and <typeparamref name="TImplementation"/>  represent the same 
-            type, the type is registered by itself. <typeparamref name="TImplementation"/> must be thread-safe 
-            when working in a multi-threaded environment.
-            If <typeparamref name="TImplementation"/> implements <see cref="T:System.IDisposable"/>, a created instance will
-            get disposed when <see cref="M:SimpleInjector.Container.Dispose">Container.Dispose</see> gets called.
-            </summary>
-            <typeparam name="TService">
-            The interface or base type that can be used to retrieve the instances.
-            </typeparam>
-            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when this container instance is locked and can not be altered, or when the 
-            <typeparamref name="TService"/> has already been registered.</exception>
-            <exception cref="T:System.ArgumentException">Thrown when the given <typeparamref name="TImplementation"/> 
-            type is not a type that can be created by the container.
-            </exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle``1(System.Func{``0})">
-            <summary>
-            Registers the specified delegate that allows constructing a single instance of 
-            <typeparamref name="TService"/>. This delegate will be called at most once during the lifetime of 
-            the application. The returned instance must be thread-safe when working in a multi-threaded 
-            environment.
-            If the instance returned from <paramref name="instanceCreator"/> implements <see cref="T:System.IDisposable"/>, 
-            the created instance will get disposed when <see cref="M:SimpleInjector.Container.Dispose">Container.Dispose</see> 
-            gets called.
-            </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
-            <param name="instanceCreator">The delegate that allows building or creating this single
-            instance.</param>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when this container instance is locked and can not be altered, or when a 
-            <paramref name="instanceCreator"/> for <typeparamref name="TService"/> has already been registered.
-            </exception>
-            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="instanceCreator"/> is a 
-            null reference.</exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle(System.Type,System.Type)">
-            <summary>
-            Registers that the same instance of type <paramref name="implementation"/> will be returned every 
-            time an instance of type <paramref name="serviceType"/> type is requested. If 
-            <paramref name="serviceType"/> and <paramref name="implementation"/> represent the same type, the 
-            type is registered by itself. <paramref name="implementation"/> must be thread-safe when working 
-            in a multi-threaded environment.
-            </summary>
-            <param name="serviceType">The base type or interface to register.</param>
-            <param name="implementation">The actual type that will be returned when requested.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when either <paramref name="serviceType"/> or 
-            <paramref name="implementation"/> are null references (Nothing in VB).</exception>
-            <exception cref="T:System.ArgumentException">Thrown when <paramref name="implementation"/> is
-            no sub type from <paramref name="serviceType"/>, or when one of them represents an open generic
-            type.</exception>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when this container instance is locked and can not be altered, or when an 
-            the <paramref name="serviceType"/> has already been registered.
-            </exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle(System.Type,System.Func{System.Object})">
-            <summary>
-            Registers the specified delegate that allows constructing a single <paramref name="serviceType"/> 
-            instance. The container will call this delegate at most once during the lifetime of the application.
-            </summary>
-            <param name="serviceType">The base type or interface to register.</param>
-            <param name="instanceCreator">The delegate that will be used for creating that single instance.</param>
-            <exception cref="T:System.ArgumentException">Thrown when <paramref name="serviceType"/> represents an open
-            generic type.</exception>
-            <exception cref="T:System.ArgumentNullException">Thrown when either <paramref name="serviceType"/> or 
-            <paramref name="instanceCreator"/> are null references (Nothing in
-            VB).</exception>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when this container instance is locked and can not be altered, or when an 
-            the <paramref name="serviceType"/> has already been registered.
-            </exception>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle``1(``0)">
-            <summary>This method has been removed.</summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve the instance.</typeparam>
-            <param name="instance">The instance to register.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterSingle(System.Type,System.Object)">
-            <summary>This method has been removed.</summary>
-            <param name="serviceType">The base type or interface to register.</param>
-            <param name="instance">The instance to register.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when either <paramref name="serviceType"/> or 
-            <paramref name="instance"/> are null references (Nothing in VB).</exception>
-        </member>
-        <member name="M:SimpleInjector.Container.InjectProperties(System.Object)">
-            <summary>This method has been removed.</summary>
-            <param name="instance">The instance whose properties will be injected.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection``1(System.Collections.Generic.IEnumerable{``0})"/> instead.
-            </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
-            <param name="collection">The collection to register.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll``1(``0[])">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection``1(``0[])"/> instead.
-            </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
-            <param name="singletons">The collection to register.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll``1(System.Type[])">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection``1(System.Collections.Generic.IEnumerable{System.Type})"/> instead.
-            </summary>
-            <typeparam name="TService">The base type or interface for elements in the collection.</typeparam>
-            <param name="serviceTypes">The collection of <see cref="T:System.Type"/> objects whose instances
-            will be requested from the container.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll``1(System.Collections.Generic.IEnumerable{System.Type})">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection``1(System.Collections.Generic.IEnumerable{System.Type})"/> instead.
-            </summary>
-            <typeparam name="TService">The base type or interface for elements in the collection.</typeparam>
-            <param name="serviceTypes">The collection of <see cref="T:System.Type"/> objects whose instances
-            will be requested from the container.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll(System.Type,System.Collections.Generic.IEnumerable{System.Type})">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection(System.Type,System.Collections.Generic.IEnumerable{System.Type})"/> instead.
-            </summary>
-            <param name="serviceType">The base type or interface for elements in the collection.</param>
-            <param name="serviceTypes">The collection of <see cref="T:System.Type"/> objects whose instances
-            will be requested from the container.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll(System.Type,System.Collections.Generic.IEnumerable{SimpleInjector.Registration})">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection(System.Type,System.Collections.Generic.IEnumerable{SimpleInjector.Registration})"/> instead.
-            </summary>
-            <param name="serviceType">The base type or interface for elements in the collection.</param>
-            <param name="registrations">The collection of <see cref="T:SimpleInjector.Registration"/> objects whose instances
-            will be requested from the container.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll(System.Type,SimpleInjector.Registration[])">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection(System.Type,System.Collections.Generic.IEnumerable{SimpleInjector.Registration})"/> instead.
-            </summary>
-            <param name="serviceType">The base type or interface for elements in the collection.</param>
-            <param name="registrations">The collection of <see cref="T:SimpleInjector.Registration"/> objects whose instances
-            will be requested from the container.</param>
-        </member>
-        <member name="M:SimpleInjector.Container.RegisterAll(System.Type,System.Collections.IEnumerable)">
-            <summary>
-            This method is obsolete. Use <see cref="M:SimpleInjector.Container.RegisterCollection(System.Type,System.Collections.IEnumerable)"/> instead.
-            </summary>
-            <param name="serviceType">The base type or interface for elements in the collection.</param>
-            <param name="collection">The collection of items to register.</param>
         </member>
         <member name="M:SimpleInjector.Container.Register(System.Type,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
             <summary>
@@ -1055,7 +872,7 @@
         <member name="E:SimpleInjector.Container.ExpressionBuilding">
             <summary>
             Occurs directly after the creation of the <see cref="T:System.Linq.Expressions.Expression" /> of a registered type is made,
-            but before any <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">initializer</see> and lifestyle specific caching
+            but before any <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializerContext})">initializer</see> and lifestyle specific caching
             has been applied, allowing the created <see cref="T:System.Linq.Expressions.Expression" /> to be altered. Multiple delegates 
             may handle the same service type.
             </summary>
@@ -1616,7 +1433,7 @@
             </para>
             </remarks>
         </member>
-        <member name="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">
+        <member name="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializerContext})">
             <summary>
             Registers an <see cref="T:System.Action`1"/> delegate that runs after the 
             creation of instances for which the supplied <paramref name="predicate"/> returns true. Please 
@@ -1644,6 +1461,27 @@
             a predicate that is thread-safe.
             </para>
             </remarks>
+        </member>
+        <member name="M:SimpleInjector.Container.AddRegistration``1(SimpleInjector.Registration)">
+            <summary>
+            Adds the <paramref name="registration"/> for the supplied <paramtyperef name="TService"/>. This
+            method can be used to apply the same <see cref="T:SimpleInjector.Registration"/> to multiple different service
+            types.
+            </summary>
+            <typeparam name="TService">The base type or interface to register.</typeparam>
+            <param name="registration">The registration that should be stored for the given 
+            <paramtyperef name="TService"/>.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the supplied arguments is a null
+            reference (Nothing in VB).</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramtyperef name="TService"/> is ambiguous, 
+            when it is not assignable from the 
+            <paramref name="registration"/>'s <see cref="P:SimpleInjector.Registration.ImplementationType">ImplementationType</see>
+            or when the supplied <paramref name="registration"/> is created for a different 
+            <see cref="T:SimpleInjector.Container"/> instance.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when this container instance is locked and can not be altered, or when an 
+            the <paramtyperef name="TService"/> has already been registered.
+            </exception>
         </member>
         <member name="M:SimpleInjector.Container.AddRegistration(System.Type,SimpleInjector.Registration)">
             <summary>
@@ -2432,9 +2270,6 @@
             ]]></code>
             </example>
         </member>
-        <member name="M:SimpleInjector.ContainerOptions.#ctor">
-            <summary>Initializes a new instance of the <see cref="T:SimpleInjector.ContainerOptions"/> class.</summary>
-        </member>
         <member name="P:SimpleInjector.ContainerOptions.Container">
             <summary>
             Gets the container to which this <b>ContainerOptions</b> instance belongs to.
@@ -2458,12 +2293,8 @@
             mismatches.</value>
         </member>
         <member name="P:SimpleInjector.ContainerOptions.ResolveUnregisteredCollections">
-            <summary>
-            Gets or sets a value indicating whether the container will return an empty collection when
-            a collection is requested that hasn't been explicitly registered. The default value is <b>false</b>,
-            which means that the container will throw an exception. Set the value to <b>true</b> to get the
-            old behavior of Simple Injector v1.x and v2.x.
-            </summary>
+            <summary>Gets or sets a value indicating whether. 
+            This method is deprecated. Changing its value will have no effect.</summary>
             <value>The value indicating whether the container will return an empty collection.</value>
         </member>
         <member name="P:SimpleInjector.ContainerOptions.UseFullyQualifiedTypeNames">
@@ -2480,23 +2311,6 @@
             that have a single public constructor.
             </summary>
             <value>The constructor resolution behavior.</value>
-            <exception cref="T:System.NullReferenceException">Thrown when the supplied value is a null reference.</exception>
-            <exception cref="T:System.InvalidOperationException">
-            Thrown when the container already contains registrations.
-            </exception>
-        </member>
-        <member name="P:SimpleInjector.ContainerOptions.ConstructorVerificationBehavior">
-            <summary>
-            Gets or sets the constructor verification behavior. The container's default behavior is to
-            disallow constructors with value types and strings.
-            <b>NOTE:</b> This property has been removed. Please use the <see cref="P:SimpleInjector.ContainerOptions.ConstructorInjectionBehavior"/> 
-            property to override Simple Injector's verification behavior.
-            </summary>
-            <value>The constructor resolution behavior.</value>
-        </member>
-        <member name="P:SimpleInjector.ContainerOptions.ConstructorInjectionBehavior">
-            <summary>Gets or sets the constructor injection behavior.</summary>
-            <value>The constructor injection behavior.</value>
             <exception cref="T:System.NullReferenceException">Thrown when the supplied value is a null reference.</exception>
             <exception cref="T:System.InvalidOperationException">
             Thrown when the container already contains registrations.
@@ -2526,6 +2340,16 @@
             Gets or sets the lifestyle selection behavior. The container's default behavior is to make
             registrations using the <see cref="F:SimpleInjector.Lifestyle.Transient"/> lifestyle.</summary>
             <value>The lifestyle selection behavior.</value>
+            <exception cref="T:System.NullReferenceException">Thrown when the supplied value is a null reference.</exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the container already contains registrations.
+            </exception>
+        </member>
+        <member name="P:SimpleInjector.ContainerOptions.DefaultLifestyle">
+            <summary>
+            Gets or sets the default lifestyle that the container will use when a registration is
+            made when no lifestyle is supplied.</summary>
+            <value>The default lifestyle.</value>
             <exception cref="T:System.NullReferenceException">Thrown when the supplied value is a null reference.</exception>
             <exception cref="T:System.InvalidOperationException">
             Thrown when the container already contains registrations.
@@ -2812,35 +2636,20 @@
             Helper methods for the container.
             </summary>
         </member>
-        <member name="M:SimpleInjector.Helpers.GetBaseTypeCandidates(System.Type,System.Type)">
-            <summary>
-            Returns a list of base types and interfaces of implementationType that either
-            equal to serviceType or are closed or partially closed version of serviceType (in case 
-            serviceType itself is generic).
-            So:
-            -in case serviceType is non generic, only serviceType will be returned.
-            -If implementationType is open generic, serviceType will be returned (or a partially closed 
-             version of serviceType is returned).
-            -If serviceType is generic and implementationType is not, a closed version of serviceType will
-             be returned.
-            -If implementationType implements multiple (partially) closed versions of serviceType, all those
-             (partially) closed versions will be returned.
-            </summary>
-            <param name="serviceType">The (open generic) service type to match.</param>
-            <param name="implementationType">The implementationType to search.</param>
-            <returns>A list of types.</returns>
-        </member>
         <member name="T:SimpleInjector.InjectionConsumerInfo">
             <summary>
             Contains contextual information about the direct consumer for which the given dependency is injected
             into.
             </summary>
         </member>
-        <member name="M:SimpleInjector.InjectionConsumerInfo.#ctor(System.Type,System.Type,System.Reflection.ParameterInfo)">
+        <member name="M:SimpleInjector.InjectionConsumerInfo.#ctor(System.Reflection.ParameterInfo)">
             <summary>Initializes a new instance of the <see cref="T:SimpleInjector.InjectionConsumerInfo"/> class.</summary>
-            <param name="serviceType">The service type of the consumer of the component that should be created.</param>
-            <param name="implementationType">The implementation type of the consumer of the component that should be created.</param>
             <param name="parameter">The constructor parameter for the created component.</param>
+        </member>
+        <member name="M:SimpleInjector.InjectionConsumerInfo.#ctor(System.Type,System.Reflection.PropertyInfo)">
+            <summary>Initializes a new instance of the <see cref="T:SimpleInjector.InjectionConsumerInfo"/> class.</summary>
+            <param name="implementationType">The implementation type of the consumer of the component that should be created.</param>
+            <param name="property">The property for the created component.</param>
         </member>
         <member name="P:SimpleInjector.InjectionConsumerInfo.ServiceType">
             <summary>Gets the service type of the consumer of the component that should be created.</summary>
@@ -3043,6 +2852,18 @@
             <summary>Gets the <see cref="P:SimpleInjector.InstanceProducer.Registration"/> instance for this instance.</summary>
             <value>The <see cref="P:SimpleInjector.InstanceProducer.Registration"/>.</value>
         </member>
+        <member name="M:SimpleInjector.InstanceProducer.FromExpression(System.Type,System.Linq.Expressions.Expression,SimpleInjector.Container)">
+            <summary>
+            Creates a new <see cref="T:SimpleInjector.InstanceProducer"/> based on the given <paramref name="serviceType"/> 
+            and <paramref name="expression"/> where the <paramref name="expression"/> will be used as-is;
+            no interception (using <see cref="E:SimpleInjector.Container.ExpressionBuilt">ExpressionBuilt</see>) such as
+            decorators will be applied.
+            </summary>
+            <param name="serviceType">The service type for which this instance is created.</param>
+            <param name="expression">The expression that describes the instance to be produced.</param>
+            <param name="container">The <see cref="P:SimpleInjector.InstanceProducer.Container"/> instance for this registration.</param>
+            <returns>A new <see cref="T:SimpleInjector.InstanceProducer"/> that describes the expression.</returns>
+        </member>
         <member name="M:SimpleInjector.InstanceProducer.GetInstance">
             <summary>Produces an instance.</summary>
             <returns>An instance. Will never return null.</returns>
@@ -3128,7 +2949,7 @@
         <member name="F:SimpleInjector.Lifestyle.Transient">
             <summary>
             The lifestyle instance that doesn't cache instances. A new instance of the specified
-            component is created every time the registered service it is requested or injected.
+            component is created every time the registered service is requested or injected.
             </summary>
             <example>
             The following example registers the <c>SomeServiceImpl</c> implementation for the
@@ -3213,6 +3034,106 @@
             </summary>
             <value>The <see cref="T:System.Int32"/> representing the length of this lifestyle.</value>
         </member>
+        <member name="M:SimpleInjector.Lifestyle.CreateHybrid(SimpleInjector.ScopedLifestyle,SimpleInjector.Lifestyle)">
+            <summary>
+            The hybrid lifestyle allows mixing two lifestyles in a single registration. The hybrid will use
+            the <paramref name="defaultLifestyle"/> in case its 
+            <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method returns a
+            scope; otherwise the <paramref name="fallbackLifestyle"/> is used. The hybrid lifestyle will 
+            redirect the creation of the instance to the selected lifestyle. By nesting hybrid lifestyles, 
+            any number of lifestyles can be mixed.
+            </summary>
+            <param name="defaultLifestyle">The lifestyle to use when its 
+            <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method returns a
+            scope..</param>
+            <param name="fallbackLifestyle">The lifestyle to use when the
+             <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method of the
+            <paramref name="defaultLifestyle"/> argument returns <b>null</b>.</param>
+            <returns>A new hybrid lifestyle that wraps the supplied lifestyles.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the supplied arguments is a null
+            reference (Nothing in VB).</exception>
+            <example>
+            <para>
+            The following example shows the creation of a <b>HybridLifestyle</b> that mixes an 
+            <b>ThreadScopedLifestyle</b> and <b>Transient</b>:
+            </para>
+            <code lang="cs"><![CDATA[
+            // NOTE: WebRequestLifestyle is located in SimpleInjector.Integration.Web.dll.
+            var hybridLifestyle = Lifestyle.CreateHybrid(
+                defaultLifestyle: new ThreadScopedLifestyle(),
+                fallbackLifestyle: Lifestyle.Transient);
+            
+            // The created lifestyle can be reused for many registrations.
+            container.Register<IUserRepository, SqlUserRepository>(hybridLifestyle);
+            container.Register<ICustomerRepository, SqlCustomerRepository>(hybridLifestyle);
+            ]]></code>
+            <para>
+            Hybrid lifestyles can be nested:
+            </para>
+            <code lang="cs"><![CDATA[
+            var mixedThreadScopedTransientLifestyle = Lifestyle.CreateHybrid(
+                new ThreadScopedLifestyle(),
+                Lifestyle.Transient);
+            
+            var hybridLifestyle = Lifestyle.CreateHybrid(
+                new WebRequestLifestyle(),
+                mixedThreadScopedTransientLifestyle);
+            ]]></code>
+            <para>
+            The <b>mixedScopeLifestyle</b> now mixed three lifestyles: Web Request, Thread Scoped and 
+            Transient.
+            </para>
+            </example>
+        </member>
+        <member name="M:SimpleInjector.Lifestyle.CreateHybrid(SimpleInjector.ScopedLifestyle,SimpleInjector.ScopedLifestyle)">
+            <summary>
+            The hybrid lifestyle allows mixing two lifestyles in a single registration. The hybrid will use
+            the <paramref name="defaultLifestyle"/> in case its 
+            <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method returns a
+            scope; otherwise the <paramref name="fallbackLifestyle"/> is used. The hybrid lifestyle will 
+            redirect the creation of the instance to the selected lifestyle. By nesting hybrid lifestyles, 
+            any number of lifestyles can be mixed.
+            </summary>
+            <param name="defaultLifestyle">The lifestyle to use when its 
+            <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method returns a
+            scope..</param>
+            <param name="fallbackLifestyle">The lifestyle to use when the
+             <see cref="M:SimpleInjector.ScopedLifestyle.GetCurrentScope(SimpleInjector.Container)">GetCurrentScope</see> method of the
+            <paramref name="defaultLifestyle"/> argument returns <b>null</b>.</param>
+            <returns>A new hybrid lifestyle that wraps the supplied lifestyles.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the supplied arguments is a null
+            reference (Nothing in VB).</exception>
+            <example>
+            <para>
+            The following example shows the creation of a <b>HybridLifestyle</b> that mixes an 
+            <b>ThreadScopedLifestyle</b> and <b>Transient</b>:
+            </para>
+            <code lang="cs"><![CDATA[
+            // NOTE: WebRequestLifestyle is located in SimpleInjector.Integration.Web.dll.
+            ScopedLifestyle hybridLifestyle = Lifestyle.CreateHybrid(
+                defaultLifestyle: new ThreadScopedLifestyle(),
+                fallbackLifestyle: new WebRequestLifestyle());
+            
+            // The created lifestyle can be reused for many registrations.
+            container.Register<IUserRepository, SqlUserRepository>(hybridLifestyle);
+            container.Register<ICustomerRepository, SqlCustomerRepository>(hybridLifestyle);
+            ]]></code>
+            <para>
+            Hybrid lifestyles can be nested:
+            </para>
+            <code lang="cs"><![CDATA[
+            ScopedLifestyle hybridLifestyle = Lifestyle.CreateHybrid(
+                defaultLifestyle: new ThreadScopedLifestyle(),
+                fallbackLifestyle: new WebRequestLifestyle());
+            
+            var hybridLifestyle = Lifestyle.CreateHybrid(hybridLifestyle, Lifestyle.Transient);
+            ]]></code>
+            <para>
+            The <b>mixedScopeLifestyle</b> now mixed three lifestyles: Web Request, Thread Scoped and 
+            Transient.
+            </para>
+            </example>
+        </member>
         <member name="M:SimpleInjector.Lifestyle.CreateHybrid(System.Func{System.Boolean},SimpleInjector.Lifestyle,SimpleInjector.Lifestyle)">
             <summary>
             The hybrid lifestyle allows mixing two lifestyles in a single registration. Based on the supplied
@@ -3235,15 +3156,14 @@
             <example>
             <para>
             The following example shows the creation of a <b>HybridLifestyle</b> that mixes an 
-            <b>WebRequestLifestyle</b> and <b>LifetimeScopeLifestyle</b>:
+            <b>WebRequestLifestyle</b> and <b>ThreadScopedLifestyle</b>:
             </para>
             <code lang="cs"><![CDATA[
             // NOTE: WebRequestLifestyle is located in SimpleInjector.Integration.Web.dll.
-            // NOTE: LifetimeScopeLifestyle is located in SimpleInjector.Extensions.LifetimeScoping.dll.
             var mixedScopeLifestyle = Lifestyle.CreateHybrid(
                 () => HttpContext.Current != null,
                 new WebRequestLifestyle(),
-                new LifetimeScopeLifestyle());
+                new ThreadScopedLifestyle());
             
             // The created lifestyle can be reused for many registrations.
             container.Register<IUserRepository, SqlUserRepository>(mixedScopeLifestyle);
@@ -3253,9 +3173,10 @@
             Hybrid lifestyles can be nested:
             </para>
             <code lang="cs"><![CDATA[
+            var lifestyle = new ThreadScopedLifestyle();
             var mixedLifetimeTransientLifestyle = Lifestyle.CreateHybrid(
-                () => container.GetCurrentLifetimeScope() != null,
-                new LifetimeScopeLifestyle(),
+                () => lifestyle.GetCurrentScope(container) != null,
+                lifestyle,
                 Lifestyle.Transient);
             
             var mixedScopeLifestyle = Lifestyle.CreateHybrid(
@@ -3291,15 +3212,14 @@
             <example>
             <para>
             The following example shows the creation of a <b>HybridLifestyle</b> that mixes an 
-            <b>WebRequestLifestyle</b> and <b>LifetimeScopeLifestyle</b>:
+            <b>WebRequestLifestyle</b> and <b>ThreadScopedLifestyle</b>:
             </para>
             <code lang="cs"><![CDATA[
             // NOTE: WebRequestLifestyle is located in SimpleInjector.Integration.Web.dll.
-            // NOTE: LifetimeScopeLifestyle is located in SimpleInjector.Extensions.LifetimeScoping.dll.
             var mixedScopeLifestyle = Lifestyle.CreateHybrid(
                 () => HttpContext.Current != null,
                 new WebRequestLifestyle(),
-                new LifetimeScopeLifestyle());
+                new ThreadScopedLifestyle());
             
             // The created lifestyle can be reused for many registrations.
             container.Register<IUserRepository, SqlUserRepository>(mixedScopeLifestyle);
@@ -3431,19 +3351,21 @@
         <member name="M:SimpleInjector.Lifestyle.CreateRegistration``1(SimpleInjector.Container)">
             <summary>
             Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <typeparamref name="TConcrete"/> with the caching as specified by this lifestyle.
+            specified <typeparamref name="TConcrete"/> with the caching as specified by this lifestyle,
+            or returns an already created <see cref="T:SimpleInjector.Registration"/> instance for this container + lifestyle
+            + type combination.
             </summary>
             <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
             <param name="container">The <see cref="T:SimpleInjector.Container"/> instance for which a 
             <see cref="T:SimpleInjector.Registration"/> must be created.</param>
-            <returns>A new <see cref="T:SimpleInjector.Registration"/> instance.</returns>
+            <returns>A new or cached <see cref="T:SimpleInjector.Registration"/> instance.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="container"/> is a null
             reference (Nothing in VB).</exception>
         </member>
         <member name="M:SimpleInjector.Lifestyle.CreateRegistration``2(SimpleInjector.Container)">
             <summary>
-            Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <typeparamref name="TImplementation"/> with the caching as specified by this lifestyle.
+            This overload has been deprecated. Please call <see cref="M:SimpleInjector.Lifestyle.CreateRegistration``1(SimpleInjector.Container)"/>
+            instead.
             </summary>
             <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
             <typeparam name="TImplementation">The concrete type that will be created.</typeparam>
@@ -3471,7 +3393,9 @@
         <member name="M:SimpleInjector.Lifestyle.CreateRegistration(System.Type,SimpleInjector.Container)">
             <summary>
             Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <paramref name="concreteType"/> with the caching as specified by this lifestyle.
+            specified <paramref name="concreteType"/> with the caching as specified by this lifestyle,
+            or returns an already created <see cref="T:SimpleInjector.Registration"/> instance for this container + lifestyle
+            + type combination.
             This method might fail when run in a partial trust sandbox when <paramref name="concreteType"/>
             is an internal type.
             </summary>
@@ -3484,10 +3408,8 @@
         </member>
         <member name="M:SimpleInjector.Lifestyle.CreateRegistration(System.Type,System.Type,SimpleInjector.Container)">
             <summary>
-            Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <paramref name="implementationType"/> with the caching as specified by this lifestyle.
-            This method might fail when run in a partial trust sandbox when <paramref name="implementationType"/>
-            is an internal type.
+            This overload has been deprecated. Please call <see cref="M:SimpleInjector.Lifestyle.CreateRegistration(System.Type,SimpleInjector.Container)"/>
+            instead.
             </summary>
             <param name="serviceType">The interface or base type that can be used to retrieve the instances.</param>
             <param name="implementationType">The concrete type that will be registered.</param>
@@ -3511,14 +3433,13 @@
             <exception cref="T:System.ArgumentNullException">Thrown when on of the supplied arguments is a null 
             reference (Nothing in VB).</exception>
         </member>
-        <member name="M:SimpleInjector.Lifestyle.CreateRegistrationCore``2(SimpleInjector.Container)">
+        <member name="M:SimpleInjector.Lifestyle.CreateRegistrationCore``1(SimpleInjector.Container)">
             <summary>
             When overridden in a derived class, 
             creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <typeparamref name="TImplementation"/> with the caching as specified by this lifestyle.
+            specified <typeparamref name="TConcrete"/> with the caching as specified by this lifestyle.
             </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
-            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
+            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
             <param name="container">The <see cref="T:SimpleInjector.Container"/> instance for which a 
             <see cref="T:SimpleInjector.Registration"/> must be created.</param>
             <returns>A new <see cref="T:SimpleInjector.Registration"/> instance.</returns>
@@ -3590,8 +3511,8 @@
             <remarks>
             <see cref="P:SimpleInjector.Registration.Lifestyle"/> implementations create a new <b>Registration</b> instance for each registered
             service type. <see cref="T:System.Linq.Expressions.Expression"/>s returned from the 
-            <see cref="M:SimpleInjector.Registration.BuildExpression">BuildExpression</see> method can be intercepted by any event
-            registered with <see cref="E:SimpleInjector.Container.ExpressionBuilding" />, have 
+            <see cref="M:SimpleInjector.Registration.BuildExpression">BuildExpression</see> method can be 
+            intercepted by any event registered with <see cref="E:SimpleInjector.Container.ExpressionBuilding" />, have 
             <see cref="M:SimpleInjector.Container.RegisterInitializer``1(System.Action{``0})">initializers</see> 
             applied, and the caching particular to its lifestyle have been applied. Interception using the 
             <see cref="E:SimpleInjector.Container.ExpressionBuilt">Container.ExpressionBuilt</see> will <b>not</b> 
@@ -3681,20 +3602,20 @@
             <param name="instanceCreator">
             The delegate supplied by the user that allows building or creating new instances.</param>
             <returns>A <see cref="T:System.Func`1"/> delegate.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
         </member>
-        <member name="M:SimpleInjector.Registration.BuildTransientDelegate``2">
+        <member name="M:SimpleInjector.Registration.BuildTransientDelegate">
             <summary>
-            Builds a <see cref="T:System.Func`1"/> delegate for the creation of <typeparamref name="TImplementation"/>.
+            Builds a <see cref="T:System.Func`1"/> delegate for the creation of <see cref="P:SimpleInjector.Registration.ImplementationType"/>.
             The returned <see cref="T:System.Func`1"/> might be intercepted by a 
             <see cref="E:SimpleInjector.Container.ExpressionBuilding">Container.ExpressionBuilding</see> event, 
-            and the creation of the <typeparamref name="TImplementation"/> will have been wrapped with a 
+            and the creation of the <see cref="P:SimpleInjector.Registration.ImplementationType"/> will have been wrapped with a 
             delegate that executes the registered 
             <see cref="M:SimpleInjector.Container.RegisterInitializer``1(System.Action{``0})">initializers</see> 
-            that are applicable to the given <typeparamref name="TService"/> (if any).
+            that are applicable to the given <see cref="P:SimpleInjector.Registration.ImplementationType"/> (if any).
             </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
-            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
             <returns>A <see cref="T:System.Func`1"/> delegate.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
         </member>
         <member name="M:SimpleInjector.Registration.BuildTransientExpression``1(System.Func{``0})">
             <summary>
@@ -3703,27 +3624,27 @@
             be intercepted by a 
             <see cref="E:SimpleInjector.Container.ExpressionBuilding">Container.ExpressionBuilding</see> event, 
             and the <paramref name="instanceCreator"/> will have been wrapped with a delegate that executes the
-            registered <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">initializers</see> that are 
+            registered <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializerContext})">initializers</see> that are 
             applicable to the given <typeparamref name="TService"/> (if any).
             </summary>
             <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
             <param name="instanceCreator">
             The delegate supplied by the user that allows building or creating new instances.</param>
             <returns>An <see cref="T:System.Linq.Expressions.Expression"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
         </member>
-        <member name="M:SimpleInjector.Registration.BuildTransientExpression``2">
+        <member name="M:SimpleInjector.Registration.BuildTransientExpression">
             <summary>
-            Builds an <see cref="T:System.Linq.Expressions.Expression"/> that describes the creation of 
-            <typeparamref name="TImplementation"/>. The returned <see cref="T:System.Linq.Expressions.Expression"/> might be intercepted
+            Builds an <see cref="T:System.Linq.Expressions.Expression"/> that describes the creation of <see cref="P:SimpleInjector.Registration.ImplementationType"/>. 
+            The returned <see cref="T:System.Linq.Expressions.Expression"/> might be intercepted
             by a <see cref="E:SimpleInjector.Container.ExpressionBuilding">Container.ExpressionBuilding</see>
-            event, and the creation of the <typeparamref name="TImplementation"/> will have been wrapped with
+            event, and the creation of the <see cref="P:SimpleInjector.Registration.ImplementationType"/> will have been wrapped with
             a delegate that executes the registered 
-            <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">initializers</see> 
-            that are applicable to the given <typeparamref name="TService"/> (if any).
+            <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializerContext})">initializers</see> that are applicable 
+            to the InstanceProducer's <see cref="P:SimpleInjector.InstanceProducer.ServiceType">ServiceType</see> (if any).
             </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve instances.</typeparam>
-            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
             <returns>An <see cref="T:System.Linq.Expressions.Expression"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
         </member>
         <member name="T:SimpleInjector.Scope">
             <summary>Implements a cache for <see cref="T:SimpleInjector.ScopedLifestyle"/> implementations.</summary>
@@ -3742,16 +3663,6 @@
         <member name="P:SimpleInjector.Scope.Container">
             <summary>Gets the container instance that this scope belongs to.</summary>
             <value>The <see cref="P:SimpleInjector.Scope.Container"/> instance.</value>
-        </member>
-        <member name="M:SimpleInjector.Scope.GetInstance``1">
-            <summary>Gets an instance of the given <typeparamref name="TService"/> for the current scope.</summary>
-            <typeparam name="TService">The type of the service to resolve.</typeparam>
-            <returns>An instance of the given service type.</returns>
-        </member>
-        <member name="M:SimpleInjector.Scope.GetInstance(System.Type)">
-            <summary>Gets an instance of the given <paramref name="serviceType" /> for the current scope.</summary>
-            <param name="serviceType">The type of the service to resolve.</param>
-            <returns>An instance of the given service type.</returns>
         </member>
         <member name="M:SimpleInjector.Scope.WhenScopeEnds(System.Action)">
             <summary>
@@ -3899,19 +3810,6 @@
             <param name="container">The container for which the delegate gets created.</param>
             <returns>A <see cref="T:System.Func`1"/> delegate. This method should never return null.</returns>
         </member>
-        <member name="M:SimpleInjector.ScopedLifestyle.GetCurrentScopeCore(SimpleInjector.Container)">
-            <summary>
-            Returns the current <see cref="T:SimpleInjector.Scope"/> for this lifestyle and the given 
-            <paramref name="container"/>, or null when this method is executed outside the context of a scope.
-            </summary>
-            <remarks>
-            By default, this method calls the <see cref="M:SimpleInjector.ScopedLifestyle.CreateCurrentScopeProvider(SimpleInjector.Container)"/> method and invokes the
-            returned delegate. This method can be overridden to provide an optimized way for getting the
-            current scope.
-            </remarks>
-            <param name="container">The container instance that is related to the scope to return.</param>
-            <returns>A <see cref="T:SimpleInjector.Scope"/> instance or null when there is no scope active in this context.</returns>
-        </member>
         <member name="M:SimpleInjector.ScopedLifestyle.CreateRegistrationCore``1(System.Func{``0},SimpleInjector.Container)">
             <summary>
             Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
@@ -3925,16 +3823,28 @@
             <see cref="T:SimpleInjector.Registration"/> must be created.</param>
             <returns>A new <see cref="T:SimpleInjector.Registration"/> instance.</returns>
         </member>
-        <member name="M:SimpleInjector.ScopedLifestyle.CreateRegistrationCore``2(SimpleInjector.Container)">
+        <member name="M:SimpleInjector.ScopedLifestyle.CreateRegistrationCore``1(SimpleInjector.Container)">
             <summary>
             Creates a new <see cref="T:SimpleInjector.Registration"/> instance defining the creation of the
-            specified <typeparamref name="TImplementation"/> with the caching as specified by this lifestyle.
+            specified <typeparamref name="TConcrete"/> with the caching as specified by this lifestyle.
             </summary>
-            <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
-            <typeparam name="TImplementation">The concrete type that will be registered.</typeparam>
+            <typeparam name="TConcrete">The concrete type that will be registered.</typeparam>
             <param name="container">The <see cref="T:SimpleInjector.Container"/> instance for which a 
             <see cref="T:SimpleInjector.Registration"/> must be created.</param>
             <returns>A new <see cref="T:SimpleInjector.Registration"/> instance.</returns>
+        </member>
+        <member name="M:SimpleInjector.ScopedLifestyle.GetCurrentScopeCore(SimpleInjector.Container)">
+            <summary>
+            Returns the current <see cref="T:SimpleInjector.Scope"/> for this lifestyle and the given 
+            <paramref name="container"/>, or null when this method is executed outside the context of a scope.
+            </summary>
+            <remarks>
+            By default, this method calls the <see cref="M:SimpleInjector.ScopedLifestyle.CreateCurrentScopeProvider(SimpleInjector.Container)"/> method and invokes the
+            returned delegate. This method can be overridden to provide an optimized way for getting the
+            current scope.
+            </remarks>
+            <param name="container">The container instance that is related to the scope to return.</param>
+            <returns>A <see cref="T:SimpleInjector.Scope"/> instance or null when there is no scope active in this context.</returns>
         </member>
         <member name="T:SimpleInjector.StringResources">
             <summary>Internal helper for string resources.</summary>
@@ -3959,6 +3869,75 @@
             service. This property will return null in case the service is resolved directly from the container.
             </summary>
             <value>The <see cref="T:SimpleInjector.InjectionConsumerInfo"/> or null.</value>
+        </member>
+        <member name="M:SimpleInjector.Types.GetBaseTypeCandidates(System.Type,System.Type)">
+            <summary>
+            Returns a list of base types and interfaces of implementationType that either
+            equal to serviceType or are closed or partially closed version of serviceType (in case 
+            serviceType itself is generic).
+            So:
+            -in case serviceType is non generic, only serviceType will be returned.
+            -If implementationType is open generic, serviceType will be returned (or a partially closed 
+             version of serviceType is returned).
+            -If serviceType is generic and implementationType is not, a closed version of serviceType will
+             be returned.
+            -If implementationType implements multiple (partially) closed versions of serviceType, all those
+             (partially) closed versions will be returned.
+            </summary>
+            <param name="serviceType">The (open generic) service type to match.</param>
+            <param name="implementationType">The implementationType to search.</param>
+            <returns>A list of types.</returns>
+        </member>
+        <member name="T:SimpleInjector.TypesExtensions">
+            <summary>Useful extensions on <see cref="T:System.Type"/>.</summary>
+        </member>
+        <member name="M:SimpleInjector.TypesExtensions.ToFriendlyName(System.Type)">
+            <summary>
+            Builds an easy to read type name. Namespaces will be omitted, and generic types will be displayed 
+            in a C#-like syntax. Ideal for reporting type names in exception messages.
+            </summary>
+            <param name="type">The type to convert.</param>
+            <returns>A human-readable string representation of that type.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the supplied argument is a null reference.</exception>
+        </member>
+        <member name="M:SimpleInjector.TypesExtensions.IsClosedTypeOf(System.Type,System.Type)">
+            <summary>
+            Returns true is there is a closed version of the supplied <paramref name="genericTypeDefinition"/>
+            that is assignable from the current <paramref name="type"/>. This method returns true when either 
+            <paramref name="type"/> itself, one of its base classes or one of its implemented interfaces is a
+            closed version of <paramref name="genericTypeDefinition"/>; otherwise false.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="genericTypeDefinition">The generic type definition to match.</param>
+            <returns>True when type is assignable; otherwise false.</returns>
+        </member>
+        <member name="M:SimpleInjector.TypesExtensions.GetClosedTypeOf(System.Type,System.Type)">
+            <summary>
+            Gets the single closed version of <paramref name="genericTypeDefinition"/> that the current 
+            <paramref name="type"/> is assignable from. In case none or multiple matching closed types are 
+            found, and exception is thrown. Example: When <paramref name="type"/> is a type 
+            <c>class X : IX&lt;int&gt;, IFoo&lt;string&gt;</c> and <paramref name="genericTypeDefinition"/> 
+            is type <c>IX&lt;T&gt;</c>: this method will return type <c>IX&lt;int&gt;</c>.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="genericTypeDefinition">The generic type definition to match.</param>
+            <returns>The matching closed type.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="genericTypeDefinition"/> is not
+            a generic type or when none of the base classes or implemented interfaces of </exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when multiple matching closed generic types
+            are found.</exception>
+        </member>
+        <member name="M:SimpleInjector.TypesExtensions.GetClosedTypesOf(System.Type,System.Type)">
+            <summary>
+            Gets the list of closed versions of <paramref name="genericTypeDefinition"/> that the current
+            <paramref name="type"/> is assignable from. Example: When <paramref name="type"/> is a type 
+            <c>class X : IX&lt;int&gt;, IFoo&lt;string&gt;</c> and <paramref name="genericTypeDefinition"/> 
+            is type <c>IX&lt;T&gt;</c>: this method will return type <c>IX&lt;int&gt;</c>.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="genericTypeDefinition">The generic type definition to match.</param>
+            <returns>A list of matching closed generic types.</returns>
         </member>
         <member name="T:SimpleInjector.TypesToRegisterOptions">
             <summary>
@@ -3989,7 +3968,8 @@
         <member name="P:SimpleInjector.TypesToRegisterOptions.IncludeGenericTypeDefinitions">
             <summary>
             Gets or sets a value indicating whether generic type definitions (types that have
-            <see cref="!:System.Type.IsGenericTypeDefinition">Type.IsGenericTypeDefinition</see> set to true) 
+            <see cref="P:System.Reflection.TypeInfo.IsGenericTypeDefinition">TypeInfo.IsGenericTypeDefinition</see>
+            set to true) 
             should be included in the result. The default value for this property is <b>false</b>.
             </summary>
             <value>A boolean.</value>
@@ -4126,12 +4106,6 @@
             <returns><c>true</c> if the specified container is verifying; otherwise, <c>false</c>.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="container"/> is null.</exception>
         </member>
-        <member name="M:SimpleInjector.Advanced.AdvancedExtensions.GetInitializer``1(SimpleInjector.Container)">
-            <summary>This method has been removed.</summary>
-            <param name="container">The container.</param>
-            <typeparam name="TService">The type for with an initializer must be built.</typeparam>
-            <returns>An <see cref="T:System.Action`1"/> delegate or <b>null</b>.</returns>
-        </member>
         <member name="M:SimpleInjector.Advanced.AdvancedExtensions.GetItem(SimpleInjector.Container,System.Object)">
             <summary>
             Retrieves an item from the container stored by the given <paramref name="key"/> or null when no
@@ -4209,23 +4183,25 @@
             that is made with one of the <b>RegisterCollection</b> overloads that accepts a dynamic collection
             (an <b>IEnumerable</b> or <b>IEnumerable&lt;TService&gt;</b>).</exception>
         </member>
-        <member name="T:SimpleInjector.Advanced.IConstructorInjectionBehavior">
-            <summary>
-            Defines the container's behavior for building an expression tree based on the supplied constructor of
-            a given type.
-            Set the <see cref="P:SimpleInjector.ContainerOptions.ConstructorInjectionBehavior">ConstructorInjectionBehavior</see> 
-            property of the container's <see cref="P:SimpleInjector.Container.Options"/> property to change the default behavior 
-            of the container.
-            </summary>
+        <member name="T:SimpleInjector.Advanced.BehaviorDeprecationExtensions">
+            <summary>Deprecation extensions.</summary>
         </member>
-        <member name="M:SimpleInjector.Advanced.IConstructorInjectionBehavior.BuildParameterExpression(System.Reflection.ParameterInfo)">
+        <member name="M:SimpleInjector.Advanced.BehaviorDeprecationExtensions.BuildExpression(SimpleInjector.Advanced.IDependencyInjectionBehavior,SimpleInjector.InjectionConsumerInfo)">
             <summary>
-            Builds an <see cref="T:System.Linq.Expressions.Expression"/> for the supplied <paramref name="parameter"/>, based on the
-            container's configuration.
+            This interface method has been removed. Please call GetInstanceProducerFor instead.
             </summary>
-            <param name="parameter">The parameter.</param>
-            <returns>An <see cref="T:System.Linq.Expressions.Expression"/> that describes the intend of creating that 
-            <paramref name="parameter"/>. This method never returns null.</returns>
+            <param name="behavior">The behavior.</param>
+            <param name="consumer">The consumer.</param>
+            <returns>Throws an exception.</returns>
+        </member>
+        <member name="M:SimpleInjector.Advanced.BehaviorDeprecationExtensions.SelectProperty(SimpleInjector.Advanced.IPropertySelectionBehavior,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            This interface method has been removed. Please call SelectProperty(PropertyInfo) instead.
+            </summary>
+            <param name="behavior">The behavior.</param>
+            <param name="serviceType">Type of the abstraction that is requested.</param>
+            <param name="propertyInfo">The property to check.</param>
+            <returns>True when the property should be injected.</returns>
         </member>
         <member name="T:SimpleInjector.Advanced.IConstructorResolutionBehavior">
             <summary>
@@ -4235,35 +4211,16 @@
             of the container.
             </summary>
         </member>
-        <member name="M:SimpleInjector.Advanced.IConstructorResolutionBehavior.GetConstructor(System.Type,System.Type)">
+        <member name="M:SimpleInjector.Advanced.IConstructorResolutionBehavior.GetConstructor(System.Type)">
             <summary>
             Gets the given <paramref name="implementationType"/>'s constructor that can be used by the 
             container to create that instance.
             </summary>
-            <param name="serviceType">Type of the abstraction that is requested.</param>
             <param name="implementationType">Type of the implementation to find a suitable constructor for.</param>
             <returns>
             The <see cref="T:System.Reflection.ConstructorInfo"/>. This method never returns null.
             </returns>
             <exception cref="T:SimpleInjector.ActivationException">Thrown when no suitable constructor could be found.</exception>
-        </member>
-        <member name="T:SimpleInjector.Advanced.IConstructorVerificationBehavior">
-            <summary>
-            Defines the container's behavior for verifying the constructor that will be picked by the
-            <see cref="T:SimpleInjector.Advanced.IConstructorResolutionBehavior"/>.
-            Set the <see cref="P:SimpleInjector.ContainerOptions.ConstructorVerificationBehavior">ConstructorVerificationBehavior</see> 
-            property of the container's <see cref="P:SimpleInjector.Container.Options"/> property to change the default behavior 
-            of the container.
-            </summary>
-        </member>
-        <member name="M:SimpleInjector.Advanced.IConstructorVerificationBehavior.Verify(System.Reflection.ParameterInfo)">
-            <summary>Verifies the specified <paramref name="parameter"/>.</summary>
-            <param name="parameter">The parameter.</param>
-            <exception cref="T:SimpleInjector.ActivationException">Thrown when the <paramref name="parameter"/> cannot be 
-            used for auto wiring.
-            </exception>
-            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="parameter"/> is a
-            null reference.</exception>
         </member>
         <member name="T:SimpleInjector.Advanced.IDependencyInjectionBehavior">
             <summary>
@@ -4283,14 +4240,16 @@
             the supplied <paramref name="consumer"/> cannot be used for auto wiring.</exception>
             <exception cref="T:System.ArgumentNullException">Thrown when the supplied argument is a null reference.</exception>
         </member>
-        <member name="M:SimpleInjector.Advanced.IDependencyInjectionBehavior.BuildExpression(SimpleInjector.InjectionConsumerInfo)">
+        <member name="M:SimpleInjector.Advanced.IDependencyInjectionBehavior.GetInstanceProducer(SimpleInjector.InjectionConsumerInfo,System.Boolean)">
             <summary>
-            Builds an <see cref="T:System.Linq.Expressions.Expression"/> for the 
+            Gets the <see cref="T:SimpleInjector.InstanceProducer"/> for the 
             <see cref="P:SimpleInjector.InjectionConsumerInfo.Target">Target</see> of the supplied <paramref name="consumer"/>.
             </summary>
             <param name="consumer">Contextual information about the consumer where the built dependency is
             injected into.</param>
-            <returns>An <see cref="T:System.Linq.Expressions.Expression"/> that describes the intend of creating that 
+            <param name="throwOnFailure">The indication whether the method should return null or throw
+            an exception when the type is not registered.</param>
+            <returns>An <see cref="T:SimpleInjector.InstanceProducer"/> that describes the intend of creating that 
             <see cref="P:SimpleInjector.InjectionConsumerInfo.Target">Target</see>. This method never returns null.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the argument is a null reference.</exception>
         </member>
@@ -4304,9 +4263,8 @@
             <see cref="F:SimpleInjector.Lifestyle.Transient">Transient</see> lifestyle is used.
             </summary>
         </member>
-        <member name="M:SimpleInjector.Advanced.ILifestyleSelectionBehavior.SelectLifestyle(System.Type,System.Type)">
+        <member name="M:SimpleInjector.Advanced.ILifestyleSelectionBehavior.SelectLifestyle(System.Type)">
             <summary>Selects the lifestyle based on the supplied type information.</summary>
-            <param name="serviceType">Type of the abstraction that is registered.</param>
             <param name="implementationType">Type of the implementation to that is registered.</param>
             <returns>The suited <see cref="T:SimpleInjector.Lifestyle"/> for the given type.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when either one of the arguments is a null reference.</exception>
@@ -4315,10 +4273,10 @@
             <summary>
             An instance of this type will be supplied to the <see cref="T:System.Predicate`1" />
             delegate that is that is supplied to the 
-            <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializationContext})">RegisterInitializer</see>
-            overload that takes this delegate. This type contains contextual information about the creation and it 
-            allows the user to examine the given instance to decide whether the instance should be initialized or 
-            not.
+            <see cref="M:SimpleInjector.ContainerOptions.RegisterResolveInterceptor(SimpleInjector.ResolveInterceptor,System.Predicate{SimpleInjector.Advanced.InitializationContext})">RegisterResolveInterceptor</see>
+            method that takes this delegate. This type contains contextual information about a resolved type and it 
+            allows the user to examine the given instance to decide whether the <see cref="T:SimpleInjector.ResolveInterceptor"/>
+            should be applied or not.
             </summary>
         </member>
         <member name="P:SimpleInjector.Advanced.InitializationContext.Producer">
@@ -4336,15 +4294,38 @@
             </summary>
             /// <value>The <see cref="P:SimpleInjector.Advanced.InitializationContext.Registration"/>.</value>
         </member>
+        <member name="T:SimpleInjector.Advanced.InitializerContext">
+            <summary>
+            An instance of this type will be supplied to the <see cref="T:System.Predicate`1" />
+            delegate that is that is supplied to the 
+            <see cref="M:SimpleInjector.Container.RegisterInitializer(System.Action{SimpleInjector.Advanced.InstanceInitializationData},System.Predicate{SimpleInjector.Advanced.InitializerContext})">RegisterInitializer</see>
+            overload that takes this delegate. This type contains contextual information about the creation and it 
+            allows the user to examine the given instance to decide whether the instance should be initialized or 
+            not.
+            </summary>
+        </member>
+        <member name="P:SimpleInjector.Advanced.InitializerContext.Producer">
+            <summary>
+            Gets a null reference. This property has been deprecated.
+            </summary>
+            <value>The null (Nothing in VB).</value>
+        </member>
+        <member name="P:SimpleInjector.Advanced.InitializerContext.Registration">
+            <summary>
+            Gets the <see cref="P:SimpleInjector.Advanced.InitializerContext.Registration"/> that is responsible for the initialization of the created
+            instance.
+            </summary>
+            /// <value>The <see cref="P:SimpleInjector.Advanced.InitializerContext.Registration"/>.</value>
+        </member>
         <member name="T:SimpleInjector.Advanced.InstanceInitializationData">
             <summary>
             Contains data that can be used to initialize a created instance. This data includes the actual
             created <see cref="P:SimpleInjector.Advanced.InstanceInitializationData.Instance"/> and the <see cref="P:SimpleInjector.Advanced.InstanceInitializationData.Context"/> information about the created instance.
             </summary>
         </member>
-        <member name="M:SimpleInjector.Advanced.InstanceInitializationData.#ctor(SimpleInjector.Advanced.InitializationContext,System.Object)">
+        <member name="M:SimpleInjector.Advanced.InstanceInitializationData.#ctor(SimpleInjector.Advanced.InitializerContext,System.Object)">
             <summary>Initializes a new instance of the <see cref="T:SimpleInjector.Advanced.InstanceInitializationData"/> struct.</summary>
-            <param name="context">The <see cref="T:SimpleInjector.Advanced.InitializationContext"/> that contains contextual information
+            <param name="context">The <see cref="T:SimpleInjector.Advanced.InitializerContext"/> that contains contextual information
             about the created instance.</param>
             <param name="instance">The created instance.</param>
         </member>
@@ -4402,7 +4383,9 @@
             <summary>
             Determines whether a property should be injected by the container upon creation of its type.
             </summary>
-            <param name="serviceType">Type of the abstraction that is requested.</param>
+            <param name="implementationType">
+            The type being created for which the property should be injected. Note that this might a
+            different type than the type on which the property is declared (which might be a base class).</param>
             <param name="propertyInfo">The property to check.</param>
             <returns>True when the property should be injected.</returns>
         </member>
@@ -4458,21 +4441,20 @@
             <summary>Gets the lazily initialized Scope of the current LazyScope instance.</summary>
             <value>The current Scope or null.</value>
         </member>
-        <member name="T:SimpleInjector.Advanced.Internal.LazyScopedRegistration`2">
+        <member name="T:SimpleInjector.Advanced.Internal.LazyScopedRegistration`1">
             <summary>
             This is an internal type. Only depend on this type when you want to be absolutely sure a future 
             version of the framework will break your code.
             </summary>
-            <typeparam name="TService">Service type.</typeparam>
             <typeparam name="TImplementation">Implementation type.</typeparam>
         </member>
-        <member name="M:SimpleInjector.Advanced.Internal.LazyScopedRegistration`2.#ctor(SimpleInjector.Registration)">
+        <member name="M:SimpleInjector.Advanced.Internal.LazyScopedRegistration`1.#ctor(SimpleInjector.Registration)">
             <summary>
-            Initializes a new instance of the <see cref="T:SimpleInjector.Advanced.Internal.LazyScopedRegistration`2"/> 
+            Initializes a new instance of the <see cref="T:SimpleInjector.Advanced.Internal.LazyScopedRegistration`1"/> 
             struct.</summary>
             <param name="registration">The registration.</param>
         </member>
-        <member name="M:SimpleInjector.Advanced.Internal.LazyScopedRegistration`2.GetInstance(SimpleInjector.Scope)">
+        <member name="M:SimpleInjector.Advanced.Internal.LazyScopedRegistration`1.GetInstance(SimpleInjector.Scope)">
             <summary>Gets the lazily initialized instance for the of the current LazyScopedRegistration.</summary>
             <param name="scope">The scope that is used to retrieve the instance.</param>
             <returns>The cached instance.</returns>
@@ -4649,11 +4631,6 @@
             For more information, see: https://simpleinjector.org/dialm.
             </summary>
         </member>
-        <member name="F:SimpleInjector.Diagnostics.DiagnosticType.PotentialLifestyleMismatch">
-            <summary>
-            This enum options has been replaced with <see cref="F:SimpleInjector.Diagnostics.DiagnosticType.LifestyleMismatch"/>.
-            </summary>
-        </member>
         <member name="F:SimpleInjector.Diagnostics.DiagnosticType.ShortCircuitedDependency">
             <summary>
             Diagnostic type that warns when a
@@ -4710,15 +4687,6 @@
             </summary>
         </member>
         <member name="P:SimpleInjector.Diagnostics.LifestyleMismatchDiagnosticResult.Relationship">
-            <summary>Gets the object that describes the relationship between the component and its dependency.</summary>
-            <value>A <see cref="T:SimpleInjector.Advanced.KnownRelationship"/> instance.</value>
-        </member>
-        <member name="T:SimpleInjector.Diagnostics.PotentialLifestyleMismatchDiagnosticResult">
-            <summary>
-            This type is obsolete. Please use <see cref="T:SimpleInjector.Diagnostics.LifestyleMismatchDiagnosticResult"/> instead.
-            </summary>
-        </member>
-        <member name="P:SimpleInjector.Diagnostics.PotentialLifestyleMismatchDiagnosticResult.Relationship">
             <summary>Gets the object that describes the relationship between the component and its dependency.</summary>
             <value>A <see cref="T:SimpleInjector.Advanced.KnownRelationship"/> instance.</value>
         </member>
@@ -4803,6 +4771,12 @@
         <member name="F:SimpleInjector.Internals.ContainerControlledItem.Registration">
             <summary>Can be null.</summary>
         </member>
+        <member name="P:SimpleInjector.Internals.CyclicDependencyException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+            <value>The error message that explains the reason for the exception, or an empty string("").</value>
+        </member>
         <member name="T:SimpleInjector.Internals.CyclicDependencyValidator">
             <summary>
             Allows verifying whether a given type has a direct or indirect dependency on itself. Verifying is done
@@ -4847,11 +4821,166 @@
             Allows validating an ArgumentMapping.
             </summary>
         </member>
+        <member name="T:SimpleInjector.Lifestyles.AsyncScopedLifestyle">
+            <summary>
+            Defines a lifestyle that caches instances during the lifetime of an explicitly defined scope using the
+            <see cref="M:SimpleInjector.Lifestyles.AsyncScopedLifestyle.BeginScope(SimpleInjector.Container)">BeginScope</see>
+            method. An execution context scope flows with the logical execution context. Scopes can be nested and
+            nested scopes will get their own instance. Instances created by this lifestyle can be disposed when 
+            the created scope gets disposed. 
+            </summary>
+            <example>
+            The following example shows the usage of the <b>ExecutionContextScopeLifestyle</b> class:
+            <code lang="cs"><![CDATA[
+            var container = new Container();
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            container.Register<IUnitOfWork, EntityFrameworkUnitOfWork>(Lifestyle.Scoped);
+            
+            using (AsyncScopedLifestyle.BeginScope(container))
+            {
+                var instance1 = container.GetInstance<IUnitOfWork>();
+                // ...
+            }
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.AsyncScopedLifestyle.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:SimpleInjector.Lifestyles.AsyncScopedLifestyle"/> class.
+            The created and cached instance will be disposed when the created 
+            <see cref="T:SimpleInjector.Scope"/> instance gets disposed and when the created object implements 
+            <see cref="T:System.IDisposable"/>.
+            </summary>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.AsyncScopedLifestyle.BeginScope(SimpleInjector.Container)">
+             <summary>
+             Begins a new scope for the given <paramref name="container"/>. 
+             Services, registered using the <see cref="T:SimpleInjector.Lifestyles.AsyncScopedLifestyle"/> are cached during the 
+             lifetime of that scope. The scope should be disposed explicitly.
+             </summary>
+             <param name="container">The container.</param>
+             <returns>A new <see cref="T:SimpleInjector.Scope"/> instance.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             Thrown when the <paramref name="container"/> is a null reference.</exception>
+             <example>
+             <code lang="cs"><![CDATA[
+             using (AsyncScopedLifestyle.BeginScope())
+             {
+                 var handler = (IRequestHandler)container.GetInstance(handlerType);
+            
+                 handler.Handle(request);
+             }
+             ]]></code>
+             </example>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.AsyncScopedLifestyle.GetCurrentScopeCore(SimpleInjector.Container)">
+            <summary>
+            Returns the current <see cref="T:SimpleInjector.Scope"/> for this lifestyle and the given 
+            <paramref name="container"/>, or null when this method is executed outside the context of a scope.
+            </summary>
+            <param name="container">The container instance that is related to the scope to return.</param>
+            <returns>A <see cref="T:SimpleInjector.Scope"/> instance or null when there is no scope active in this context.</returns>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.AsyncScopedLifestyle.CreateCurrentScopeProvider(SimpleInjector.Container)">
+            <summary>
+            Creates a delegate that upon invocation return the current <see cref="T:SimpleInjector.Scope"/> for this
+            lifestyle and the given <paramref name="container"/>, or null when the delegate is executed outside
+            the context of such scope.
+            </summary>
+            <param name="container">The container for which the delegate gets created.</param>
+            <returns>A <see cref="T:System.Func`1"/> delegate. This method never returns null.</returns>
+        </member>
         <member name="T:SimpleInjector.Lifestyles.LifestyleSelectionBehaviorProxyLifestyle">
             <summary>
             Forwards CreateRegistration calls to the lifestyle that is returned from the registered
             container.Options.LifestyleSelectionBehavior.
             </summary>
+        </member>
+        <member name="T:SimpleInjector.Lifestyles.ThreadScopedLifestyle">
+            <summary>
+            Defines a lifestyle that caches instances during the lifetime of an explicitly defined scope using the
+            <see cref="M:SimpleInjector.Lifestyles.ThreadScopedLifestyle.BeginScope(SimpleInjector.Container)">BeginScope</see>
+            method. A scope is thread-specific, each thread should define its own scope. Scopes can be nested and
+            nested scopes will get their own instance. Instances created by this lifestyle can be disposed when 
+            the created scope gets disposed. 
+            </summary>
+            <example>
+            The following example shows the usage of the <b>ThreadScopedLifestyle</b> class:
+            <code lang="cs"><![CDATA[
+            var container = new Container();
+            container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+            
+            container.Register<IUnitOfWork, EntityFrameworkUnitOfWork>(Lifestyle.Scoped);
+            
+            using (container.BeginLifetimeScope())
+            {
+                var instance1 = container.GetInstance<IUnitOfWork>();
+                
+                // This call will return the same instance.
+                var instance2 = container.GetInstance<IUnitOfWork>();
+                
+                Assert.IsTrue(object.ReferenceEquals(instance1, instance2));
+                
+                // Create a nested scope.
+                using (container.BeginLifetimeScope())
+                {
+                    // A nested scope gets its own instance.
+                    var instance3 = container.GetInstance<IUnitOfWork>();
+            
+                    Assert.IsFalse(object.ReferenceEquals(instance1, instance3));
+                
+                    // This call will return the same instance.
+                    var instance4 = container.GetInstance<IUnitOfWork>();
+                    
+                    Assert.IsTrue(object.ReferenceEquals(instance3, instance4));
+                }
+            }
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.ThreadScopedLifestyle.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:SimpleInjector.Lifestyles.ThreadScopedLifestyle"/> class.
+            The created and cached instance will be disposed when the created 
+            <see cref="T:SimpleInjector.Scope"/> instance gets disposed and when the created object implements 
+            <see cref="T:System.IDisposable"/>.
+            </summary>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.ThreadScopedLifestyle.BeginScope(SimpleInjector.Container)">
+             <summary>
+             Begins a new scope for the given <paramref name="container"/>. 
+             Services, registered using the <see cref="T:SimpleInjector.Lifestyles.ThreadScopedLifestyle"/> are cached during the 
+             lifetime of that scope. The scope should be disposed explicitly.
+             </summary>
+             <param name="container">The container.</param>
+             <returns>A new <see cref="T:SimpleInjector.Scope"/> instance.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             Thrown when the <paramref name="container"/> is a null reference.</exception>
+             <example>
+             <code lang="cs"><![CDATA[
+             using (ThreadScopedLifestyle.BeginScope())
+             {
+                 var handler = (IRequestHandler)container.GetInstance(handlerType);
+            
+                 handler.Handle(request);
+             }
+             ]]></code>
+             </example>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.ThreadScopedLifestyle.CreateCurrentScopeProvider(SimpleInjector.Container)">
+            <summary>
+            Creates a delegate that upon invocation return the current <see cref="T:SimpleInjector.Scope"/> for this
+            lifestyle and the given <paramref name="container"/>, or null when the delegate is executed outside
+            the context of such scope.
+            </summary>
+            <param name="container">The container for which the delegate gets created.</param>
+            <returns>A <see cref="T:System.Func`1"/> delegate. This method never returns null.</returns>
+        </member>
+        <member name="M:SimpleInjector.Lifestyles.ThreadScopedLifestyle.GetCurrentScopeCore(SimpleInjector.Container)">
+            <summary>
+            Returns the current <see cref="T:SimpleInjector.Scope"/> for this lifestyle and the given 
+            <paramref name="container"/>, or null when this method is executed outside the context of a scope.
+            </summary>
+            <param name="container">The container instance that is related to the scope to return.</param>
+            <returns>A <see cref="T:SimpleInjector.Scope"/> instance or null when there is no scope active in this context.</returns>
         </member>
     </members>
 </doc>
