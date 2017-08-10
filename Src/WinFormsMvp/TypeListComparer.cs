@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WinFormsMvp
 {
-    internal class TypeListComparer<T> : IEqualityComparer<IEnumerable<T>>
+    public class TypeListComparer<T> : IEqualityComparer<IEnumerable<T>>
         where T : class
     {
         public bool Equals(IEnumerable<T> x, IEnumerable<T> y)

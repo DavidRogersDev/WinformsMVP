@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WinFormsMvp
 {
-    internal static class TypeExtensions
+    public static class TypeExtensions
     {
         static readonly IDictionary<RuntimeTypeHandle, IEnumerable<Type>> implementationTypeToViewInterfacesCache = new Dictionary<RuntimeTypeHandle, IEnumerable<Type>>();
 
@@ -13,7 +13,7 @@ namespace WinFormsMvp
         /// </summary>
         /// <param name="implementationType"></param>
         /// <returns></returns>
-        internal static IEnumerable<Type> GetViewInterfaces(this Type implementationType)
+        public static IEnumerable<Type> GetViewInterfaces(this Type implementationType)
         {
             // We use the type handle as the cache key because they're fast
             // to search against in dictionaries.

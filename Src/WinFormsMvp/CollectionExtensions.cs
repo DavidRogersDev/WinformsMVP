@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace WinFormsMvp
 {
-    internal static class CollectionExtensions
+    public static class CollectionExtensions
     {
-        internal static void AddRange<T>(this ICollection<T> target, IEnumerable<T> items)
+        public static void AddRange<T>(this ICollection<T> target, IEnumerable<T> items)
         {
             if (target == null)
                 throw new ArgumentNullException("target");
@@ -18,7 +18,7 @@ namespace WinFormsMvp
                 target.Add(item);
         }
 
-        internal static TValue GetOrCreateValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> createValueCallback)
+        public static TValue GetOrCreateValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> createValueCallback)
         {
             if (dictionary == null)
                 throw new ArgumentNullException("dictionary");
@@ -31,7 +31,7 @@ namespace WinFormsMvp
             return dictionary[key];
         }
 
-        internal static IDictionary<TKey,TValue> ToDictionary<TKey,TValue>(this IEnumerable<KeyValuePair<TKey,TValue>> source)
+        public static IDictionary<TKey,TValue> ToDictionary<TKey,TValue>(this IEnumerable<KeyValuePair<TKey,TValue>> source)
         {
             if (source == null)
                 throw new ArgumentNullException("source");
@@ -39,7 +39,7 @@ namespace WinFormsMvp
             return source.ToDictionary(m => m.Key, m => m.Value);
         }
 
-        internal static bool Empty<T>(this IEnumerable<T> source)
+        public static bool Empty<T>(this IEnumerable<T> source)
         {
             return !source.Any();
         }
@@ -47,7 +47,7 @@ namespace WinFormsMvp
         /// <summary>
         /// An order independent version of <see cref="Enumerable.SequenceEqual{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})"/>.
         /// </summary>
-        internal static bool SetEqual<T>(this IEnumerable<T> x, IEnumerable<T> y)
+        public static bool SetEqual<T>(this IEnumerable<T> x, IEnumerable<T> y)
         {
             if (x == null) throw new ArgumentNullException("x");
             if (y == null) throw new ArgumentNullException("y");

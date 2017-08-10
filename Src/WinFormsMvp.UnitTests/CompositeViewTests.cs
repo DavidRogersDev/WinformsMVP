@@ -19,22 +19,22 @@ namespace WinFormsMvp.UnitTests
             public override event EventHandler Load;
         }
 
-        [TestMethod]
-        public void CompositeView_Add_ShouldAddToList()
-        {
-            // Arrange
-            var compositeView = new MyView();
-            var view1 = MockRepository.GenerateMock<IView<object>>();
-            var view2 = MockRepository.GenerateMock<IView<object>>();
+        //[TestMethod]
+        //public void CompositeView_Add_ShouldAddToList()
+        //{
+        //    // Arrange
+        //    var compositeView = new MyView();
+        //    var view1 = MockRepository.GenerateMock<IView<object>>();
+        //    var view2 = MockRepository.GenerateMock<IView<object>>();
 
-            // Act
-            compositeView.Add(view1);
-            compositeView.Add(view2);
+        //    // Act
+        //    compositeView.Add(view1);
+        //    compositeView.Add(view2);
 
-            // Assert
-            var expected = new[] { view1, view2 };
-            Assert.IsTrue(expected.SequenceEqual(compositeView.Views));
-        }
+        //    // Assert
+        //    var expected = new[] { view1, view2 };
+        //    Assert.IsTrue(expected.SequenceEqual(compositeView.Views));
+        //}
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
