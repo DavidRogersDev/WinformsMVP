@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Practices.Unity;
+using Unity;
 using WinFormsMvp.Binder;
 
 namespace WinFormsMvp.Unity
@@ -60,7 +60,7 @@ namespace WinFormsMvp.Unity
 
             using (presenterScopedContainer)
             {
-                presenterScopedContainer.Teardown(presenter);
+                presenterScopedContainer.Dispose();
             }
 
             if (presenter is IDisposable)

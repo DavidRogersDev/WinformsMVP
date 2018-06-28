@@ -1,5 +1,5 @@
-﻿using Microsoft.Practices.Unity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Unity;
 using WinFormsMvp.Binder;
 using WinFormsMvp.Unity;
 
