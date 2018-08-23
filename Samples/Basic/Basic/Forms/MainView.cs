@@ -14,12 +14,12 @@ namespace Basic.Forms
 
         protected override void OnLoad(EventArgs e)
         {
-            OnViewLoding();
+            OnViewLoading();
 
             base.OnLoad(e);
         }
 
-        public event EventHandler ViewLoding;
+        public event EventHandler ViewLoading;
         public event EventHandler LoadChildForm1;
         public event EventHandler LoadChildForm2;
 
@@ -36,9 +36,9 @@ namespace Basic.Forms
             destinationView.ShowDialog();
         }
 
-        protected virtual void OnViewLoding()
+        protected virtual void OnViewLoading()
         {
-            ViewLoding?.Invoke(this, EventArgs.Empty);
+            ViewLoading?.Invoke(this, EventArgs.Empty);
         }
 
         private void btnLoadChildForm1_Click(object sender, EventArgs e)
