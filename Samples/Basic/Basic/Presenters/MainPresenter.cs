@@ -12,7 +12,7 @@ namespace Basic.Presenters
         public MainPresenter(IMainView view) 
             : base(view)
         {
-            View.ViewLoding += View_ViewLoding;
+            View.ViewLoading += View_ViewLoading;
             View.LoadChildForm1 += View_LoadChildForm1;
             View.LoadChildForm2 += View_LoadChildForm2;
         }
@@ -29,7 +29,7 @@ namespace Basic.Presenters
             View.LoadChildForm(type);
         }
 
-        private void View_ViewLoding(object sender, EventArgs e)
+        private void View_ViewLoading(object sender, EventArgs e)
         {
             View.ConfirmLoaded();
         }

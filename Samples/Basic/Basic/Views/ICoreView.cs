@@ -5,6 +5,6 @@ namespace Basic.Views
 {
     public interface ICoreView : IView
     {
-        event EventHandler ViewLoding;
+        event EventHandler ViewLoading;
     }
 }
